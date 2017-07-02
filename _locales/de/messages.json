@@ -1,0 +1,20 @@
+{
+  "extensionName": {
+    "message": "Bildschirmfoto speichern",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Speichert die aktuell angzeigte Seite als Bilddatei.",
+    "description": "Description of the extension."
+  },
+
+  "errorTitleFailedSending": {
+    "message": "Bildschirmfoto fehlgeschlagen!",
+    "description": "Title of error notification."
+  },
+  "errorTextFailedSending": {
+    "message": "Es ist nicht möglich von dieser Seite ein Bildschirmfoto zu erstellen!",
+    "description": "Text of error notification."
+  }
+}

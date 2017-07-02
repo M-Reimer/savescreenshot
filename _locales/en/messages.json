@@ -1,0 +1,20 @@
+{
+  "extensionName": {
+    "message": "Save Screenshot",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Saves the current page as image file.",
+    "description": "Description of the extension."
+  },
+
+  "errorTitleFailedSending": {
+    "message": "Failed to take screenshot!",
+    "description": "Title of error notification."
+  },
+  "errorTextFailedSending": {
+    "message": "It is not possible to create a screenshot from this page!",
+    "description": "Text of error notification."
+  }
+}
