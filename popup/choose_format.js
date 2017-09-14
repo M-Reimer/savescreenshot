@@ -16,10 +16,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+async function CreateButtons() {
+  const menus = await GetMenuList();
+
+  menus.forEach((entry) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "button");
+    div.setAttribute("data-settings", entry.data);
+    div.textContent = entry.label;
+    document.body.appendChild(div);
+  });
+}
+
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("button")) {
-    var chosenFormat = e.target.textContent;
-    var suffix = (chosenFormat == "PNG") ? "png" : "jpg";
-    SendMessage(suffix);
+    var data = e.target.getAttribute("data-settings");
+    SendMessage(data);
   }
 });
+
+CreateButtons();

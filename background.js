@@ -21,17 +21,50 @@ function ContextMenuClicked(aInfo) {
   SendMessage(aInfo.menuItemId);
 }
 
-// Create context menus
-browser.contextMenus.create({
-  id: "png",
-  title: "PNG",
-  contexts: ["page"]
-});
-browser.contextMenus.create({
-  id: "jpg",
-  title: "JPEG",
-  contexts: ["page"]
-});
+// Fired if toolbar button is clicked
+function ToolbarButtonClicked() {
+  SendMessage("{}");
+}
+
+// Triggers UI update (toolbar button popup and context menu)
+async function UpdateUI() {
+  // Get menu list
+  const menus = await GetMenuList();
+
+  //
+  // Update toolbar button popup
+  //
+
+  if (menus.length)
+    browser.browserAction.setPopup({popup: "popup/choose_format.html"});
+  else
+    browser.browserAction.setPopup({popup: ""});
+
+  //
+  // Update context menu
+  //
+
+  await browser.contextMenus.removeAll();
+
+  const topmenu = browser.contextMenus.create({
+    id: "{}",
+    title: browser.i18n.getMessage("extensionName"),
+    contexts: ["page"]
+  });
+
+  menus.forEach((entry) => {
+    browser.contextMenus.create({
+      id: entry.data,
+      title: entry.label,
+      contexts: ["page"],
+      parentId: topmenu
+    });
+  });
+}
+
 
 // Register event listeners
 browser.contextMenus.onClicked.addListener(ContextMenuClicked);
+browser.browserAction.onClicked.addListener(ToolbarButtonClicked);
+
+UpdateUI();

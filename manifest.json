@@ -18,7 +18,7 @@
   },
 
   "background": {
-    "scripts": ["_sendmessage.js", "background.js"]
+    "scripts": ["_globals.js", "background.js"]
   },
 
   "browser_action": {
@@ -34,8 +34,13 @@
     }
   ],
 
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
+
   "permissions": [
-    "<all_urls>", "contextMenus", "notifications"
+    "<all_urls>", "contextMenus", "notifications", "storage"
   ],
 
   "default_locale": "en"

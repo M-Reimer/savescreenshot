@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <form>
+      <h1 id="imageformat_headline">Image format</h1>
+      <input type="radio" name="format_options" id="format_manual_option"/>
+      <label for="format_manual_option" id="format_manual_label">Select manually for each screenshot</label>
+      <br/>
+      <input type="radio" name="format_options" id="format_png_option"/>
+      <label for="format_png_option" id="format_png_label">PNG</label>
+      <br/>
+      <input type="radio" name="format_options" id="format_jpg_option"/>
+      <label for="format_jpg_option" id="format_jpg_label">JPG</label>
+
+      <h1 id="region_headline">Screenshot region</h1>
+      <input type="radio" name="region_options" id="region_manual_option"/>
+      <label for="region_manual_option" id="region_manual_label">Select manually for each screenshot</label>
+      <br/>
+      <input type="radio" name="region_options" id="region_full_option"/>
+      <label for="region_full_option" id="region_full_label">Full page</label>
+      <br/>
+      <input type="radio" name="region_options" id="region_viewport_option"/>
+      <label for="region_viewport_option" id="region_viewport_label">Viewport</label>
+    </form>
+    <script src="options.js"></script>
+  </body>
+</html>

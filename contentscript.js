@@ -16,29 +16,54 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function OnMessage(request, sender, sendResponse) {
-  var desth = window.innerHeight + window.scrollMaxY;
-  var destw = window.innerWidth + window.scrollMaxX;
+async function OnMessage(request, sender, sendResponse) {
+  const prefs = await(browser.storage.local.get());
+  let format = prefs.format || "png";
+  let region = prefs.region || "full";
 
+  if (format == "manual")
+    format = request.format;
+  if (region == "manual")
+    region = request.region;
+
+  if (region == "full")
+    SaveScreenshot(
+      0,
+      0,
+      window.innerWidth + window.scrollMaxX,
+      window.innerHeight + window.scrollMaxY,
+      format
+    );
+  else
+    SaveScreenshot(
+      document.documentElement.scrollLeft,
+      document.documentElement.scrollTop,
+      window.innerWidth,
+      window.innerHeight,
+      format
+    );
+}
+
+function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   // Unfortunately there is a limit:
-  if (desth > 16384) desth = 16384;
+  if (aHeight > 16384) aHeight = 16384;
 
   var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "html:canvas");
-  canvas.height = desth;
-  canvas.width = destw;
+  canvas.height = aHeight;
+  canvas.width = aWidth;
 
   var ctx = canvas.getContext("2d");
-  ctx.drawWindow(content, 0, 0, destw, desth, "rgb(0,0,0)");
+  ctx.drawWindow(content, aLeft, aTop, aWidth, aHeight, "rgb(0,0,0)");
 
-  var imgdata;
-  if (request.suffix == "png")
+  let imgdata;
+  if (aFormat == "png")
     imgdata = canvas.toDataURL("image/png", "transparency=none");
   else
     imgdata = canvas.toDataURL("image/jpeg", "quality=80");
 
-  var a = document.createElement("a");
+  const a = document.createElement("a");
   a.href = imgdata;
-  a.download = "saved_page." + request.suffix;
+  a.download = "saved_page." + aFormat;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

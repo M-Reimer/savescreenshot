@@ -16,5 +16,27 @@
   "errorTextFailedSending": {
     "message": "It is not possible to create a screenshot from this page!",
     "description": "Text of error notification."
+  },
+
+  "fullpage": {
+    "message": "Full page",
+    "description": "Used in the options page and for creating the menus"
+  },
+  "viewport": {
+    "message": "Viewport",
+    "description": "Used in the options page and for creating the menus"
+  },
+
+  "imageformat_headline_label": {
+    "message": "Image format",
+    "description": "Headline for image format options in option page"
+  },
+  "region_headline_label": {
+    "message": "Screenshot region",
+    "description": "Headline for screenshot region options in option page"
+  },
+  "select_manually_label": {
+    "message": "Select manually for each screenshot",
+    "description": "Used in the options page for both manual select options"
   }
 }

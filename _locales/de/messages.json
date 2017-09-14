@@ -16,5 +16,27 @@
   "errorTextFailedSending": {
     "message": "Es ist nicht möglich von dieser Seite ein Bildschirmfoto zu erstellen!",
     "description": "Text of error notification."
+  },
+
+  "fullpage": {
+    "message": "Ganze Seite",
+    "description": "Used in the options page and for creating the menus"
+  },
+  "viewport": {
+    "message": "Anzeigebereich",
+    "description": "Used in the options page and for creating the menus"
+  },
+
+  "imageformat_headline_label": {
+    "message": "Bildformat",
+    "description": "Headline for image format options in option page"
+  },
+  "region_headline_label": {
+    "message": "Bildschirmfoto-Bereich",
+    "description": "Headline for screenshot region options in option page"
+  },
+  "select_manually_label": {
+    "message": "Für jedes Bildschirmfoto manuell wählen",
+    "description": "Used in the options page for both manual select options"
   }
 }
