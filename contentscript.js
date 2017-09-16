@@ -63,10 +63,42 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
 
   const a = document.createElement("a");
   a.href = imgdata;
-  a.download = "saved_page." + aFormat;
+  a.download = GetDefaultFileName("saved_page") + "." + aFormat;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+}
+
+// Gets the default file name, used for saving the screenshot
+function GetDefaultFileName(aDefaultFileName) {
+  // If possible, base the file name on document title
+  let title = ValidateFileName(document.title);
+  if (title)
+    return title;
+
+  // Otherwise try to use the actual HTML filename
+  let path = window.location.pathname;
+  if (path) {
+    let filename = ValidateFileName(path.substring(path.lastIndexOf('/')+1));
+    if (filename)
+      return filename;
+  }
+
+  // Finally use the provided default name
+  return aDefaultFileName;
+}
+
+// "Sanitizes" given string to be used as file name.
+function ValidateFileName(aFileName) {
+  // http://www.mtu.edu/umc/services/digital/writing/characters-avoid/
+  aFileName = aFileName.replace(/[<\{]+/g, "(");
+  aFileName = aFileName.replace(/[>\}]+/g, ")");
+  aFileName = aFileName.replace(/[#$%!&*\'?\"\/:\\@]/g, "");
+  // Remove leading "." and "-"
+  aFileName = aFileName.replace(/^[\s-.]+/, "");
+  // Remove trailing "."
+  aFileName = aFileName.replace(/[\s.]+$/, "");
+  return aFileName;
 }
 
 // Register message event listener
