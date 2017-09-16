@@ -3,15 +3,18 @@
 # Makefile for Undo Close Tab
 #
 
-.PHONY: xpi
+FILES = manifest.json \
+        background.js \
+        contentscript.js \
+        _globals.js \
+        options.html \
+        options.js \
+	savescreenshot.svg \
+        $(wildcard popup/choose_format.*) \
+        $(wildcard _locales/*/messages.json)
 
-xpi: clean
-	zip -r9 savescreenshot-trunk.xpi manifest.json \
-                                 popup \
-                                 _locales \
-                                 background.js \
-                                 contentscript.js \
-                                 _sendmessage.js \
-                                 savescreenshot.svg
+savescreenshot-trunk.xpi: $(FILES)
+	@zip -9 - $^ > $@
+
 clean:
 	rm -f savescreenshot-trunk.xpi
