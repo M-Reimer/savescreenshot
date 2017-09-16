@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "1.0.0",
+  "version": "2.0.0",
 
   "description": "__MSG_extensionDescription__",
 
@@ -40,7 +40,10 @@
   },
 
   "permissions": [
-    "<all_urls>", "contextMenus", "notifications", "storage"
+    "<all_urls>",
+    "contextMenus",
+    "notifications",
+    "storage"
   ],
 
   "default_locale": "en"
