@@ -13,8 +13,9 @@
   },
 
   "icons": {
-    "48": "savescreenshot.svg",
-    "96": "savescreenshot.svg"
+    "24": "icons/savescreenshot.svg",
+    "48": "icons/savescreenshot.svg",
+    "96": "icons/savescreenshot.svg"
   },
 
   "background": {
@@ -22,12 +23,12 @@
   },
 
   "browser_action": {
-    "default_icon": "savescreenshot.svg",
+    "default_icon": "icons/savescreenshot.svg",
     "browser_style": true,
     "default_popup": "popup/choose_format.html",
     "theme_icons": [{
-      "dark": "savescreenshot.svg",
-      "light": "savescreenshot-light.svg",
+      "dark": "icons/savescreenshot.svg",
+      "light": "icons/savescreenshot-light.svg",
       "size": 19
     }]
   },
