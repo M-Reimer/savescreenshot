@@ -24,7 +24,12 @@
   "browser_action": {
     "default_icon": "savescreenshot.svg",
     "browser_style": true,
-    "default_popup": "popup/choose_format.html"
+    "default_popup": "popup/choose_format.html",
+    "theme_icons": [{
+      "dark": "savescreenshot.svg",
+      "light": "savescreenshot-light.svg",
+      "size": 19
+    }]
   },
 
   "content_scripts": [

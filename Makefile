@@ -13,8 +13,12 @@ FILES = manifest.json \
         $(wildcard popup/choose_format.*) \
         $(wildcard _locales/*/messages.json)
 
-savescreenshot-trunk.xpi: $(FILES)
+savescreenshot-trunk.xpi: $(FILES) savescreenshot-light.svg
 	@zip -9 - $^ > $@
+
+savescreenshot-light.svg: savescreenshot.svg
+	@sed -e 's/:#4c4c4c/:#ffffff/g' $^ > $@
 
 clean:
 	rm -f savescreenshot-trunk.xpi
+	rm -f savescreenshot-light.svg
