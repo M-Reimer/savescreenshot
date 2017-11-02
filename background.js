@@ -62,6 +62,44 @@ async function UpdateUI() {
   });
 }
 
+// Create a message host which exports parts of the "downloads" API (only the
+// part which is needed to trigger downloads) to our content script.
+browser.runtime.onConnect.addListener(function(aPort) {
+  aPort.onMessage.addListener(async function(aMessage) {
+    const prefs = await browser.storage.local.get();
+    const method = prefs.savemethod || "open";
+    browser.downloads.download({
+      filename: aMessage.filename,
+      url: DataURItoBlobURI(aMessage.content),
+      saveAs: (method == "saveas") ? true : false
+    });
+  });
+});
+
+// This is a workaround for Bug 1318564 in Firefox: https://bugzil.la/1318564
+// It converts a "data:" URI (which is not working with the "downloads" API)
+// to a "blob:" URI (which is working).
+function DataURItoBlobURI(aDataURI) {
+  // Split data URI into parts
+  const [scheme, mime, encoding, content] = aDataURI.split(/[:;,]/);
+
+  // Check preparsed values
+  if (scheme != "data" || mime == "" || encoding != "base64" || content == "") {
+    console.log("DataURItoBlobURI error: Invalid data URI: " + aDataURI);
+    return "";
+  }
+
+  // Convert base64-encoded string to byte array
+  let array = [];
+  const bytestring = atob(content);
+  for (let i = 0; i < bytestring.length; i++) {
+    array.push(bytestring.charCodeAt(i));
+  }
+
+  // Create blob URI from byte array and return it
+  const blob = new Blob([new Uint8Array(array)], {type: mime});
+  return URL.createObjectURL(blob);
+}
 
 // Register event listeners
 browser.contextMenus.onClicked.addListener(ContextMenuClicked);

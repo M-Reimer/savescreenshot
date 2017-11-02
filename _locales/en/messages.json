@@ -38,5 +38,22 @@
   "select_manually_label": {
     "message": "Select manually for each screenshot",
     "description": "Used in the options page for both manual select options"
+  },
+
+  "savemethod_headline_label": {
+    "message": "Save method",
+    "description": "Headline for save method options in option page"
+  },
+  "savemethod_open_label": {
+    "message": "Offer to open the image file directly",
+    "description": "Used in option page for open dialog option"
+  },
+  "savemethod_saveas_label": {
+    "message": "Display \"Save As\" dialog",
+    "description": "Used in option page for save as dialog option"
+  },
+  "savemethod_save_label": {
+    "message": "Directly save to \"Downloads\" directory without prompting",
+    "description": "Used in option page for direct download option"
   }
 }

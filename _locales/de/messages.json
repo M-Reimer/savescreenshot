@@ -38,5 +38,22 @@
   "select_manually_label": {
     "message": "Für jedes Bildschirmfoto manuell wählen",
     "description": "Used in the options page for both manual select options"
+  },
+
+  "savemethod_headline_label": {
+    "message": "Speichermethode",
+    "description": "Headline for save method options in option page"
+  },
+  "savemethod_open_label": {
+    "message": "Anbieten, die Bilddatei direkt zu öffnen",
+    "description": "Used in option page for open dialog option"
+  },
+  "savemethod_saveas_label": {
+    "message": "Dialog \"Speichern unter\" anzeigen",
+    "description": "Used in option page for save as dialog option"
+  },
+  "savemethod_save_label": {
+    "message": "Ohne Rückfrage direkt ins \"Downloads\"-Verzeichnis speicheren",
+    "description": "Used in option page for direct download option"
   }
 }

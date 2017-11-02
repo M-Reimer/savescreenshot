@@ -61,12 +61,30 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   else
     imgdata = canvas.toDataURL("image/jpeg", "quality=80");
 
-  const a = document.createElement("a");
-  a.href = imgdata;
-  a.download = GetDefaultFileName("saved_page") + "." + aFormat;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  TriggerDownload(imgdata, GetDefaultFileName("saved_page") + "." + aFormat);
+}
+
+// Triggers a download for the content aContent named as aFilename.
+async function TriggerDownload(aContent, aFileName) {
+  const prefs = await browser.storage.local.get();
+  const method = prefs.savemethod || "open";
+
+  // Trigger the firefox "open file" dialog.
+  if (method == "open") {
+    const a = document.createElement("a");
+    a.href = aContent;
+    a.download = aFileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  // All other cases have to be communicated to our "background script" as
+  // content scripts can't access the "downloads" API.
+  else {
+    const port = browser.runtime.connect();
+    port.postMessage({content: aContent, filename: aFileName});
+    port.disconnect();
+  }
 }
 
 // Gets the default file name, used for saving the screenshot
