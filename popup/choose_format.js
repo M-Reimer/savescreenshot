@@ -28,10 +28,11 @@ async function CreateButtons() {
   });
 }
 
-document.addEventListener("click", (e) => {
+document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("button")) {
     var data = e.target.getAttribute("data-settings");
-    SendMessage(data);
+    await SendMessage(data);
+    window.close();
   }
 });
 

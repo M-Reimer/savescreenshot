@@ -18,25 +18,20 @@
 
 // Function which handles sending the "take screenshot" message to the active
 // tab. Includes error handling with error notification.
-function SendMessage(aJsonMessage) {
-  const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-  gettingActiveTab.then(
-    function(tabs) {
-      const message = JSON.parse(aJsonMessage);
-      const sending = browser.tabs.sendMessage(tabs[0].id, message);
-      sending.then(
-        function() {},
-        function(aError) {
-          console.log("SaveScreenshot message sending error: " + aError);
-          browser.notifications.create("error-notification", {
-            "type": "basic",
-            "title": browser.i18n.getMessage("errorTitleFailedSending"),
-            "message": browser.i18n.getMessage("errorTextFailedSending")
-          });
-        }
-      );
-    }
-  );
+async function SendMessage(aJsonMessage) {
+  const tabs = await browser.tabs.query({active: true, currentWindow: true});
+  const message = JSON.parse(aJsonMessage);
+  try {
+    await browser.tabs.sendMessage(tabs[0].id, message);
+  }
+  catch(e) {
+    console.log("SaveScreenshot message sending error: " + e);
+    browser.notifications.create("error-notification", {
+      "type": "basic",
+      "title": browser.i18n.getMessage("errorTitleFailedSending"),
+      "message": browser.i18n.getMessage("errorTextFailedSending")
+    });
+  }
 }
 
 // Function to generate list with menu entries based on the user settings.
