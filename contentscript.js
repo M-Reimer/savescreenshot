@@ -45,8 +45,11 @@ async function OnMessage(request, sender, sendResponse) {
 }
 
 function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
-  // Unfortunately there is a limit:
-  if (aHeight > 16384) aHeight = 16384;
+  // Maximum size is limited!
+  // https://dxr.mozilla.org/mozilla-central/source/dom/canvas/CanvasRenderingContext2D.cpp#5517
+  // https://dxr.mozilla.org/mozilla-central/source/gfx/2d/Factory.cpp#316
+  if (aHeight > 32767) aHeight = 32767;
+  if (aWidth > 32767) aWidth = 32767;
 
   var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "html:canvas");
   canvas.height = aHeight;
