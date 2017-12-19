@@ -18,20 +18,29 @@
     "description": "Text of error notification."
   },
 
-  "fullpage": {
+  "region_full_label": {
     "message": "Ganze Seite",
     "description": "Used in the options page and for creating the menus"
   },
-  "viewport": {
+  "region_viewport_label": {
     "message": "Anzeigebereich",
     "description": "Used in the options page and for creating the menus"
   },
 
-  "imageformat_headline_label": {
+  "general_headline": {
+    "message": "Allgemeine Einstellungen",
+    "description": "Headline for the general settings in option page"
+  },
+  "show_contextmenu_label": {
+    "message": "Eintrag zum Seiten-Kontextmenü hinzufügen",
+    "description": "Used in the options page for the context menu checkbox"
+  },
+
+  "imageformat_headline": {
     "message": "Bildformat",
     "description": "Headline for image format options in option page"
   },
-  "region_headline_label": {
+  "region_headline": {
     "message": "Bildschirmfoto-Bereich",
     "description": "Headline for screenshot region options in option page"
   },
@@ -40,7 +49,7 @@
     "description": "Used in the options page for both manual select options"
   },
 
-  "savemethod_headline_label": {
+  "savemethod_headline": {
     "message": "Speichermethode",
     "description": "Headline for save method options in option page"
   },

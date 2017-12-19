@@ -46,20 +46,25 @@ async function UpdateUI() {
 
   await browser.contextMenus.removeAll();
 
-  const topmenu = browser.contextMenus.create({
-    id: "{}",
-    title: browser.i18n.getMessage("extensionName"),
-    contexts: ["page"]
-  });
+  const prefs = await browser.storage.local.get("show_contextmenu");
+  const show_menu = (prefs.show_contextmenu !== undefined) ? prefs.show_contextmenu : true;
 
-  menus.forEach((entry) => {
-    browser.contextMenus.create({
-      id: entry.data,
-      title: entry.label,
-      contexts: ["page"],
-      parentId: topmenu
+  if (show_menu) {
+    const topmenu = browser.contextMenus.create({
+      id: "{}",
+      title: browser.i18n.getMessage("extensionName"),
+      contexts: ["page"]
     });
-  });
+
+    menus.forEach((entry) => {
+      browser.contextMenus.create({
+        id: entry.data,
+        title: entry.label,
+        contexts: ["page"],
+        parentId: topmenu
+      });
+    });
+  }
 }
 
 // Create a message host which exports parts of the "downloads" API (only the

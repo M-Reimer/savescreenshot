@@ -43,19 +43,19 @@ async function GetMenuList() {
   let list = [];
   if (format == "manual" && region == "manual") {
     list.push({
-      label: browser.i18n.getMessage("fullpage") + " (PNG)",
+      label: browser.i18n.getMessage("region_full_label") + " (PNG)",
       data: '{"format": "png", "region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("fullpage") + " (JPEG)",
+      label: browser.i18n.getMessage("region_full_label") + " (JPEG)",
       data: '{"format": "jpg", "region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("viewport") + " (PNG)",
+      label: browser.i18n.getMessage("region_viewport_label") + " (PNG)",
       data: '{"format": "png", "region": "viewport"}'
     });
     list.push({
-      label: browser.i18n.getMessage("viewport") + " (JPEG)",
+      label: browser.i18n.getMessage("region_viewport_label") + " (JPEG)",
       data: '{"format": "jpg", "region": "viewport"}'
     });
   }
@@ -71,11 +71,11 @@ async function GetMenuList() {
   }
   else if (region == "manual") {
     list.push({
-      label: browser.i18n.getMessage("fullpage"),
+      label: browser.i18n.getMessage("region_full_label"),
       data: '{"region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("viewport"),
+      label: browser.i18n.getMessage("region_viewport_label"),
       data: '{"region": "viewport"}'
     });
   }

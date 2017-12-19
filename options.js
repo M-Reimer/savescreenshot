@@ -22,17 +22,37 @@ async function MethodChanged(e) {
   });
 }
 
+async function CheckboxChanged(e) {
+  if (e.target.id.match(/([a-z_]+)_checkbox/)) {
+    let pref = RegExp.$1;
+    let params = {};
+    params[pref] = e.target.checked;
+    await browser.storage.local.set(params);
+  }
+  browser.extension.getBackgroundPage().UpdateUI();
+}
+
 function init() {
-  document.querySelector("#imageformat_headline").textContent = browser.i18n.getMessage("imageformat_headline_label");
-  document.querySelector("#region_headline").textContent = browser.i18n.getMessage("region_headline_label");
-  document.querySelector("#format_manual_label").textContent = browser.i18n.getMessage("select_manually_label");
-  document.querySelector("#region_manual_label").textContent = browser.i18n.getMessage("select_manually_label");
-  document.querySelector("#region_full_label").textContent = browser.i18n.getMessage("fullpage");
-  document.querySelector("#region_viewport_label").textContent = browser.i18n.getMessage("viewport");
-  document.querySelector("#savemethod_headline").textContent = browser.i18n.getMessage("savemethod_headline_label");
-  document.querySelector("#savemethod_open_label").textContent = browser.i18n.getMessage("savemethod_open_label");
-  document.querySelector("#savemethod_saveas_label").textContent = browser.i18n.getMessage("savemethod_saveas_label");
-  document.querySelector("#savemethod_save_label").textContent = browser.i18n.getMessage("savemethod_save_label");
+  // i18n
+  [
+    "imageformat_headline",
+    "region_headline",
+    ["format_manual_label", "select_manually_label"],
+    ["region_manual_label", "select_manually_label"],
+    "region_full_label",
+    "region_viewport_label",
+    "savemethod_headline",
+    "savemethod_open_label",
+    "savemethod_saveas_label",
+    "savemethod_save_label",
+    "general_headline",
+    "show_contextmenu_label"
+  ].forEach((id) => {
+    if (typeof id === "string")
+      document.getElementById(id).textContent = browser.i18n.getMessage(id);
+    else
+      document.getElementById(id[0]).textContent = browser.i18n.getMessage(id[1]);
+  });
 
   loadOptions();
 
@@ -48,6 +68,7 @@ function init() {
   methodoptions.forEach((option) => {
     option.addEventListener("click", MethodChanged);
   });
+  document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
 }
 
 function loadOptions() {
@@ -58,6 +79,7 @@ function loadOptions() {
     document.querySelector("#region_" + region + "_option").checked = true;
     const method = result.savemethod || "open";
     document.querySelector("#savemethod_" + method + "_option").checked = true;
+    document.querySelector("#show_contextmenu_checkbox").checked = (result.show_contextmenu !== undefined) ? result.show_contextmenu : true;
   });
 }
 
