@@ -56,7 +56,7 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   canvas.width = aWidth;
 
   var ctx = canvas.getContext("2d");
-  ctx.drawWindow(content, aLeft, aTop, aWidth, aHeight, "rgb(0,0,0)");
+  ctx.drawWindow(window, aLeft, aTop, aWidth, aHeight, "rgb(0,0,0)");
 
   let imgdata;
   if (aFormat == "png")
