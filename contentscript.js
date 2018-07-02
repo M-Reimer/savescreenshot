@@ -114,7 +114,7 @@ function ValidateFileName(aFileName) {
   // http://www.mtu.edu/umc/services/digital/writing/characters-avoid/
   aFileName = aFileName.replace(/[<\{]+/g, "(");
   aFileName = aFileName.replace(/[>\}]+/g, ")");
-  aFileName = aFileName.replace(/[#$%!&*\'?\"\/:\\@]/g, "");
+  aFileName = aFileName.replace(/[#$%!&*\'?\"\/:\\@|]/g, "");
   // Remove leading "." and "-"
   aFileName = aFileName.replace(/^[\s-.]+/, "");
   // Remove trailing "."
