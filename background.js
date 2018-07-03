@@ -84,6 +84,8 @@ browser.runtime.onConnect.addListener(function(aPort) {
 // This is a workaround for Bug 1318564 in Firefox: https://bugzil.la/1318564
 // It converts a "data:" URI (which is not working with the "downloads" API)
 // to a "blob:" URI (which is working).
+// Note: It also is not possible to use "toBlob()" in contentscript as
+//       we are not allowed to acces blob: URLs created in contentscript...
 function DataURItoBlobURI(aDataURI) {
   // Split data URI into parts
   const [scheme, mime, encoding, content] = aDataURI.split(/[:;,]/);

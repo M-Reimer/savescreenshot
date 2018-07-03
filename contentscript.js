@@ -60,9 +60,9 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
 
   let imgdata;
   if (aFormat == "png")
-    imgdata = canvas.toDataURL("image/png", "transparency=none");
+    imgdata = canvas.toDataURL("image/png");
   else
-    imgdata = canvas.toDataURL("image/jpeg", "quality=80");
+    imgdata = canvas.toDataURL("image/jpeg", 0.8);
 
   TriggerDownload(imgdata, GetDefaultFileName("saved_page") + "." + aFormat);
 }
