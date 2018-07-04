@@ -78,7 +78,7 @@ async function GetMenuList() {
     });
     list.push({
       label: "Copy",
-      data: '{"format": "jpg"}'
+      data: '{"format": "copy"}'
     });
   }
   else if (region == "manual") {
