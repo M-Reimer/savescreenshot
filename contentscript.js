@@ -59,24 +59,33 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   ctx.drawWindow(window, aLeft, aTop, aWidth, aHeight, "rgb(0,0,0)");
 
   let imgdata;
-  if (aFormat == "png")
-    imgdata = canvas.toDataURL("image/png");
-  else
+  if (aFormat == "jpg")
     imgdata = canvas.toDataURL("image/jpeg", 0.8);
+  else
+    imgdata = canvas.toDataURL("image/png");
 
-  TriggerDownload(imgdata, GetDefaultFileName("saved_page") + "." + aFormat);
+  TriggerDownload(imgdata, aFormat);
 }
 
+
 // Triggers a download for the content aContent named as aFilename.
-async function TriggerDownload(aContent, aFileName) {
+async function TriggerDownload(aContent, aFormat) {
+  if (aFormat == "copy") {
+    const port = browser.runtime.connect();
+    port.postMessage({content: aContent, action: "copy"});
+    port.disconnect();
+    return;
+  }
+
   const prefs = await browser.storage.local.get();
   const method = prefs.savemethod || "open";
+  const filename = GetDefaultFileName("saved_page") + "." + aFormat;
 
   // Trigger the firefox "open file" dialog.
   if (method == "open") {
     const a = document.createElement("a");
     a.href = aContent;
-    a.download = aFileName;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -85,7 +94,7 @@ async function TriggerDownload(aContent, aFileName) {
   // content scripts can't access the "downloads" API.
   else {
     const port = browser.runtime.connect();
-    port.postMessage({content: aContent, filename: aFileName});
+    port.postMessage({content: aContent, filename: filename});
     port.disconnect();
   }
 }

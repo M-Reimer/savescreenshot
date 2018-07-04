@@ -51,12 +51,20 @@ async function GetMenuList() {
       data: '{"format": "jpg", "region": "full"}'
     });
     list.push({
+      label: browser.i18n.getMessage("region_full_label") + " (Copy)",
+      data: '{"format": "copy", "region": "full"}'
+    });
+    list.push({
       label: browser.i18n.getMessage("region_viewport_label") + " (PNG)",
       data: '{"format": "png", "region": "viewport"}'
     });
     list.push({
       label: browser.i18n.getMessage("region_viewport_label") + " (JPEG)",
       data: '{"format": "jpg", "region": "viewport"}'
+    });
+    list.push({
+      label: browser.i18n.getMessage("region_viewport_label") + " (Copy)",
+      data: '{"format": "copy", "region": "viewport"}'
     });
   }
   else if (format == "manual") {
@@ -66,6 +74,10 @@ async function GetMenuList() {
     });
     list.push({
       label: "JPEG",
+      data: '{"format": "jpg"}'
+    });
+    list.push({
+      label: "Copy",
       data: '{"format": "jpg"}'
     });
   }

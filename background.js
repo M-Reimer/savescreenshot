@@ -71,22 +71,34 @@ async function UpdateUI() {
 // part which is needed to trigger downloads) to our content script.
 browser.runtime.onConnect.addListener(function(aPort) {
   aPort.onMessage.addListener(async function(aMessage) {
-    const prefs = await browser.storage.local.get();
-    const method = prefs.savemethod || "open";
-    browser.downloads.download({
-      filename: aMessage.filename,
-      url: DataURItoBlobURI(aMessage.content),
-      saveAs: (method == "saveas") ? true : false
-    });
+    const blob = DataURItoBlob(aMessage.content);
+
+    if (aMessage.action && aMessage.action == "copy") {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        browser.clipboard.setImageData(e.target.result, "png");
+      }
+      reader.readAsArrayBuffer(blob);
+    }
+    else {
+      const bloburi = URL.createObjectURL(blob);
+      const prefs = await browser.storage.local.get();
+      const method = prefs.savemethod || "open";
+      browser.downloads.download({
+        filename: aMessage.filename,
+        url: bloburi,
+        saveAs: (method == "saveas") ? true : false
+      });
+    }
   });
 });
 
-// This is a workaround for Bug 1318564 in Firefox: https://bugzil.la/1318564
-// It converts a "data:" URI (which is not working with the "downloads" API)
-// to a "blob:" URI (which is working).
-// Note: It also is not possible to use "toBlob()" in contentscript as
+// This function converts a "data:" URI to a Blob object.
+// The Blob is used to get "blob:" URI as a workaround for Bug 1318564
+// https://bugzil.la/1318564 and to get an ArrayBuffer to copy to clipboard.
+// Note: It is not possible to use "toBlob()" in contentscript as
 //       we are not allowed to acces blob: URLs created in contentscript...
-function DataURItoBlobURI(aDataURI) {
+function DataURItoBlob(aDataURI) {
   // Split data URI into parts
   const [scheme, mime, encoding, content] = aDataURI.split(/[:;,]/);
 
@@ -103,9 +115,8 @@ function DataURItoBlobURI(aDataURI) {
     array.push(bytestring.charCodeAt(i));
   }
 
-  // Create blob URI from byte array and return it
-  const blob = new Blob([new Uint8Array(array)], {type: mime});
-  return URL.createObjectURL(blob);
+  // Create Blob from byte array and return it
+  return new Blob([new Uint8Array(array)], {type: mime});
 }
 
 // Register event listeners
