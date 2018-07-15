@@ -36,6 +36,7 @@ function init() {
   // i18n
   [
     "imageformat_headline",
+    "format_copy_label",
     "region_headline",
     ["format_manual_label", "select_manually_label"],
     ["region_manual_label", "select_manually_label"],

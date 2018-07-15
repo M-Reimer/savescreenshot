@@ -49,6 +49,11 @@
     "description": "Used in the options page for both manual select options"
   },
 
+  "format_copy_label": {
+    "message": "Kopieren",
+    "description": "Used in options page and menus for copying to clipboard"
+  },
+
   "savemethod_headline": {
     "message": "Speichermethode",
     "description": "Headline for save method options in option page"

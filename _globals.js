@@ -40,30 +40,34 @@ async function GetMenuList() {
   const format = prefs.format || "png";
   const region = prefs.region || "full";
 
+  const lbl_region_full = browser.i18n.getMessage("region_full_label");
+  const lbl_region_viewport = browser.i18n.getMessage("region_viewport_label");
+  const lbl_copy = browser.i18n.getMessage("format_copy_label");
+
   let list = [];
   if (format == "manual" && region == "manual") {
     list.push({
-      label: browser.i18n.getMessage("region_full_label") + " (PNG)",
+      label: lbl_region_full + " (PNG)",
       data: '{"format": "png", "region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("region_full_label") + " (JPEG)",
+      label: lbl_region_full + " (JPEG)",
       data: '{"format": "jpg", "region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("region_full_label") + " (Copy)",
+      label: lbl_region_full + " (" + lbl_copy + ")",
       data: '{"format": "copy", "region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("region_viewport_label") + " (PNG)",
+      label: lbl_region_viewport + " (PNG)",
       data: '{"format": "png", "region": "viewport"}'
     });
     list.push({
-      label: browser.i18n.getMessage("region_viewport_label") + " (JPEG)",
+      label: lbl_region_viewport + " (JPEG)",
       data: '{"format": "jpg", "region": "viewport"}'
     });
     list.push({
-      label: browser.i18n.getMessage("region_viewport_label") + " (Copy)",
+      label: lbl_region_viewport + " (" + lbl_copy + ")",
       data: '{"format": "copy", "region": "viewport"}'
     });
   }
@@ -77,17 +81,17 @@ async function GetMenuList() {
       data: '{"format": "jpg"}'
     });
     list.push({
-      label: "Copy",
+      label: lbl_copy,
       data: '{"format": "copy"}'
     });
   }
   else if (region == "manual") {
     list.push({
-      label: browser.i18n.getMessage("region_full_label"),
+      label: lbl_region_full,
       data: '{"region": "full"}'
     });
     list.push({
-      label: browser.i18n.getMessage("region_viewport_label"),
+      label: lbl_region_viewport,
       data: '{"region": "viewport"}'
     });
   }
