@@ -1,0 +1,73 @@
+{
+  "extensionName": {
+    "message": "Guardar captura de pantalla",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Guarda la página actual como un archivo de imagen.",
+    "description": "Description of the extension."
+  },
+
+  "errorTitleFailedSending": {
+    "message": "¡No se pudo tomar captura de pantalla!",
+    "description": "Title of error notification."
+  },
+  "errorTextFailedSending": {
+    "message": "!No es posible crear una captura de pantalla desde esta página.!",
+    "description": "Text of error notification."
+  },
+
+  "region_full_label": {
+    "message": "Página completa",
+    "description": "Used in the options page and for creating the menus"
+  },
+  "region_viewport_label": {
+    "message": "Viewport",
+    "description": "Used in the options page and for creating the menus"
+  },
+
+  "general_headline": {
+    "message": "Opciones generales",
+    "description": "Headline for the general settings in option page"
+  },
+  "show_contextmenu_label": {
+    "message": "Añadir entrada al menú contextual de la página.",
+    "description": "Used in the options page for the context menu checkbox"
+  },
+
+  "imageformat_headline": {
+    "message": "Formato de la imagen",
+    "description": "Headline for image format options in option page"
+  },
+  "region_headline": {
+    "message": "Región de la captura de pantalla",
+    "description": "Headline for screenshot region options in option page"
+  },
+  "select_manually_label": {
+    "message": "Seleccione manualmente para cada captura de pantalla",
+    "description": "Used in the options page for both manual select options"
+  },
+
+  "format_copy_label": {
+    "message": "Copiar",
+    "description": "Used in options page and menus for copying to clipboard"
+  },
+
+  "savemethod_headline": {
+    "message": "Método de guardado",
+    "description": "Headline for save method options in option page"
+  },
+  "savemethod_open_label": {
+    "message": "Preguntar para abrir el archivo de imagen directamente",
+    "description": "Used in option page for open dialog option"
+  },
+  "savemethod_saveas_label": {
+    "message": "Mostrar el diálogo \"Guardar como\"",
+    "description": "Used in option page for save as dialog option"
+  },
+  "savemethod_save_label": {
+    "message": "Guarde directamente en el directorio de \"Descargas\" sin preguntar",
+    "description": "Used in option page for direct download option"
+  }
+}
