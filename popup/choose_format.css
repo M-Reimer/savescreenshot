@@ -1,17 +1,13 @@
 body {
   margin: 0px;
-  padding: 4px;
+  padding: 6px 0px;
 }
 
 .button {
   margin: 0px;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  padding: 3px 4px;
-  cursor: pointer;
+  padding: 4px 10px;
 }
 
 .button:hover {
   background-color: #f0f0f0;
-  border-color: #b6b6b3;
 }
