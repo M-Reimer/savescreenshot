@@ -8,7 +8,19 @@
       <h1 id="general_headline">General settings</h1>
       <input type="checkbox" id="show_contextmenu_checkbox"/>
       <label for="show_contextmenu_checkbox" id="show_contextmenu_label">Add entry to the page context menu</label>
-      <h1 id="imageformat_headline">Image format</h1>
+      <br/>
+      <label for="shortcut" id="shortcut_label">Shortcut</label>
+      <input id="shortcut" type="text" value=""></input>
+      <br/>
+      <label for="prefixFormat" id="prefixFormat_label">Prefix</label>
+      <input id="prefixFormat" type="text" value=""></input>
+      <br/>
+      <p>%y %Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </p>
+      <p>%h - host name | %u - URL | %5 - MD5 from URL | %t - page title </p>
+      <p>Example: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de</p>
+
+
+      <h1 id="imageformat_headline">Image format</h1>      
       <input type="radio" name="format_options" id="format_manual_option"/>
       <label for="format_manual_option" id="format_manual_label">Select manually for each screenshot</label>
       <br/>

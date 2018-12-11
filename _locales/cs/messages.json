@@ -1,81 +1,82 @@
 {
   "extensionName": {
-    "message": "Save Screenshot",
+    "message": "Uložit snímek obrazovky",
     "description": "Name of the extension."
   },
 
   "extensionDescription": {
-    "message": "Saves the current page as image file.",
+    "message": "Uloží aktuální stránku jako obrázek.",
     "description": "Description of the extension."
   },
 
   "errorTitleFailedSending": {
-    "message": "Failed to take screenshot!",
+    "message": "Nastala chyba při snímání obrazovky!",
     "description": "Title of error notification."
   },
   "errorTextFailedSending": {
-    "message": "It is not possible to create a screenshot from this page!",
+    "message": "Z této stránky nelze vytvořit snímek obrazovky!",
     "description": "Text of error notification."
   },
 
   "region_full_label": {
-    "message": "Full page",
+    "message": "Celá stránka",
     "description": "Used in the options page and for creating the menus"
   },
   "region_viewport_label": {
-    "message": "Viewport",
+    "message": "Viditelná oblast",
     "description": "Used in the options page and for creating the menus"
   },
 
   "general_headline": {
-    "message": "General settings",
+    "message": "Obecné nastavení",
     "description": "Headline for the general settings in option page"
   },
   "show_contextmenu_label": {
-    "message": "Add entry to the page context menu",
+    "message": "Přidat záznam do kontextové nabídky stránky",
     "description": "Used in the options page for the context menu checkbox"
   },
 
   "imageformat_headline": {
-    "message": "Image format",
+    "message": "Formát obrázku",
     "description": "Headline for image format options in option page"
   },
   "region_headline": {
-    "message": "Screenshot region",
+    "message": "Oblast snímku obrazovky",
     "description": "Headline for screenshot region options in option page"
   },
   "select_manually_label": {
-    "message": "Select manually for each screenshot",
+    "message": "Zvolit ručně pro každý snímek obrazovky",
     "description": "Used in the options page for both manual select options"
   },
 
   "format_copy_label": {
-    "message": "Copy",
+    "message": "Kopírovat",
     "description": "Used in options page and menus for copying to clipboard"
   },
 
   "savemethod_headline": {
-    "message": "Save method",
+    "message": "Metoda uložení",
     "description": "Headline for save method options in option page"
   },
   "savemethod_open_label": {
-    "message": "Offer to open the image file directly",
+    "message": "Nabídnout přímé otevření souboru s obrázkem",
     "description": "Used in option page for open dialog option"
   },
   "savemethod_saveas_label": {
-    "message": "Display \"Save As\" dialog",
+    "message": "Zobrazit dialog \"Uložit jako\"",
     "description": "Used in option page for save as dialog option"
   },
   "savemethod_save_label": {
-    "message": "Directly save to \"Downloads\" directory without prompting",
+    "message": "Uložit do složky \"Stažené soubory\" bez dotazování",
     "description": "Used in option page for direct download option"
   },
   "shortcut_label": {
-    "message": "Shortcut",
+    "message": "Klávesová zkratka",
     "description": "Shortcut"
   },
   "prefixFormat_label": {
-    "message": "Filename format",
+    "message": "Formát názvu souboru",
     "description": "Prefix format"
   }
+  
 }

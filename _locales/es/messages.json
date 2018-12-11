@@ -69,5 +69,13 @@
   "savemethod_save_label": {
     "message": "Guarde directamente en el directorio de \"Descargas\" sin preguntar",
     "description": "Used in option page for direct download option"
+  },
+  "shortcut_label": {
+    "message": "Shortcut",
+    "description": "Shortcut"
+  },
+  "prefixFormat_label": {
+    "message": "Filename format",
+    "description": "Prefix format"
   }
 }

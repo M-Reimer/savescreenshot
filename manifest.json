@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "3.2.0",
+  "version": "3.2.3",
 
   "description": "__MSG_extensionDescription__",
 
@@ -20,6 +20,15 @@
 
   "background": {
     "scripts": ["_globals.js", "background.js"]
+  },
+
+  "commands": {
+    "do-screenshot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+        },
+      "description": "Send a 'do-screenshot' event to the extension"
+    }
   },
 
   "browser_action": {

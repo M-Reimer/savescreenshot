@@ -123,4 +123,11 @@ function DataURItoBlob(aDataURI) {
 browser.contextMenus.onClicked.addListener(ContextMenuClicked);
 browser.browserAction.onClicked.addListener(ToolbarButtonClicked);
 
+browser.commands.onCommand.addListener(function(command) {
+  if (command == "do-screenshot") {
+    console.log("do-screenshot");
+    ToolbarButtonClicked();
+  }
+});
+
 UpdateUI();

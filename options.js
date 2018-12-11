@@ -1,3 +1,11 @@
+const commandName = 'do-screenshot';
+
+function updateShortcut(param) {
+    browser.commands.update({
+        name: commandName,
+        shortcut: param
+    });
+}
 
 async function FormatChanged(e) {
   let format = e.target.id.split("_")[1];
@@ -32,6 +40,20 @@ async function CheckboxChanged(e) {
   browser.extension.getBackgroundPage().UpdateUI();
 }
 
+async function TextChanged(e) {
+    let pref = e.target.id;
+    let value = e.target.value;
+    let params = {};
+    params[pref] = value;
+    await browser.storage.local.set(params);
+
+    if (pref=="shortcut"){
+        updateShortcut(value);
+    }
+}
+
+
+
 function init() {
   // i18n
   [
@@ -47,7 +69,8 @@ function init() {
     "savemethod_saveas_label",
     "savemethod_save_label",
     "general_headline",
-    "show_contextmenu_label"
+    "show_contextmenu_label",
+    "shortcut_label", "prefixFormat_label"
   ].forEach((id) => {
     if (typeof id === "string")
       document.getElementById(id).textContent = browser.i18n.getMessage(id);
@@ -69,6 +92,14 @@ function init() {
   methodoptions.forEach((option) => {
     option.addEventListener("click", MethodChanged);
   });
+
+  document.getElementById("prefixFormat").addEventListener("change", TextChanged);
+
+  document.getElementById("shortcut").addEventListener("change", TextChanged);
+  //let shortcut = document.getElementById("shortcut").value;
+  //updateShortcut(shortcut);
+  //updateShortcut(shortcut);
+
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
 }
 
@@ -78,9 +109,15 @@ function loadOptions() {
     document.querySelector("#format_" + format + "_option").checked = true;
     const region = result.region || "full";
     document.querySelector("#region_" + region + "_option").checked = true;
-    const method = result.savemethod || "open";
+    const method = result.savemethod || "save";
     document.querySelector("#savemethod_" + method + "_option").checked = true;
     document.querySelector("#show_contextmenu_checkbox").checked = (result.show_contextmenu !== undefined) ? result.show_contextmenu : true;
+
+    const shortcut = result.shortcut || "Ctrl+Shift+L";
+    document.querySelector("#shortcut").value = shortcut;
+
+    const prefixFormat = result.prefixFormat || "%y%m%d_%H%M%S_%h";
+    document.querySelector("#prefixFormat").value = prefixFormat;
   });
 }
 
