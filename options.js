@@ -70,7 +70,8 @@ function init() {
     "savemethod_save_label",
     "general_headline",
     "show_contextmenu_label",
-    "shortcut_label", "prefixFormat_label"
+    "shortcut_label", "prefixFormat_label",
+    "prefixFormat_description001","prefixFormat_description002","prefixFormat_description003",
   ].forEach((id) => {
     if (typeof id === "string")
       document.getElementById(id).textContent = browser.i18n.getMessage(id);
