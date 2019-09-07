@@ -19,7 +19,7 @@
   },
 
   "background": {
-    "scripts": ["_globals.js", "background.js"]
+    "scripts": ["iconupdater.js", "_globals.js", "background.js"]
   },
 
   "browser_action": {

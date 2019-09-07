@@ -7,6 +7,7 @@ FILES = manifest.json \
         background.js \
         contentscript.js \
         _globals.js \
+        iconupdater.js \
         options.html \
         options.js \
         resetshortcuts.js \

@@ -131,3 +131,5 @@ browser.browserAction.onClicked.addListener(ToolbarButtonClicked);
 browser.commands.onCommand.addListener(CommandPressed);
 
 UpdateUI();
+
+IconUpdater.Init("icons/savescreenshot.svg");
