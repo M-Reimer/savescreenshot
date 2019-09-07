@@ -9,6 +9,7 @@ FILES = manifest.json \
         _globals.js \
         options.html \
         options.js \
+        resetshortcuts.js \
         icons/savescreenshot.svg \
         $(wildcard popup/choose_format.*) \
         $(wildcard _locales/*/messages.json)
