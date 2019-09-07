@@ -1,4 +1,4 @@
-Undo Close Tab
+Save Screenshot
 ====================
 
 Main repository: https://github.com/M-Reimer/savescreenshot.
