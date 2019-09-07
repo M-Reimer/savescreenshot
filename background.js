@@ -26,6 +26,12 @@ function ToolbarButtonClicked() {
   SendMessage("{}");
 }
 
+// Fired if shortcut is pressed
+function CommandPressed(aName) {
+  const info = aName.split("-");
+  SendMessage('{"format": "' + info[1] + '", "region": "' + info[0] + '"}');
+}
+
 // Triggers UI update (toolbar button popup and context menu)
 async function UpdateUI() {
   // Get menu list
@@ -122,5 +128,6 @@ function DataURItoBlob(aDataURI) {
 // Register event listeners
 browser.contextMenus.onClicked.addListener(ContextMenuClicked);
 browser.browserAction.onClicked.addListener(ToolbarButtonClicked);
+browser.commands.onCommand.addListener(CommandPressed);
 
 UpdateUI();

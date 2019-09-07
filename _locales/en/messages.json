@@ -35,6 +35,10 @@
     "message": "Add entry to the page context menu",
     "description": "Used in the options page for the context menu checkbox"
   },
+  "reset_shortcuts_button": {
+    "message": "Reset keyboard shortcuts",
+    "description": "Label for the keyboard shortcut reset button"
+  },
 
   "imageformat_headline": {
     "message": "Image format",

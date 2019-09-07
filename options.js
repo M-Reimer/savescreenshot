@@ -47,7 +47,8 @@ function init() {
     "savemethod_saveas_label",
     "savemethod_save_label",
     "general_headline",
-    "show_contextmenu_label"
+    "show_contextmenu_label",
+    "reset_shortcuts_button"
   ].forEach((id) => {
     if (typeof id === "string")
       document.getElementById(id).textContent = browser.i18n.getMessage(id);
@@ -70,6 +71,9 @@ function init() {
     option.addEventListener("click", MethodChanged);
   });
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
+
+  // Init shortcut reset button
+  ResetShortcuts.Init();
 }
 
 function loadOptions() {

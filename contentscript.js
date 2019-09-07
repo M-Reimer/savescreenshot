@@ -18,13 +18,8 @@
 
 async function OnMessage(request, sender, sendResponse) {
   const prefs = await(browser.storage.local.get());
-  let format = prefs.format || "png";
-  let region = prefs.region || "full";
-
-  if (format == "manual")
-    format = request.format;
-  if (region == "manual")
-    region = request.region;
+  let format = request.format || prefs.format || "png";
+  let region = request.region || prefs.region || "full";
 
   if (region == "full")
     SaveScreenshot(

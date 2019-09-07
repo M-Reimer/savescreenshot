@@ -45,6 +45,27 @@
     "browser_style": true
   },
 
+  "commands": {
+    "full-png": {
+      "description": "__MSG_region_full_label__ (PNG)"
+    },
+    "full-jpg": {
+      "description": "__MSG_region_full_label__ (JPEG)"
+    },
+    "full-copy": {
+      "description": "__MSG_region_full_label__ (__MSG_format_copy_label__)"
+    },
+    "viewport-png": {
+      "description": "__MSG_region_viewport_label__ (PNG)"
+    },
+    "viewport-jpg": {
+      "description": "__MSG_region_viewport_label__ (JPEG)"
+    },
+    "viewport-copy": {
+      "description": "__MSG_region_viewport_label__ (__MSG_format_copy_label__)"
+    }
+  },
+
   "permissions": [
     "<all_urls>",
     "contextMenus",
