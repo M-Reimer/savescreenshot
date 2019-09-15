@@ -40,16 +40,16 @@
     "description": "Filename format"
   },
   "filenameformat_description001": {
-    "message": "%y %Y - Jahr | %m  - Monat | %d - Tag | %H - Stunde | %M - Minute | %S - Sekunde",
-    "description": "%y %Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
+    "message": "%Y - Jahr | %m  - Monat | %d - Tag | %H - Stunde | %M - Minute | %S - Sekunde",
+    "description": "%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
   },
   "filenameformat_description002": {
     "message": "%h - Hostname | %u - URL | %t - Seitentitel",
     "description": "%h - host name | %u - URL | %t - page title"
   },
   "filenameformat_description003": {
-    "message": "Beispiel: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de",
-    "description": "Example: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de"
+    "message": "Beispiel: %Y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de",
+    "description": "Example: %Y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de"
   },
   "reset_shortcuts_button": {
     "message": "Tastenkombinationen zurücksetzen",

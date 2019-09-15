@@ -125,7 +125,6 @@ Number.prototype.pad = function (len) {
 
 function ApplyFilenameFormat(aFormat) {
   const currentdate = new Date();
-  aFormat = aFormat.replace(/%y/,currentdate.getFullYear());
   aFormat = aFormat.replace(/%Y/,currentdate.getFullYear());
   aFormat = aFormat.replace(/%m/,(currentdate.getMonth()+1).pad(2));
   aFormat = aFormat.replace(/%d/,currentdate.getDate().pad(2));

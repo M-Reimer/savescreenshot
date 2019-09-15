@@ -40,16 +40,16 @@
     "description": "Filename format"
   },
   "filenameformat_description001": {
-    "message": "%y %Y - rok | %m  - měsíc | %d - den | %H - hodina | %M - minuta | %S - vteřina",
-    "description": "%y %Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
+    "message": "%Y - rok | %m  - měsíc | %d - den | %H - hodina | %M - minuta | %S - vteřina",
+    "description": "%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
   },
   "filenameformat_description002": {
     "message": "%h - název hostitele | %u - URL | %t - titulek stránky",
     "description": "%h - host name | %u - URL | %t - page title"
   },
   "filenameformat_description003": {
-    "message": "Příklad: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.cz",
-    "description": "Example: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de"
+    "message": "Příklad: %Y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.cz",
+    "description": "Example: %Y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de"
   },
 
   "imageformat_headline": {
