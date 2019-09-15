@@ -98,7 +98,7 @@ async function TriggerDownload(aContent, aFormat) {
 // Gets the default file name, used for saving the screenshot
 function GetDefaultFileName(aDefaultFileName, aFilenameFormat) {
   //prioritize formatted variant
-  let formatted = ApplyFilenameFormat(aFilenameFormat);
+  let formatted = ValidateFileName(ApplyFilenameFormat(aFilenameFormat));
   if (formatted)
     return formatted;
 
