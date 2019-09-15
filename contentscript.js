@@ -119,18 +119,14 @@ function GetDefaultFileName(aDefaultFileName, aFilenameFormat) {
   return aDefaultFileName;
 }
 
-Number.prototype.pad = function (len) {
-    return (new Array(len+1).join("0") + this).slice(-len);
-}
-
 function ApplyFilenameFormat(aFormat) {
   const currentdate = new Date();
   aFormat = aFormat.replace(/%Y/,currentdate.getFullYear());
-  aFormat = aFormat.replace(/%m/,(currentdate.getMonth()+1).pad(2));
-  aFormat = aFormat.replace(/%d/,currentdate.getDate().pad(2));
-  aFormat = aFormat.replace(/%H/,currentdate.getHours().pad(2));
-  aFormat = aFormat.replace(/%M/,currentdate.getMinutes().pad(2));
-  aFormat = aFormat.replace(/%S/,currentdate.getSeconds().pad(2));
+  aFormat = aFormat.replace(/%m/,(currentdate.getMonth()+1).toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%d/,currentdate.getDate().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%H/,currentdate.getHours().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%M/,currentdate.getMinutes().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%S/,currentdate.getSeconds().toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%t/,document.title || "");
   aFormat = aFormat.replace(/%u/,document.URL);
   aFormat = aFormat.replace(/%h/,window.location.hostname);
