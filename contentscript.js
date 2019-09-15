@@ -123,61 +123,19 @@ Number.prototype.pad = function (len) {
     return (new Array(len+1).join("0") + this).slice(-len);
 }
 
-function ApplyFilenameFormat(prefixFormat) {
-  //--datetime prefix
-  var currentdate = new Date();
-  if (prefixFormat.lastIndexOf("%y")>=0 ){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%y/,currentdate.getFullYear());
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%Y")>=0 ){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%Y/,currentdate.getFullYear());
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%m")>=0){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%m/,(currentdate.getMonth()+1).pad(2));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%d")>=0){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%d/,currentdate.getDate().pad(2));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%H")>=0){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%H/,currentdate.getHours().pad(2));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%M")>=0){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%M/,currentdate.getMinutes().pad(2));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%S")>=0){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%S/,currentdate.getSeconds().pad(2));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  //--rest
-  if (prefixFormat.lastIndexOf("%t")>=0 ){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%t/,ValidateFileName(document.title));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%u")>=0 ){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%u/,ValidateFileName(document.URL));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  if (prefixFormat.lastIndexOf("%h")>=0 ){
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-    prefixFormat = prefixFormat.replace(/%h/,ValidateFileName(window.location.hostname));
-    console.log("ApplyPrefixFormat: "+prefixFormat);
-  }
-  return prefixFormat;
+function ApplyFilenameFormat(aFormat) {
+  const currentdate = new Date();
+  aFormat = aFormat.replace(/%y/,currentdate.getFullYear());
+  aFormat = aFormat.replace(/%Y/,currentdate.getFullYear());
+  aFormat = aFormat.replace(/%m/,(currentdate.getMonth()+1).pad(2));
+  aFormat = aFormat.replace(/%d/,currentdate.getDate().pad(2));
+  aFormat = aFormat.replace(/%H/,currentdate.getHours().pad(2));
+  aFormat = aFormat.replace(/%M/,currentdate.getMinutes().pad(2));
+  aFormat = aFormat.replace(/%S/,currentdate.getSeconds().pad(2));
+  aFormat = aFormat.replace(/%t/,document.title || "");
+  aFormat = aFormat.replace(/%u/,document.URL);
+  aFormat = aFormat.replace(/%h/,window.location.hostname);
+  return aFormat;
 }
 
 // "Sanitizes" given string to be used as file name.
