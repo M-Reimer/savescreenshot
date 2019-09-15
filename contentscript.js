@@ -119,6 +119,7 @@ function GetDefaultFileName(aDefaultFileName, aFilenameFormat) {
   return aDefaultFileName;
 }
 
+// Replaces format character sequences with the actual values
 function ApplyFilenameFormat(aFormat) {
   const currentdate = new Date();
   aFormat = aFormat.replace(/%Y/,currentdate.getFullYear());
