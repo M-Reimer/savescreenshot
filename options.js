@@ -32,6 +32,14 @@ async function CheckboxChanged(e) {
   browser.extension.getBackgroundPage().UpdateUI();
 }
 
+async function TextChanged(e) {
+  let pref = e.target.id;
+  let value = e.target.value;
+  let params = {};
+  params[pref] = value;
+  await browser.storage.local.set(params);
+}
+
 function init() {
   // i18n
   [
@@ -48,6 +56,8 @@ function init() {
     "savemethod_save_label",
     "general_headline",
     "show_contextmenu_label",
+    "filenameformat_label",
+    "prefixFormat_description001","prefixFormat_description002","prefixFormat_description003",
     "reset_shortcuts_button"
   ].forEach((id) => {
     if (typeof id === "string")
@@ -70,6 +80,9 @@ function init() {
   methodoptions.forEach((option) => {
     option.addEventListener("click", MethodChanged);
   });
+
+  document.getElementById("filenameformat").addEventListener("change", TextChanged);
+
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
 
   // Init shortcut reset button
@@ -85,6 +98,8 @@ function loadOptions() {
     const method = result.savemethod || "open";
     document.querySelector("#savemethod_" + method + "_option").checked = true;
     document.querySelector("#show_contextmenu_checkbox").checked = (result.show_contextmenu !== undefined) ? result.show_contextmenu : true;
+    const filenameformat = result.filenameformat || "%y%m%d_%H%M%S_%h";
+    document.querySelector("#filenameformat").value = filenameformat;
   });
 }
 

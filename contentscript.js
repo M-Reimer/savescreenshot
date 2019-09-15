@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2017  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2019  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -74,7 +74,9 @@ async function TriggerDownload(aContent, aFormat) {
 
   const prefs = await browser.storage.local.get();
   const method = prefs.savemethod || "open";
-  const filename = GetDefaultFileName("saved_page") + "." + aFormat;
+  const prefixFormat= prefs.filenameformat || "%y%m%d_%H%M%S_%h"; //%y%m%d_%H%M%S_%h_%t_%5_%u
+  console.log("prefixFormat: "+prefixFormat);
+  const filename = GetDefaultFileName("saved_page",prefixFormat) + "." + aFormat;
 
   // Trigger the firefox "open file" dialog.
   if (method == "open") {
@@ -95,7 +97,13 @@ async function TriggerDownload(aContent, aFormat) {
 }
 
 // Gets the default file name, used for saving the screenshot
-function GetDefaultFileName(aDefaultFileName) {
+function GetDefaultFileName(aDefaultFileName, prefixFormat) {
+  //prioritize prefix variant
+  let prefix= ApplyPrefixFormat(prefixFormat);
+  console.log("prefix: "+prefix);
+  if (prefix)
+    return prefix;
+
   // If possible, base the file name on document title
   let title = ValidateFileName(document.title);
   if (title)
@@ -111,6 +119,67 @@ function GetDefaultFileName(aDefaultFileName) {
 
   // Finally use the provided default name
   return aDefaultFileName;
+}
+
+Number.prototype.pad = function (len) {
+    return (new Array(len+1).join("0") + this).slice(-len);
+}
+
+function ApplyPrefixFormat(prefixFormat) {
+  //--datetime prefix
+  var currentdate = new Date();
+  if (prefixFormat.lastIndexOf("%y")>=0 ){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%y/,currentdate.getFullYear());
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%Y")>=0 ){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%Y/,currentdate.getFullYear());
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%m")>=0){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%m/,(currentdate.getMonth()+1).pad(2));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%d")>=0){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%d/,currentdate.getDate().pad(2));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%H")>=0){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%H/,currentdate.getHours().pad(2));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%M")>=0){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%M/,currentdate.getMinutes().pad(2));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%S")>=0){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%S/,currentdate.getSeconds().pad(2));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  //--rest
+  if (prefixFormat.lastIndexOf("%t")>=0 ){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%t/,ValidateFileName(document.title));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%u")>=0 ){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%u/,ValidateFileName(document.URL));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  if (prefixFormat.lastIndexOf("%h")>=0 ){
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+    prefixFormat = prefixFormat.replace(/%h/,ValidateFileName(window.location.hostname));
+    console.log("ApplyPrefixFormat: "+prefixFormat);
+  }
+  return prefixFormat;
 }
 
 // "Sanitizes" given string to be used as file name.

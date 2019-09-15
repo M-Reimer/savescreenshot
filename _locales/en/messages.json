@@ -35,6 +35,22 @@
     "message": "Add entry to the page context menu",
     "description": "Used in the options page for the context menu checkbox"
   },
+  "filenameformat_label": {
+    "message": "Filename format",
+    "description": "Filename format"
+  },
+  "prefixFormat_description001": {
+    "message": "%y %Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second",
+    "description": "%y %Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
+  },
+  "prefixFormat_description002": {
+    "message": "%h - host name | %u - URL | %t - page title",
+    "description": "%h - host name | %u - URL | %t - page title"
+  },
+  "prefixFormat_description003": {
+    "message": "Example: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de",
+    "description": "Example: %y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de"
+  },
   "reset_shortcuts_button": {
     "message": "Reset keyboard shortcuts",
     "description": "Label for the keyboard shortcut reset button"
