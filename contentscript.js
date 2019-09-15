@@ -74,7 +74,7 @@ async function TriggerDownload(aContent, aFormat) {
 
   const prefs = await browser.storage.local.get();
   const method = prefs.savemethod || "open";
-  const filenameformat= prefs.filenameformat || "%y%m%d_%H%M%S_%h"; //%y%m%d_%H%M%S_%h_%t_%5_%u
+  const filenameformat= prefs.filenameformat || "";
   const filename = GetDefaultFileName("saved_page", filenameformat) + "." + aFormat;
 
   // Trigger the firefox "open file" dialog.

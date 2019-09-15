@@ -98,7 +98,7 @@ function loadOptions() {
     const method = result.savemethod || "open";
     document.querySelector("#savemethod_" + method + "_option").checked = true;
     document.querySelector("#show_contextmenu_checkbox").checked = (result.show_contextmenu !== undefined) ? result.show_contextmenu : true;
-    const filenameformat = result.filenameformat || "%y%m%d_%H%M%S_%h";
+    const filenameformat = result.filenameformat || "";
     document.querySelector("#filenameformat").value = filenameformat;
   });
 }
