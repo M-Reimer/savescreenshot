@@ -74,9 +74,8 @@ async function TriggerDownload(aContent, aFormat) {
 
   const prefs = await browser.storage.local.get();
   const method = prefs.savemethod || "open";
-  const prefixFormat= prefs.filenameformat || "%y%m%d_%H%M%S_%h"; //%y%m%d_%H%M%S_%h_%t_%5_%u
-  console.log("prefixFormat: "+prefixFormat);
-  const filename = GetDefaultFileName("saved_page",prefixFormat) + "." + aFormat;
+  const filenameformat= prefs.filenameformat || "%y%m%d_%H%M%S_%h"; //%y%m%d_%H%M%S_%h_%t_%5_%u
+  const filename = GetDefaultFileName("saved_page", filenameformat) + "." + aFormat;
 
   // Trigger the firefox "open file" dialog.
   if (method == "open") {
@@ -97,12 +96,11 @@ async function TriggerDownload(aContent, aFormat) {
 }
 
 // Gets the default file name, used for saving the screenshot
-function GetDefaultFileName(aDefaultFileName, prefixFormat) {
-  //prioritize prefix variant
-  let prefix= ApplyPrefixFormat(prefixFormat);
-  console.log("prefix: "+prefix);
-  if (prefix)
-    return prefix;
+function GetDefaultFileName(aDefaultFileName, aFilenameFormat) {
+  //prioritize formatted variant
+  let formatted = ApplyFilenameFormat(aFilenameFormat);
+  if (formatted)
+    return formatted;
 
   // If possible, base the file name on document title
   let title = ValidateFileName(document.title);
@@ -125,7 +123,7 @@ Number.prototype.pad = function (len) {
     return (new Array(len+1).join("0") + this).slice(-len);
 }
 
-function ApplyPrefixFormat(prefixFormat) {
+function ApplyFilenameFormat(prefixFormat) {
   //--datetime prefix
   var currentdate = new Date();
   if (prefixFormat.lastIndexOf("%y")>=0 ){

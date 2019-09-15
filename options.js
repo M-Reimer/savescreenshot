@@ -57,7 +57,7 @@ function init() {
     "general_headline",
     "show_contextmenu_label",
     "filenameformat_label",
-    "prefixFormat_description001","prefixFormat_description002","prefixFormat_description003",
+    "filenameformat_description001","filenameformat_description002","filenameformat_description003",
     "reset_shortcuts_button"
   ].forEach((id) => {
     if (typeof id === "string")
