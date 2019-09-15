@@ -1,0 +1,73 @@
+{
+  "extensionName": {
+    "message": "Uložit snímek obrazovky",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Uloží aktuální stránku jako obrázek.",
+    "description": "Description of the extension."
+  },
+
+  "errorTitleFailedSending": {
+    "message": "Nastala chyba při snímání obrazovky!",
+    "description": "Title of error notification."
+  },
+  "errorTextFailedSending": {
+    "message": "Z této stránky nelze vytvořit snímek obrazovky!",
+    "description": "Text of error notification."
+  },
+
+  "region_full_label": {
+    "message": "Celá stránka",
+    "description": "Used in the options page and for creating the menus"
+  },
+  "region_viewport_label": {
+    "message": "Viditelná oblast",
+    "description": "Used in the options page and for creating the menus"
+  },
+
+  "general_headline": {
+    "message": "Obecné nastavení",
+    "description": "Headline for the general settings in option page"
+  },
+  "show_contextmenu_label": {
+    "message": "Přidat záznam do kontextové nabídky stránky",
+    "description": "Used in the options page for the context menu checkbox"
+  },
+
+  "imageformat_headline": {
+    "message": "Formát obrázku",
+    "description": "Headline for image format options in option page"
+  },
+  "region_headline": {
+    "message": "Oblast snímku obrazovky",
+    "description": "Headline for screenshot region options in option page"
+  },
+  "select_manually_label": {
+    "message": "Zvolit ručně pro každý snímek obrazovky",
+    "description": "Used in the options page for both manual select options"
+  },
+
+  "format_copy_label": {
+    "message": "Kopírovat",
+    "description": "Used in options page and menus for copying to clipboard"
+  },
+
+  "savemethod_headline": {
+    "message": "Metoda uložení",
+    "description": "Headline for save method options in option page"
+  },
+  "savemethod_open_label": {
+    "message": "Nabídnout přímé otevření souboru s obrázkem",
+    "description": "Used in option page for open dialog option"
+  },
+  "savemethod_saveas_label": {
+    "message": "Zobrazit dialog \"Uložit jako\"",
+    "description": "Used in option page for save as dialog option"
+  },
+  "savemethod_save_label": {
+    "message": "Uložit do složky \"Stažené soubory\" bez dotazování",
+    "description": "Used in option page for direct download option"
+  }
+}
