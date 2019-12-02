@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2017  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2019  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,10 +52,9 @@ async function UpdateUI() {
 
   await browser.contextMenus.removeAll();
 
-  const prefs = await browser.storage.local.get("show_contextmenu");
-  const show_menu = (prefs.show_contextmenu !== undefined) ? prefs.show_contextmenu : true;
+  const prefs = await Storage.get();
 
-  if (show_menu) {
+  if (prefs.show_contextmenu) {
     const topmenu = browser.contextMenus.create({
       id: "{}",
       title: browser.i18n.getMessage("extensionName"),
@@ -88,12 +87,11 @@ browser.runtime.onConnect.addListener(function(aPort) {
     }
     else {
       const bloburi = URL.createObjectURL(blob);
-      const prefs = await browser.storage.local.get();
-      const method = prefs.savemethod || "open";
+      const prefs = await Storage.get();
       browser.downloads.download({
         filename: aMessage.filename,
         url: bloburi,
-        saveAs: (method == "saveas") ? true : false
+        saveAs: (prefs.savemethod == "saveas")
       });
     }
   });

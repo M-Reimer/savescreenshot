@@ -1,7 +1,7 @@
 
 async function FormatChanged(e) {
   let format = e.target.id.split("_")[1];
-  await browser.storage.local.set({
+  await Storage.set({
     format: format
   });
   browser.extension.getBackgroundPage().UpdateUI();
@@ -9,7 +9,7 @@ async function FormatChanged(e) {
 
 async function RegionChanged(e) {
   let region = e.target.id.split("_")[1];
-  await browser.storage.local.set({
+  await Storage.set({
     region: region
   });
   browser.extension.getBackgroundPage().UpdateUI();
@@ -17,7 +17,7 @@ async function RegionChanged(e) {
 
 async function MethodChanged(e) {
   let method = e.target.id.split("_")[1];
-  await browser.storage.local.set({
+  await Storage.set({
     savemethod: method
   });
 }
@@ -27,7 +27,7 @@ async function CheckboxChanged(e) {
     let pref = RegExp.$1;
     let params = {};
     params[pref] = e.target.checked;
-    await browser.storage.local.set(params);
+    await Storage.set(params);
   }
   browser.extension.getBackgroundPage().UpdateUI();
 }
@@ -37,10 +37,10 @@ async function TextChanged(e) {
   let value = e.target.value;
   let params = {};
   params[pref] = value;
-  await browser.storage.local.set(params);
+  await Storage.set(params);
 }
 
-function init() {
+async function init() {
   // i18n
   [
     "imageformat_headline",
@@ -66,7 +66,7 @@ function init() {
       document.getElementById(id[0]).textContent = browser.i18n.getMessage(id[1]);
   });
 
-  loadOptions();
+  await loadOptions();
 
   let formatoptions = document.getElementsByName("format_options");
   formatoptions.forEach((option) => {
@@ -89,18 +89,13 @@ function init() {
   ResetShortcuts.Init();
 }
 
-function loadOptions() {
-  browser.storage.local.get().then((result) => {
-    const format = result.format || "png";
-    document.querySelector("#format_" + format + "_option").checked = true;
-    const region = result.region || "full";
-    document.querySelector("#region_" + region + "_option").checked = true;
-    const method = result.savemethod || "open";
-    document.querySelector("#savemethod_" + method + "_option").checked = true;
-    document.querySelector("#show_contextmenu_checkbox").checked = (result.show_contextmenu !== undefined) ? result.show_contextmenu : true;
-    const filenameformat = result.filenameformat || "";
-    document.querySelector("#filenameformat").value = filenameformat;
-  });
+async function loadOptions() {
+  const prefs = await Storage.get();
+  document.getElementById("format_" + prefs.format + "_option").checked = true;
+  document.getElementById("region_" + prefs.region + "_option").checked = true;
+  document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
+  document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
+  document.getElementById("filenameformat").value = prefs.filenameformat;
 }
 
 init();

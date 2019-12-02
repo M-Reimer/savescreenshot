@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2017  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2019  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,16 +36,14 @@ async function SendMessage(aJsonMessage) {
 
 // Function to generate list with menu entries based on the user settings.
 async function GetMenuList() {
-  const prefs = await(browser.storage.local.get());
-  const format = prefs.format || "png";
-  const region = prefs.region || "full";
+  const prefs = await Storage.get();
 
   const lbl_region_full = browser.i18n.getMessage("region_full_label");
   const lbl_region_viewport = browser.i18n.getMessage("region_viewport_label");
   const lbl_copy = browser.i18n.getMessage("format_copy_label");
 
   let list = [];
-  if (format == "manual" && region == "manual") {
+  if (prefs.format == "manual" && prefs.region == "manual") {
     list.push({
       label: lbl_region_full + " (PNG)",
       data: '{"format": "png", "region": "full"}'
@@ -71,7 +69,7 @@ async function GetMenuList() {
       data: '{"format": "copy", "region": "viewport"}'
     });
   }
-  else if (format == "manual") {
+  else if (prefs.format == "manual") {
     list.push({
       label: "PNG",
       data: '{"format": "png"}'
@@ -85,7 +83,7 @@ async function GetMenuList() {
       data: '{"format": "copy"}'
     });
   }
-  else if (region == "manual") {
+  else if (prefs.region == "manual") {
     list.push({
       label: lbl_region_full,
       data: '{"region": "full"}'

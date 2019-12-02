@@ -17,9 +17,9 @@
 */
 
 async function OnMessage(request, sender, sendResponse) {
-  const prefs = await(browser.storage.local.get());
-  let format = request.format || prefs.format || "png";
-  let region = request.region || prefs.region || "full";
+  const prefs = await Storage.get();
+  const format = request.format || prefs.format;
+  const region = request.region || prefs.region;
 
   if (region == "full")
     SaveScreenshot(
@@ -72,13 +72,11 @@ async function TriggerDownload(aContent, aFormat) {
     return;
   }
 
-  const prefs = await browser.storage.local.get();
-  const method = prefs.savemethod || "open";
-  const filenameformat= prefs.filenameformat || "";
-  const filename = GetDefaultFileName("saved_page", filenameformat) + "." + aFormat;
+  const prefs = await Storage.get();
+  const filename = GetDefaultFileName("saved_page", prefs.filenameformat) + "." + aFormat;
 
   // Trigger the firefox "open file" dialog.
-  if (method == "open") {
+  if (prefs.savemethod == "open") {
     const a = document.createElement("a");
     a.href = aContent;
     a.download = filename;

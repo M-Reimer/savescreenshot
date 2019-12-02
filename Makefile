@@ -6,6 +6,7 @@
 FILES = manifest.json \
         background.js \
         contentscript.js \
+        storage.js \
         _globals.js \
         iconupdater.js \
         options.html \
