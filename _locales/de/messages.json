@@ -35,8 +35,12 @@
     "message": "Eintrag zum Seiten-Kontextmenü hinzufügen",
     "description": "Used in the options page for the context menu checkbox"
   },
+  "jpegquality_label": {
+    "message": "JPEG Qualität:",
+    "description": "Used in the options page for the jpeg quality textbox"
+  },
   "filenameformat_label": {
-    "message": "Format des Dateinamens",
+    "message": "Format des Dateinamens:",
     "description": "Filename format"
   },
   "filenameformat_description001": {

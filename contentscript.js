@@ -27,7 +27,8 @@ async function OnMessage(request, sender, sendResponse) {
       0,
       window.innerWidth + window.scrollMaxX,
       window.innerHeight + window.scrollMaxY,
-      format
+      format,
+      prefs.jpegquality
     );
   else
     SaveScreenshot(
@@ -35,11 +36,12 @@ async function OnMessage(request, sender, sendResponse) {
       document.documentElement.scrollTop,
       window.innerWidth,
       window.innerHeight,
-      format
+      format,
+      prefs.jpegquality
     );
 }
 
-function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
+function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat, aQuality) {
   // Maximum size is limited!
   // https://dxr.mozilla.org/mozilla-central/source/dom/canvas/CanvasRenderingContext2D.cpp#5517
   // https://dxr.mozilla.org/mozilla-central/source/gfx/2d/Factory.cpp#316
@@ -55,7 +57,7 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
 
   let imgdata;
   if (aFormat == "jpg")
-    imgdata = canvas.toDataURL("image/jpeg", 0.8);
+    imgdata = canvas.toDataURL("image/jpeg", aQuality / 100);
   else
     imgdata = canvas.toDataURL("image/png");
 

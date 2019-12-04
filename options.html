@@ -10,12 +10,16 @@
       <label for="show_contextmenu_checkbox" id="show_contextmenu_label">Add entry to the page context menu</label>
       <br/>
       <br/>
+      <label for="jpegquality" id="jpegquality_label">JPEG quality</label>
+      <input id="jpegquality" type="number" min="0" max="100" style="width: 5em;"/>%
+      <br/>
+      <br/>
       <label for="filenameformat" id="filenameformat_label">Filename Format: </label>
       <input id="filenameformat" type="text" value=""></input>
       <br/>
-      <p id="filenameformat_description001">%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </p>
-      <p id="filenameformat_description002">%h - host name | %u - URL | %t - page title </p>
-      <p id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</p>
+      <div id="filenameformat_description001">%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </div>
+      <div id="filenameformat_description002">%h - host name | %u - URL | %t - page title </div>
+      <div id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</div>
       <button id="reset_shortcuts_button" style="margin-top: 1em;">Reset keyboard shortcuts</button>
 
       <h1 id="imageformat_headline">Image format</h1>

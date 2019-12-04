@@ -23,7 +23,8 @@ const Storage = {
     "savemethod": "open",
     "format": "png",
     "region": "full",
-    "filenameformat": ""
+    "filenameformat": "",
+    "jpegquality": 80
   },
 
   get: async function() {

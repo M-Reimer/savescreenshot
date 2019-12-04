@@ -40,6 +40,19 @@ async function TextChanged(e) {
   await Storage.set(params);
 }
 
+async function NumberChanged(e) {
+  const pref = e.target.id;
+  const value = parseInt(e.target.value);
+
+  // Has to be a number and has to be in the defined range!
+  if (isNaN(value) || value > e.target.max || value < e.target.min)
+    return;
+
+  const params = {};
+  params[pref] = value;
+  await Storage.set(params);
+}
+
 async function init() {
   // i18n
   [
@@ -58,7 +71,8 @@ async function init() {
     "show_contextmenu_label",
     "filenameformat_label",
     "filenameformat_description001","filenameformat_description002","filenameformat_description003",
-    "reset_shortcuts_button"
+    "reset_shortcuts_button",
+    "jpegquality_label"
   ].forEach((id) => {
     if (typeof id === "string")
       document.getElementById(id).textContent = browser.i18n.getMessage(id);
@@ -82,6 +96,7 @@ async function init() {
   });
 
   document.getElementById("filenameformat").addEventListener("change", TextChanged);
+  document.getElementById("jpegquality").addEventListener("change", NumberChanged);
 
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
 
@@ -96,6 +111,7 @@ async function loadOptions() {
   document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
   document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
   document.getElementById("filenameformat").value = prefs.filenameformat;
+  document.getElementById("jpegquality").value = prefs.jpegquality;
 }
 
 init();
