@@ -48,8 +48,8 @@
     "description": "%h - host name | %u - URL | %t - page title"
   },
   "filenameformat_description003": {
-    "message": "Beispiel: %Y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de",
-    "description": "Example: %Y%m%d_%H%M%S_%h -> 20181224_123805_www.abc.de"
+    "message": "Beispiel: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de",
+    "description": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de"
   },
   "reset_shortcuts_button": {
     "message": "Tastenkombinationen zurücksetzen",
