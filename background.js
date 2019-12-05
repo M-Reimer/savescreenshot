@@ -72,8 +72,11 @@ async function UpdateUI() {
   }
 }
 
-// Create a message host which exports parts of the "downloads" API (only the
-// part which is needed to trigger downloads) to our content script.
+// Create a message host to receive calls from our "content script" and passes
+// it to the clipboard and downloads API which are only available here.
+// When using the downloads API, we create a cache for usage in the
+// "downloads.onChanged" event.
+const DOWNLOAD_CACHE = {};
 browser.runtime.onConnect.addListener(function(aPort) {
   aPort.onMessage.addListener(async function(aMessage) {
     const blob = DataURItoBlob(aMessage.content);
@@ -88,13 +91,41 @@ browser.runtime.onConnect.addListener(function(aPort) {
     else {
       const bloburi = URL.createObjectURL(blob);
       const prefs = await Storage.get();
-      browser.downloads.download({
+      const options = {
         filename: aMessage.filename,
         url: bloburi,
         saveAs: (prefs.savemethod == "saveas")
-      });
+      };
+      // Trigger download
+      const id = await browser.downloads.download(options);
+      // Store download options for usage in "onChanged".
+      DOWNLOAD_CACHE[id] = options;
     }
   });
+});
+
+// Download change listener.
+// Used to create a notification in the "non prompting" mode, so the user knows
+// that his screenshot has been created. Also handles cleanup after download.
+browser.downloads.onChanged.addListener((delta) => {
+  if (delta.id in DOWNLOAD_CACHE) { // Was the download triggered by us?
+    if (delta.state && delta.state.current === "complete") { // Is it done?
+      const options = DOWNLOAD_CACHE[delta.id];
+
+      // When saving without prompting, then trigger notification
+      if (!options.saveAs)
+        browser.notifications.create("info-notification", {
+          "type": "basic",
+          "title": browser.i18n.getMessage("extensionName"),
+          "message": browser.i18n.getMessage("info_screenshot_saved") + "\n" + options.filename
+        });
+
+      // Free memory used for our "blob URL"
+      URL.revokeObjectURL(options.url);
+      // Remove data for this download from our cache
+      delete DOWNLOAD_CACHE[delta.id];
+    }
+  }
 });
 
 // This function converts a "data:" URI to a Blob object.

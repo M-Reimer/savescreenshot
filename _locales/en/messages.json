@@ -93,5 +93,10 @@
   "savemethod_save_label": {
     "message": "Directly save to \"Downloads\" directory without prompting",
     "description": "Used in option page for direct download option"
+  },
+
+  "info_screenshot_saved": {
+    "message": "Screenshot saved:",
+    "description": "Text in notification, displayed when saving without prompt"
   }
 }

@@ -93,5 +93,10 @@
   "savemethod_save_label": {
     "message": "Ohne Rückfrage direkt ins \"Downloads\"-Verzeichnis speicheren",
     "description": "Used in option page for direct download option"
+  },
+
+  "info_screenshot_saved": {
+    "message": "Bildschirmfoto gespeichert:",
+    "description": "Text in notification, displayed when saving without prompt"
   }
 }
