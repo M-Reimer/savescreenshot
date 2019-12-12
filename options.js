@@ -20,6 +20,7 @@ async function MethodChanged(e) {
   await Storage.set({
     savemethod: method
   });
+  document.getElementById("savenotification_checkbox").disabled = (method != "save");
 }
 
 async function CheckboxChanged(e) {
@@ -99,6 +100,7 @@ async function init() {
   document.getElementById("jpegquality").addEventListener("change", NumberChanged);
 
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
+  document.getElementById("savenotification_checkbox").addEventListener("change", CheckboxChanged);
 
   // Init shortcut reset button
   ResetShortcuts.Init();
@@ -112,6 +114,9 @@ async function loadOptions() {
   document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
   document.getElementById("filenameformat").value = prefs.filenameformat;
   document.getElementById("jpegquality").value = prefs.jpegquality;
+
+  document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
+  document.getElementById("savenotification_checkbox").checked = prefs.savenotification;
 }
 
 init();

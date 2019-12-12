@@ -24,7 +24,8 @@ const Storage = {
     "format": "png",
     "region": "full",
     "filenameformat": "",
-    "jpegquality": 80
+    "jpegquality": 80,
+    "savenotification": true
   },
 
   get: async function() {

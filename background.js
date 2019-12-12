@@ -107,13 +107,14 @@ browser.runtime.onConnect.addListener(function(aPort) {
 // Download change listener.
 // Used to create a notification in the "non prompting" mode, so the user knows
 // that his screenshot has been created. Also handles cleanup after download.
-browser.downloads.onChanged.addListener((delta) => {
+browser.downloads.onChanged.addListener(async (delta) => {
   if (delta.id in DOWNLOAD_CACHE) { // Was the download triggered by us?
     if (delta.state && delta.state.current === "complete") { // Is it done?
       const options = DOWNLOAD_CACHE[delta.id];
 
       // When saving without prompting, then trigger notification
-      if (!options.saveAs)
+      const prefs = await Storage.get();
+      if (!options.saveAs && prefs.savenotification)
         browser.notifications.create("info-notification", {
           "type": "basic",
           "title": browser.i18n.getMessage("extensionName"),
