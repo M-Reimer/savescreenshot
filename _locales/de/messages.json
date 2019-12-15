@@ -94,6 +94,10 @@
     "message": "Ohne Rückfrage direkt ins \"Downloads\"-Verzeichnis speicheren",
     "description": "Used in option page for direct download option"
   },
+  "savenotification_label": {
+    "message": "Benachrichtigung nach dem Speichern anzeigen",
+    "description": "Label for the checkbox for toggling the save notification"
+  },
 
   "info_screenshot_saved": {
     "message": "Bildschirmfoto gespeichert:",

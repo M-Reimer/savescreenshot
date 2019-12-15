@@ -94,6 +94,10 @@
     "message": "Directly save to \"Downloads\" directory without prompting",
     "description": "Used in option page for direct download option"
   },
+  "savenotification_label": {
+    "message": "Show notification after saving",
+    "description": "Label for the checkbox for toggling the save notification"
+  },
 
   "info_screenshot_saved": {
     "message": "Screenshot saved:",

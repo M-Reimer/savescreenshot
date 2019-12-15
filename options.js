@@ -73,7 +73,8 @@ async function init() {
     "filenameformat_label",
     "filenameformat_description001","filenameformat_description002","filenameformat_description003",
     "reset_shortcuts_button",
-    "jpegquality_label"
+    "jpegquality_label",
+    "savenotification_label"
   ].forEach((id) => {
     if (typeof id === "string")
       document.getElementById(id).textContent = browser.i18n.getMessage(id);
