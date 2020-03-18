@@ -18,9 +18,14 @@
 
 // Function which handles sending the "take screenshot" message to the active
 // tab. Includes error handling with error notification.
-async function SendMessage(aJsonMessage) {
+async function SendMessage(aJsonMessage, cb) {
   const tabs = await browser.tabs.query({active: true, currentWindow: true});
   const message = JSON.parse(aJsonMessage);
+
+  if (typeof cb !== "undefined") {
+    cb();
+  }
+
   try {
     await browser.tabs.sendMessage(tabs[0].id, message);
   }
@@ -40,6 +45,7 @@ async function GetMenuList() {
 
   const lbl_region_full = browser.i18n.getMessage("region_full_label");
   const lbl_region_viewport = browser.i18n.getMessage("region_viewport_label");
+  const lbl_region_selection = browser.i18n.getMessage("region_selection_label");
   const lbl_copy = browser.i18n.getMessage("format_copy_label");
 
   let list = [];
@@ -68,6 +74,19 @@ async function GetMenuList() {
       label: lbl_region_viewport + " (" + lbl_copy + ")",
       data: '{"format": "copy", "region": "viewport"}'
     });
+    list.push({
+      label: lbl_region_selection + " (PNG)",
+      data: '{"format": "png", "region": "selection"}'
+    });
+    list.push({
+      label: lbl_region_selection + " (JPEG)",
+      data: '{"format": "jpg", "region": "selection"}'
+    });
+    list.push({
+      label: lbl_region_selection + " (" + lbl_copy + ")",
+      data: '{"format": "copy", "region": "selection"}'
+    });
+
   }
   else if (prefs.format == "manual") {
     list.push({
@@ -91,6 +110,10 @@ async function GetMenuList() {
     list.push({
       label: lbl_region_viewport,
       data: '{"region": "viewport"}'
+    });
+    list.push({
+      label: lbl_region_selection,
+      data: '{"region": "selection"}'
     });
   }
   return list;

@@ -28,11 +28,13 @@ async function CreateButtons() {
   });
 }
 
-document.addEventListener("click", async (e) => {
+document.addEventListener("click", (e) => {
   if (e.target.classList.contains("button")) {
     var data = e.target.getAttribute("data-settings");
-    await SendMessage(data);
-    window.close();
+    // close window in callback so it does not close to early
+    // which always happened on first invokation during testing
+    const w = window;
+    SendMessage(data, () => w.close());
   }
 });
 
