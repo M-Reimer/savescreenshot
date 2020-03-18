@@ -26,6 +26,10 @@
     "message": "Anzeigebereich",
     "description": "Used in the options page and for creating the menus"
   },
+  "region_selection_label": {
+    "message": "Auswahl",
+    "description": "Used in the options page and for creating the menus"
+  },
 
   "general_headline": {
     "message": "Allgemeine Einstellungen",
