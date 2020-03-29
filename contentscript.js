@@ -16,6 +16,63 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+function Select() {
+
+  const overlay = document.createElement('div');
+  const selection = document.createElement('div');
+  overlay.appendChild(selection);
+  document.body.appendChild(overlay);
+
+  selection.style.cssText=`
+        border: 1px dashed black;
+        position: absolute;
+     `;
+  overlay.style.cssText=`
+        position: fixed;
+        left: 0;
+        right: 0;
+        top:0;
+        height: 100%;
+        width: 100%;
+        z-index: 999999;
+        cursor: crosshair;
+      `;
+
+  let x1, y1, x2, y2 = 0;
+  let left, top, width, height;
+  overlay.addEventListener('mousedown', (e) => {
+    // starting postions
+    x1 = e.clientX;
+    y1 = e.clientY;
+    overlay.addEventListener('mousemove', (e) => {
+      // new positions
+      x2 = e.clientX;
+      y2 = e.clientY;
+      // update relative positions
+      left = x1 < x2 ? x1 : x2;
+      top = y1 < y2 ? y1 : y2;
+      height = Math.abs(y2 - y1);
+      width = Math.abs(x2 - x1);
+      // update div
+      selection.style.left = left + "px";
+      selection.style.top = top + "px";
+      selection.style.width = width + "px";
+      selection.style.height = height  + "px";
+    });
+  });
+
+  return new Promise((resolve, reject) => {
+    overlay.addEventListener('mouseup', (e) => {
+      overlay.remove();
+      resolve({x: left + window.scrollX,
+               y: top + window.scrollY,
+               w: width,
+               h: height});
+    });
+  });
+}
+
+
 async function OnMessage(request, sender, sendResponse) {
   const prefs = await Storage.get();
   const format = request.format || prefs.format;
@@ -30,7 +87,18 @@ async function OnMessage(request, sender, sendResponse) {
       format,
       prefs.jpegquality
     );
-  else
+  else if (region == "selection") {
+    Select().then((posn) => {
+      SaveScreenshot(
+        posn.x,
+        posn.y,
+        posn.w,
+        posn.h,
+        format,
+        prefs.jpegquality
+      );
+    });
+  } else
     SaveScreenshot(
       document.documentElement.scrollLeft,
       document.documentElement.scrollTop,
