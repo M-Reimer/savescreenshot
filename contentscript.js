@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function Select(cb) {
+function Select() {
 
   const overlay = document.createElement('div');
   const selection = document.createElement('div');
@@ -60,12 +60,15 @@ function Select(cb) {
       selection.style.height = height  + "px";
     });
   });
-  overlay.addEventListener('mouseup', (e) => {
-    overlay.remove();
-    cb({x: left + window.scrollX,
-        y: top + window.scrollY,
-        w: width,
-        h: height});
+
+  return new Promise((resolve, reject) => {
+    overlay.addEventListener('mouseup', (e) => {
+      overlay.remove();
+      resolve({x: left + window.scrollX,
+               y: top + window.scrollY,
+               w: width,
+               h: height});
+    });
   });
 }
 
@@ -85,15 +88,16 @@ async function OnMessage(request, sender, sendResponse) {
       prefs.jpegquality
     );
   else if (region == "selection") {
-    const posn = await new Promise(Select);
-    SaveScreenshot(
-          posn.x,
-          posn.y,
-          posn.w,
-          posn.h,
-          format,
-          prefs.jpegquality
-    );
+    Select().then((posn) => {
+      SaveScreenshot(
+        posn.x,
+        posn.y,
+        posn.w,
+        posn.h,
+        format,
+        prefs.jpegquality
+      );
+    });
   } else
     SaveScreenshot(
       document.documentElement.scrollLeft,
