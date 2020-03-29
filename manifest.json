@@ -68,6 +68,15 @@
     },
     "viewport-copy": {
       "description": "__MSG_region_viewport_label__ (__MSG_format_copy_label__)"
+    },
+    "selection-png": {
+      "description": "__MSG_region_selection_label__ (PNG)"
+    },
+    "selection-jpg": {
+      "description": "__MSG_region_selection_label__ (JPEG)"
+    },
+    "selection-copy": {
+      "description": "__MSG_region_selection_label__ (__MSG_format_copy_label__)"
     }
   },
 
