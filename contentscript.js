@@ -208,9 +208,9 @@ function SanitizeFileName(aFileName) {
   aFileName = aFileName.replace(/[<\{]+/g, "(");
   aFileName = aFileName.replace(/[>\}]+/g, ")");
   aFileName = aFileName.replace(/[#$%!&*\'?\"\/:\\@|]/g, "");
-  // Remove leading "." and "-"
+  // Remove leading spaces, "." and "-"
   aFileName = aFileName.replace(/^[\s-.]+/, "");
-  // Remove trailing "."
+  // Remove trailing spaces and "."
   aFileName = aFileName.replace(/[\s.]+$/, "");
   return aFileName;
 }
