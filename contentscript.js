@@ -166,19 +166,19 @@ async function TriggerDownload(aContent, aFormat) {
 // Gets the default file name, used for saving the screenshot
 function GetDefaultFileName(aDefaultFileName, aFilenameFormat) {
   //prioritize formatted variant
-  let formatted = ValidateFileName(ApplyFilenameFormat(aFilenameFormat));
+  let formatted = SanitizeFileName(ApplyFilenameFormat(aFilenameFormat));
   if (formatted)
     return formatted;
 
   // If possible, base the file name on document title
-  let title = ValidateFileName(document.title);
+  let title = SanitizeFileName(document.title);
   if (title)
     return title;
 
   // Otherwise try to use the actual HTML filename
   let path = window.location.pathname;
   if (path) {
-    let filename = ValidateFileName(path.substring(path.lastIndexOf('/')+1));
+    let filename = SanitizeFileName(path.substring(path.lastIndexOf('/')+1));
     if (filename)
       return filename;
   }
@@ -203,7 +203,7 @@ function ApplyFilenameFormat(aFormat) {
 }
 
 // "Sanitizes" given string to be used as file name.
-function ValidateFileName(aFileName) {
+function SanitizeFileName(aFileName) {
   // http://www.mtu.edu/umc/services/digital/writing/characters-avoid/
   aFileName = aFileName.replace(/[<\{]+/g, "(");
   aFileName = aFileName.replace(/[>\}]+/g, ")");
