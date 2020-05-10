@@ -212,6 +212,8 @@ function SanitizeFileName(aFileName) {
   aFileName = aFileName.replace(/^[\s-.]+/, "");
   // Remove trailing spaces and "."
   aFileName = aFileName.replace(/[\s.]+$/, "");
+  // Replace all groups of spaces with just one space character
+  aFileName = aFileName.replace(/\s+/g, " ");
   return aFileName;
 }
 
