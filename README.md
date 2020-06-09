@@ -3,7 +3,7 @@ Save Screenshot
 
 Main repository: https://github.com/M-Reimer/savescreenshot.
 
-AMO: https://addons.mozilla.org/en-US/firefox/addon/savescreenshot/
+AMO: https://addons.mozilla.org/firefox/addon/savescreenshot/
 
 Localization: https://lusito.github.io/web-ext-translator/?gh=https://github.com/M-Reimer/savescreenshot/
 
