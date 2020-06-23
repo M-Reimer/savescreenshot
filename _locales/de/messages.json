@@ -72,10 +72,6 @@
     "message": "Bildschirmfoto-Bereich",
     "description": "Headline for screenshot region options in option page"
   },
-  "select_manually_label": {
-    "message": "Für jedes Bildschirmfoto manuell wählen",
-    "description": "Used in the options page for both manual select options"
-  },
 
   "format_copy_label": {
     "message": "Kopieren",

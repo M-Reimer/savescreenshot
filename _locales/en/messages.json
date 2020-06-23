@@ -72,10 +72,6 @@
     "message": "Screenshot region",
     "description": "Headline for screenshot region options in option page"
   },
-  "select_manually_label": {
-    "message": "Select manually for each screenshot",
-    "description": "Used in the options page for both manual select options"
-  },
 
   "format_copy_label": {
     "message": "Copy",

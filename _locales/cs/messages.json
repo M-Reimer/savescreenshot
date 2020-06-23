@@ -64,10 +64,6 @@
     "message": "Oblast snímku obrazovky",
     "description": "Headline for screenshot region options in option page"
   },
-  "select_manually_label": {
-    "message": "Zvolit ručně pro každý snímek obrazovky",
-    "description": "Used in the options page for both manual select options"
-  },
 
   "format_copy_label": {
     "message": "Kopírovat",

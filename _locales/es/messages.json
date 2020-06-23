@@ -48,10 +48,6 @@
     "message": "Región de la captura de pantalla",
     "description": "Headline for screenshot region options in option page"
   },
-  "select_manually_label": {
-    "message": "Seleccione manualmente para cada captura de pantalla",
-    "description": "Used in the options page for both manual select options"
-  },
 
   "format_copy_label": {
     "message": "Copiar",
