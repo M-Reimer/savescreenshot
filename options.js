@@ -1,17 +1,24 @@
 
-async function FormatChanged(e) {
-  let format = e.target.id.split("_")[1];
-  await Storage.set({
-    format: format
+async function MultiselectGroupChanged(e) {
+  // Collect checked boxes in this multiselect group
+  let options = document.getElementsByName(e.target.name);
+  const selected = [];
+  options.forEach((option) => {
+    if (option.checked)
+      selected.push(option.id.split("_")[1]);
   });
-  browser.extension.getBackgroundPage().UpdateUI();
-}
 
-async function RegionChanged(e) {
-  let region = e.target.id.split("_")[1];
-  await Storage.set({
-    region: region
-  });
+  // If all checkboxes would be removed, then recheck the current item
+  if (selected.length == 0) {
+    selected.push(e.target.id.split("_")[1]);
+    e.target.checked = true;
+  }
+
+  // Store selection
+  const pref = e.target.name.split("_")[0] + "s";
+  const settings = {};
+  settings[pref] = selected;
+  await Storage.set(settings);
   browser.extension.getBackgroundPage().UpdateUI();
 }
 
@@ -60,8 +67,6 @@ async function init() {
     "imageformat_headline",
     "format_copy_label",
     "region_headline",
-    ["format_manual_label", "select_manually_label"],
-    ["region_manual_label", "select_manually_label"],
     "region_full_label",
     "region_viewport_label",
     "savemethod_headline",
@@ -76,21 +81,18 @@ async function init() {
     "jpegquality_label",
     "savenotification_label"
   ].forEach((id) => {
-    if (typeof id === "string")
-      document.getElementById(id).textContent = browser.i18n.getMessage(id);
-    else
-      document.getElementById(id[0]).textContent = browser.i18n.getMessage(id[1]);
+    document.getElementById(id).textContent = browser.i18n.getMessage(id);
   });
 
   await loadOptions();
 
   let formatoptions = document.getElementsByName("format_options");
   formatoptions.forEach((option) => {
-    option.addEventListener("click", FormatChanged);
+    option.addEventListener("click", MultiselectGroupChanged);
   });
   let regionoptions = document.getElementsByName("region_options");
   regionoptions.forEach((option) => {
-    option.addEventListener("click", RegionChanged);
+    option.addEventListener("click", MultiselectGroupChanged);
   });
   let methodoptions = document.getElementsByName("savemethod_options");
   methodoptions.forEach((option) => {
@@ -109,8 +111,10 @@ async function init() {
 
 async function loadOptions() {
   const prefs = await Storage.get();
-  document.getElementById("format_" + prefs.format + "_option").checked = true;
-  document.getElementById("region_" + prefs.region + "_option").checked = true;
+  for (let format of prefs.formats)
+    document.getElementById("format_" + format + "_option").checked = true;
+  for (let region of prefs.regions)
+    document.getElementById("region_" + region + "_option").checked = true;
   document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
   document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
   document.getElementById("filenameformat").value = prefs.filenameformat;

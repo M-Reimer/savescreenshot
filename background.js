@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2019  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -155,11 +155,37 @@ function DataURItoBlob(aDataURI) {
   return new Blob([new Uint8Array(array)], {type: mime});
 }
 
+// Migrates old "only one possible" preferences to new "multi select" model
+async function MigrateSettings() {
+  const prefs = await Storage.get();
+  const newprefs = {};
+  if ("region" in prefs) {
+    if (prefs.region == "manual")
+      newprefs.regions = ["full", "viewport", "selection"];
+    else
+      newprefs.regions = [prefs.region];
+    await Storage.remove("region");
+  }
+  if ("format" in prefs) {
+    if (prefs.format == "manual")
+      newprefs.formats = ["png", "jpg", "copy"];
+    else
+      newprefs.formats = [prefs.format];
+    await Storage.remove("format");
+  }
+  await Storage.set(newprefs);
+}
+
+async function Startup() {
+  await MigrateSettings();
+  await UpdateUI();
+}
+
 // Register event listeners
 browser.contextMenus.onClicked.addListener(ContextMenuClicked);
 browser.browserAction.onClicked.addListener(ToolbarButtonClicked);
 browser.commands.onCommand.addListener(CommandPressed);
 
-UpdateUI();
+Startup();
 
 IconUpdater.Init("icons/savescreenshot.svg");

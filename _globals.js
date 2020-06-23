@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2019  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,79 +37,39 @@ async function SendMessage(aJsonMessage) {
 // Function to generate list with menu entries based on the user settings.
 async function GetMenuList() {
   const prefs = await Storage.get();
+  if (prefs.formats.length == 1 && prefs.regions.length == 1)
+    return [];
 
-  const lbl_region_full = browser.i18n.getMessage("region_full_label");
-  const lbl_region_viewport = browser.i18n.getMessage("region_viewport_label");
-  const lbl_region_selection = browser.i18n.getMessage("region_selection_label");
-  const lbl_copy = browser.i18n.getMessage("format_copy_label");
+  const formats = [
+    {id: "png",  label: "PNG"},
+    {id: "jpg",  label: "JPEG"},
+    {id: "copy", label: browser.i18n.getMessage("format_copy_label")}
+  ];
+  const regions = [
+    {id: "full",      label: browser.i18n.getMessage("region_full_label")},
+    {id: "viewport",  label: browser.i18n.getMessage("region_viewport_label")},
+    {id: "selection", label: browser.i18n.getMessage("region_selection_label")}
+  ];
+
+  let template = "$REGION ($FORMAT)";
+  if (prefs.formats.length == 1)
+    template = "$REGION";
+  else if (prefs.regions.length == 1)
+    template = "$FORMAT";
 
   let list = [];
-  if (prefs.format == "manual" && prefs.region == "manual") {
-    list.push({
-      label: lbl_region_full + " (PNG)",
-      data: '{"format": "png", "region": "full"}'
-    });
-    list.push({
-      label: lbl_region_full + " (JPEG)",
-      data: '{"format": "jpg", "region": "full"}'
-    });
-    list.push({
-      label: lbl_region_full + " (" + lbl_copy + ")",
-      data: '{"format": "copy", "region": "full"}'
-    });
-    list.push({
-      label: lbl_region_viewport + " (PNG)",
-      data: '{"format": "png", "region": "viewport"}'
-    });
-    list.push({
-      label: lbl_region_viewport + " (JPEG)",
-      data: '{"format": "jpg", "region": "viewport"}'
-    });
-    list.push({
-      label: lbl_region_viewport + " (" + lbl_copy + ")",
-      data: '{"format": "copy", "region": "viewport"}'
-    });
-    list.push({
-      label: lbl_region_selection + " (PNG)",
-      data: '{"format": "png", "region": "selection"}'
-    });
-    list.push({
-      label: lbl_region_selection + " (JPEG)",
-      data: '{"format": "jpg", "region": "selection"}'
-    });
-    list.push({
-      label: lbl_region_selection + " (" + lbl_copy + ")",
-      data: '{"format": "copy", "region": "selection"}'
-    });
+  for (let region of regions) {
+    if (!prefs.regions.includes(region.id))
+      continue;
+    for (let format of formats) {
+      if (!prefs.formats.includes(format.id))
+        continue;
+      list.push({
+        label: template.replace("$REGION", region.label).replace("$FORMAT", format.label),
+        data: '{"format": "' + format.id + '", "region": "' + region.id + '"}'
+      });
+    }
+  }
 
-  }
-  else if (prefs.format == "manual") {
-    list.push({
-      label: "PNG",
-      data: '{"format": "png"}'
-    });
-    list.push({
-      label: "JPEG",
-      data: '{"format": "jpg"}'
-    });
-    list.push({
-      label: lbl_copy,
-      data: '{"format": "copy"}'
-    });
-  }
-  else if (prefs.region == "manual") {
-    list.push({
-      label: lbl_region_full,
-      data: '{"region": "full"}'
-    });
-    list.push({
-      label: lbl_region_viewport,
-      data: '{"region": "viewport"}'
-    });
-    list.push({
-      label: lbl_region_selection,
-      data: '{"region": "selection"}'
-    });
-  }
   return list;
 }

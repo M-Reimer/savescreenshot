@@ -21,8 +21,8 @@ const Storage = {
   _defaults: {
     "show_contextmenu": true,
     "savemethod": "open",
-    "format": "png",
-    "region": "full",
+    "formats": ["png"],
+    "regions": ["full"],
     "filenameformat": "",
     "jpegquality": 80,
     "savenotification": true
@@ -37,7 +37,11 @@ const Storage = {
     return prefs;
   },
 
-  set: async function(aObject) {
+  set: function(aObject) {
     return browser.storage.local.set(aObject);
+  },
+
+  remove: function(keys) {
+    return browser.storage.local.remove(keys);
   }
 };

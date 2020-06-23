@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2019  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,8 +75,8 @@ function Select() {
 
 async function OnMessage(request, sender, sendResponse) {
   const prefs = await Storage.get();
-  const format = request.format || prefs.format;
-  const region = request.region || prefs.region;
+  const format = request.format || prefs.formats[0];
+  const region = request.region || prefs.regions[0];
 
   if (region == "full")
     SaveScreenshot(
