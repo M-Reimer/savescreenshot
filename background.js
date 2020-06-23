@@ -72,6 +72,12 @@ async function UpdateUI() {
   }
 }
 
+// Register event listener to receive option update notifications
+browser.runtime.onMessage.addListener((data, sender) => {
+  if (data.type == "OptionsChanged" && data.redraw)
+    UpdateUI();
+});
+
 // Create a message host to receive calls from our "content script" and passes
 // it to the clipboard and downloads API which are only available here.
 // When using the downloads API, we create a cache for usage in the

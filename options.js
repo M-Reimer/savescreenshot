@@ -19,7 +19,7 @@ async function MultiselectGroupChanged(e) {
   const settings = {};
   settings[pref] = selected;
   await Storage.set(settings);
-  browser.extension.getBackgroundPage().UpdateUI();
+  await browser.runtime.sendMessage({type: "OptionsChanged", redraw: true});
 }
 
 async function MethodChanged(e) {
@@ -28,6 +28,7 @@ async function MethodChanged(e) {
     savemethod: method
   });
   document.getElementById("savenotification_checkbox").disabled = (method != "save");
+  await browser.runtime.sendMessage({type: "OptionsChanged"});
 }
 
 async function CheckboxChanged(e) {
@@ -37,7 +38,7 @@ async function CheckboxChanged(e) {
     params[pref] = e.target.checked;
     await Storage.set(params);
   }
-  browser.extension.getBackgroundPage().UpdateUI();
+  await browser.runtime.sendMessage({type: "OptionsChanged", redraw: true});
 }
 
 async function TextChanged(e) {
@@ -46,6 +47,7 @@ async function TextChanged(e) {
   let params = {};
   params[pref] = value;
   await Storage.set(params);
+  await browser.runtime.sendMessage({type: "OptionsChanged"});
 }
 
 async function NumberChanged(e) {
@@ -59,6 +61,7 @@ async function NumberChanged(e) {
   const params = {};
   params[pref] = value;
   await Storage.set(params);
+  await browser.runtime.sendMessage({type: "OptionsChanged"});
 }
 
 async function init() {
@@ -111,10 +114,12 @@ async function init() {
 
 async function loadOptions() {
   const prefs = await Storage.get();
-  for (let format of prefs.formats)
-    document.getElementById("format_" + format + "_option").checked = true;
-  for (let region of prefs.regions)
-    document.getElementById("region_" + region + "_option").checked = true;
+  document.getElementsByName("format_options").forEach((option) => {
+    option.checked = prefs.formats.includes(option.id.split("_")[1]);
+  });
+  document.getElementsByName("region_options").forEach((option) => {
+    option.checked = prefs.regions.includes(option.id.split("_")[1]);
+  });
   document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
   document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
   document.getElementById("filenameformat").value = prefs.filenameformat;
@@ -123,5 +128,11 @@ async function loadOptions() {
   document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
   document.getElementById("savenotification_checkbox").checked = prefs.savenotification;
 }
+
+// Register event listener to receive option update notifications
+browser.runtime.onMessage.addListener((data, sender) => {
+  if (data.type == "OptionsChanged")
+    loadOptions();
+});
 
 init();
