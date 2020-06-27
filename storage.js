@@ -21,8 +21,8 @@ const Storage = {
   _defaults: {
     "show_contextmenu": true,
     "savemethod": "open",
-    "formats": ["png"],
-    "regions": ["full"],
+    "formats": ["png", "jpg", "copy"],
+    "regions": ["full", "viewport", "selection"],
     "filenameformat": "",
     "jpegquality": 80,
     "savenotification": true
