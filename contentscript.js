@@ -197,7 +197,7 @@ function ApplyFilenameFormat(aFormat) {
   aFormat = aFormat.replace(/%M/,currentdate.getMinutes().toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%S/,currentdate.getSeconds().toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%t/,document.title || "");
-  aFormat = aFormat.replace(/%u/,document.URL);
+  aFormat = aFormat.replace(/%u/,document.URL.replace(/:/g, ".").replace(/[\/\?]/g, "-"));
   aFormat = aFormat.replace(/%h/,window.location.hostname);
   return aFormat;
 }
