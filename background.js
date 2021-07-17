@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2021  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -72,34 +72,67 @@ async function UpdateUI() {
   }
 }
 
-// Register event listener to receive option update notifications
+// Register event listener to receive option update notifications and
+// content script requests
 browser.runtime.onMessage.addListener((data, sender) => {
+  // An option change with request for redraw happened
   if (data.type == "OptionsChanged" && data.redraw)
     UpdateUI();
+
+  // The content script requests us to take a screenshot
+  if (data.type == "TakeScreenshot")
+    TakeScreenshot(data, sender.tab);
 });
 
-// Create a message host to receive calls from our "content script" and passes
-// it to the clipboard and downloads API which are only available here.
-// When using the downloads API, we create a cache for usage in the
-// "downloads.onChanged" event.
-const DOWNLOAD_CACHE = {};
-browser.runtime.onConnect.addListener(function(aPort) {
-  aPort.onMessage.addListener(async function(aMessage) {
-    const blob = DataURItoBlob(aMessage.content);
 
-    if (aMessage.action && aMessage.action == "copy") {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        browser.clipboard.setImageData(e.target.result, "png");
-      }
-      reader.readAsArrayBuffer(blob);
+const DOWNLOAD_CACHE = {};
+async function TakeScreenshot(data, tab) {
+  formats = {png: "png", jpg: "jpeg", copy: "png"};
+
+  const prefs = await Storage.get();
+
+  const content = await browser.tabs.captureTab(tab.id, {
+    format: formats[data.format],
+    quality: prefs.jpegquality,
+    rect: {
+      x: data.left,
+      y: data.top,
+      width: data.width,
+      height: data.height
     }
+  });
+
+  // Handle copy to clipboard
+  if (data.format == "copy") {
+    const blob = DataURItoBlob(content);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      browser.clipboard.setImageData(e.target.result, "png");
+    }
+    reader.readAsArrayBuffer(blob);
+  }
+
+  // All other data formats have to be handled as downloads
+  else {
+    const filename = GetDefaultFileName("saved_page", tab, prefs.filenameformat) + "." + data.format;
+
+    // The method "open" requires a temporary <a> hyperlink whose creation and
+    // handling has to be offloaded to our content script
+    if (prefs.savemethod == "open") {
+      const tabs = await browser.tabs.query({active: true,
+                                             currentWindow: true});
+      await browser.tabs.sendMessage(tabs[0].id, {
+        type: "TriggerOpen",
+        content: content,
+        filename: filename
+      });
+    }
+    // All other download types are handled with the "browser.downloads" API
     else {
-      const bloburi = URL.createObjectURL(blob);
-      const prefs = await Storage.get();
+      const blob = DataURItoBlob(content);
       const options = {
-        filename: aMessage.filename,
-        url: bloburi,
+        filename: filename,
+        url: URL.createObjectURL(blob),
         saveAs: (prefs.savemethod == "saveas")
       };
       // Trigger download
@@ -107,8 +140,9 @@ browser.runtime.onConnect.addListener(function(aPort) {
       // Store download options for usage in "onChanged".
       DOWNLOAD_CACHE[id] = options;
     }
-  });
-});
+  }
+}
+
 
 // Download change listener.
 // Used to create a notification in the "non prompting" mode, so the user knows
@@ -160,6 +194,62 @@ function DataURItoBlob(aDataURI) {
   // Create Blob from byte array and return it
   return new Blob([new Uint8Array(array)], {type: mime});
 }
+
+// Gets the default file name, used for saving the screenshot
+function GetDefaultFileName(aDefaultFileName, tab, aFilenameFormat) {
+  //prioritize formatted variant
+  const formatted = SanitizeFileName(ApplyFilenameFormat(aFilenameFormat));
+  if (formatted)
+    return formatted;
+
+  // If possible, base the file name on document title
+  const title = SanitizeFileName(tab.title);
+  if (title)
+    return title;
+
+  // Otherwise try to use the actual HTML filename
+  const url = new URL(tab.url)
+  const path = url.pathname;
+  if (path) {
+    const filename = SanitizeFileName(path.substring(path.lastIndexOf('/')+1));
+    if (filename)
+      return filename;
+  }
+
+  // Finally use the provided default name
+  return aDefaultFileName;
+}
+
+// Replaces format character sequences with the actual values
+function ApplyFilenameFormat(aFormat) {
+  const now = new Date();
+  aFormat = aFormat.replace(/%Y/,now.getFullYear());
+  aFormat = aFormat.replace(/%m/,(now.getMonth()+1).toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%d/,now.getDate().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%H/,now.getHours().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%M/,now.getMinutes().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%S/,now.getSeconds().toString().padStart(2, '0'));
+  aFormat = aFormat.replace(/%t/,document.title || "");
+  aFormat = aFormat.replace(/%u/,document.URL.replace(/:/g, ".").replace(/[\/\?]/g, "-"));
+  aFormat = aFormat.replace(/%h/,window.location.hostname);
+  return aFormat;
+}
+
+// "Sanitizes" given string to be used as file name.
+function SanitizeFileName(aFileName) {
+  // http://www.mtu.edu/umc/services/digital/writing/characters-avoid/
+  aFileName = aFileName.replace(/[<\{]+/g, "(");
+  aFileName = aFileName.replace(/[>\}]+/g, ")");
+  aFileName = aFileName.replace(/[#$%!&*\'?\"\/:\\@|]/g, "");
+  // Remove leading spaces, "." and "-"
+  aFileName = aFileName.replace(/^[\s-.]+/, "");
+  // Remove trailing spaces and "."
+  aFileName = aFileName.replace(/[\s.]+$/, "");
+  // Replace all groups of spaces with just one space character
+  aFileName = aFileName.replace(/\s+/g, " ");
+  return aFileName;
+}
+
 
 // Migrates old "only one possible" preferences to new "multi select" model
 async function MigrateSettings() {

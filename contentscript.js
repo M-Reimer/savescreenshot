@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2021  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 */
 
 function Select() {
-
   const overlay = document.createElement('div');
   const selection = document.createElement('div');
   overlay.appendChild(selection);
@@ -74,6 +73,14 @@ function Select() {
 
 
 async function OnMessage(request, sender, sendResponse) {
+  if (request.type == "TakeScreenshot")
+    TakeScreenshot(request);
+
+  if (request.type == "TriggerOpen")
+    TriggerOpen(request.content, request.filename);
+}
+
+async function TakeScreenshot(request) {
   const prefs = await Storage.get();
   const format = request.format || prefs.formats[0];
   const region = request.region || prefs.regions[0];
@@ -84,8 +91,7 @@ async function OnMessage(request, sender, sendResponse) {
       0,
       window.innerWidth + window.scrollMaxX,
       window.innerHeight + window.scrollMaxY,
-      format,
-      prefs.jpegquality
+      format
     );
   else if (region == "selection") {
     Select().then((posn) => {
@@ -94,8 +100,7 @@ async function OnMessage(request, sender, sendResponse) {
         posn.y,
         posn.w,
         posn.h,
-        format,
-        prefs.jpegquality
+        format
       );
     });
   } else
@@ -104,118 +109,38 @@ async function OnMessage(request, sender, sendResponse) {
       document.documentElement.scrollTop,
       window.innerWidth,
       window.innerHeight,
-      format,
-      prefs.jpegquality
+      format
     );
 }
 
-function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat, aQuality) {
+function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   // Maximum size is limited!
   // https://dxr.mozilla.org/mozilla-central/source/dom/canvas/CanvasRenderingContext2D.cpp#5517
   // https://dxr.mozilla.org/mozilla-central/source/gfx/2d/Factory.cpp#316
   if (aHeight > 32767) aHeight = 32767;
   if (aWidth > 32767) aWidth = 32767;
 
-  var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "html:canvas");
-  canvas.height = aHeight;
-  canvas.width = aWidth;
-
-  var ctx = canvas.getContext("2d");
-  ctx.drawWindow(window, aLeft, aTop, aWidth, aHeight, "rgb(0,0,0)");
-
-  let imgdata;
-  if (aFormat == "jpg")
-    imgdata = canvas.toDataURL("image/jpeg", aQuality / 100);
-  else
-    imgdata = canvas.toDataURL("image/png");
-
-  TriggerDownload(imgdata, aFormat);
+  browser.runtime.sendMessage({
+    type: "TakeScreenshot",
+    left: aLeft,
+    top: aTop,
+    width: aWidth,
+    height: aHeight,
+    format: aFormat
+  });
 }
 
 
 // Triggers a download for the content aContent named as aFilename.
-async function TriggerDownload(aContent, aFormat) {
-  if (aFormat == "copy") {
-    const port = browser.runtime.connect();
-    port.postMessage({content: aContent, action: "copy"});
-    port.disconnect();
-    return;
-  }
-
-  const prefs = await Storage.get();
-  const filename = GetDefaultFileName("saved_page", prefs.filenameformat) + "." + aFormat;
-
-  // Trigger the firefox "open file" dialog.
-  if (prefs.savemethod == "open") {
-    const a = document.createElement("a");
-    a.href = aContent;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-  // All other cases have to be communicated to our "background script" as
-  // content scripts can't access the "downloads" API.
-  else {
-    const port = browser.runtime.connect();
-    port.postMessage({content: aContent, filename: filename});
-    port.disconnect();
-  }
+async function TriggerOpen(aContent, aFilename) {
+  const a = document.createElement("a");
+  a.href = aContent;
+  a.download = aFilename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
-// Gets the default file name, used for saving the screenshot
-function GetDefaultFileName(aDefaultFileName, aFilenameFormat) {
-  //prioritize formatted variant
-  let formatted = SanitizeFileName(ApplyFilenameFormat(aFilenameFormat));
-  if (formatted)
-    return formatted;
-
-  // If possible, base the file name on document title
-  let title = SanitizeFileName(document.title);
-  if (title)
-    return title;
-
-  // Otherwise try to use the actual HTML filename
-  let path = window.location.pathname;
-  if (path) {
-    let filename = SanitizeFileName(path.substring(path.lastIndexOf('/')+1));
-    if (filename)
-      return filename;
-  }
-
-  // Finally use the provided default name
-  return aDefaultFileName;
-}
-
-// Replaces format character sequences with the actual values
-function ApplyFilenameFormat(aFormat) {
-  const currentdate = new Date();
-  aFormat = aFormat.replace(/%Y/,currentdate.getFullYear());
-  aFormat = aFormat.replace(/%m/,(currentdate.getMonth()+1).toString().padStart(2, '0'));
-  aFormat = aFormat.replace(/%d/,currentdate.getDate().toString().padStart(2, '0'));
-  aFormat = aFormat.replace(/%H/,currentdate.getHours().toString().padStart(2, '0'));
-  aFormat = aFormat.replace(/%M/,currentdate.getMinutes().toString().padStart(2, '0'));
-  aFormat = aFormat.replace(/%S/,currentdate.getSeconds().toString().padStart(2, '0'));
-  aFormat = aFormat.replace(/%t/,document.title || "");
-  aFormat = aFormat.replace(/%u/,document.URL.replace(/:/g, ".").replace(/[\/\?]/g, "-"));
-  aFormat = aFormat.replace(/%h/,window.location.hostname);
-  return aFormat;
-}
-
-// "Sanitizes" given string to be used as file name.
-function SanitizeFileName(aFileName) {
-  // http://www.mtu.edu/umc/services/digital/writing/characters-avoid/
-  aFileName = aFileName.replace(/[<\{]+/g, "(");
-  aFileName = aFileName.replace(/[>\}]+/g, ")");
-  aFileName = aFileName.replace(/[#$%!&*\'?\"\/:\\@|]/g, "");
-  // Remove leading spaces, "." and "-"
-  aFileName = aFileName.replace(/^[\s-.]+/, "");
-  // Remove trailing spaces and "."
-  aFileName = aFileName.replace(/[\s.]+$/, "");
-  // Replace all groups of spaces with just one space character
-  aFileName = aFileName.replace(/\s+/g, " ");
-  return aFileName;
-}
 
 // Register message event listener
 browser.runtime.onMessage.addListener(OnMessage);

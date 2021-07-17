@@ -21,6 +21,7 @@
 async function SendMessage(aJsonMessage) {
   const tabs = await browser.tabs.query({active: true, currentWindow: true});
   const message = JSON.parse(aJsonMessage);
+  message.type = "TakeScreenshot";
   try {
     await browser.tabs.sendMessage(tabs[0].id, message);
   }
