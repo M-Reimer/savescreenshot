@@ -117,8 +117,8 @@ async function TakeScreenshot(request) {
 
 function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   // Maximum size is limited!
-  // https://dxr.mozilla.org/mozilla-central/source/dom/canvas/CanvasRenderingContext2D.cpp#5517
-  // https://dxr.mozilla.org/mozilla-central/source/gfx/2d/Factory.cpp#316
+  // https://hg.mozilla.org/mozilla-central/file/93c7ed3f5606865707e5ebee8709b13ce0c2e220/dom/canvas/CanvasRenderingContext2D.cpp#l4814
+  // https://hg.mozilla.org/mozilla-central/file/93c7ed3f5606865707e5ebee8709b13ce0c2e220/gfx/2d/Factory.cpp#l326
   if (aHeight > 32767) {
     aHeight = 32767;
     alert(browser.i18n.getMessage("warningImageTooHigh"));
