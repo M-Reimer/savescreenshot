@@ -11,7 +11,6 @@ FILES = manifest.json \
         iconupdater.js \
         options.html \
         options.js \
-        resetshortcuts.js \
         icons/savescreenshot.svg \
         $(wildcard popup/choose_format.*) \
         $(wildcard _locales/*/messages.json)

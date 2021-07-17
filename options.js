@@ -80,7 +80,6 @@ async function init() {
     "show_contextmenu_label",
     "filenameformat_label",
     "filenameformat_description001","filenameformat_description002","filenameformat_description003",
-    "reset_shortcuts_button",
     "jpegquality_label",
     "savenotification_label"
   ].forEach((id) => {
@@ -107,9 +106,6 @@ async function init() {
 
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
   document.getElementById("savenotification_checkbox").addEventListener("change", CheckboxChanged);
-
-  // Init shortcut reset button
-  ResetShortcuts.Init();
 }
 
 async function loadOptions() {

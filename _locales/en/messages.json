@@ -59,10 +59,6 @@
     "message": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de",
     "description": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de"
   },
-  "reset_shortcuts_button": {
-    "message": "Reset keyboard shortcuts",
-    "description": "Label for the keyboard shortcut reset button"
-  },
 
   "imageformat_headline": {
     "message": "Image format",
