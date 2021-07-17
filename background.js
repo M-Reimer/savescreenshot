@@ -172,7 +172,7 @@ browser.downloads.onChanged.addListener(async (delta) => {
 // Gets the default file name, used for saving the screenshot
 function GetDefaultFileName(aDefaultFileName, tab, aFilenameFormat) {
   //prioritize formatted variant
-  const formatted = SanitizeFileName(ApplyFilenameFormat(aFilenameFormat));
+  const formatted = SanitizeFileName(ApplyFilenameFormat(aFilenameFormat, tab));
   if (formatted)
     return formatted;
 
@@ -195,7 +195,7 @@ function GetDefaultFileName(aDefaultFileName, tab, aFilenameFormat) {
 }
 
 // Replaces format character sequences with the actual values
-function ApplyFilenameFormat(aFormat) {
+function ApplyFilenameFormat(aFormat, tab) {
   const now = new Date();
   aFormat = aFormat.replace(/%Y/,now.getFullYear());
   aFormat = aFormat.replace(/%m/,(now.getMonth()+1).toString().padStart(2, '0'));
@@ -203,9 +203,9 @@ function ApplyFilenameFormat(aFormat) {
   aFormat = aFormat.replace(/%H/,now.getHours().toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%M/,now.getMinutes().toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%S/,now.getSeconds().toString().padStart(2, '0'));
-  aFormat = aFormat.replace(/%t/,document.title || "");
-  aFormat = aFormat.replace(/%u/,document.URL.replace(/:/g, ".").replace(/[\/\?]/g, "-"));
-  aFormat = aFormat.replace(/%h/,window.location.hostname);
+  aFormat = aFormat.replace(/%t/,tab.title || "");
+  aFormat = aFormat.replace(/%u/,tab.url.replace(/:/g, ".").replace(/[\/\?]/g, "-"));
+  aFormat = aFormat.replace(/%h/,(new URL(tab.url)).hostname);
   return aFormat;
 }
 
