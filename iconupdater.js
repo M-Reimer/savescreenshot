@@ -45,7 +45,7 @@ const IconUpdater = {
 
     // Get SVG image
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", chrome.extension.getURL(this.default_image), false);
+    xhr.open("GET", browser.runtime.getURL(this.default_image), false);
     xhr.send();
     let svg = xhr.responseText;
 
