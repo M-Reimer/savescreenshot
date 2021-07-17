@@ -135,12 +135,15 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
 
 // Triggers a download for the content aContent named as aFilename.
 async function TriggerOpen(aContent, aFilename) {
+  const blob = await (await fetch(aContent)).blob();
+  const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = aContent;
+  a.href = url;
   a.download = aFilename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 
