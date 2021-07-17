@@ -118,9 +118,7 @@ async function TakeScreenshot(data, tab) {
     // The method "open" requires a temporary <a> hyperlink whose creation and
     // handling has to be offloaded to our content script
     if (prefs.savemethod == "open") {
-      const tabs = await browser.tabs.query({active: true,
-                                             currentWindow: true});
-      await browser.tabs.sendMessage(tabs[0].id, {
+      await browser.tabs.sendMessage(tab.id, {
         type: "TriggerOpen",
         content: content,
         filename: filename
