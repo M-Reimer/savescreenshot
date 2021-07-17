@@ -18,6 +18,11 @@
     "description": "Text of error notification."
   },
 
+  "warningImageTooHigh": {
+    "message": "Das Bildschirmfoto, das Sie erzeugen wollen, überschreitet die Firefox-Interne Höhenbeschränkung von 32767 Pixeln. Die Höhe wurde auf 32767 Pixel begrenzt um das Bildschirmfoto erfolgreich erstellen zu können!",
+    "description": "Warning message which is shown if pages are too high"
+  },
+
   "region_full_label": {
     "message": "Ganze Seite",
     "description": "Used in the options page and for creating the menus"

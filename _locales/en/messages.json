@@ -18,6 +18,11 @@
     "description": "Text of error notification."
   },
 
+  "warningImageTooHigh": {
+    "message": "The screenshot, you are trying to create, would exceed the Firefox internal height limit of 32767 pixels. It was truncated to exactly 32767 pixels height to make the screenshot succeed!",
+    "description": "Warning message which is shown if pages are too high"
+  },
+
   "region_full_label": {
     "message": "Full page",
     "description": "Used in the options page and for creating the menus"
