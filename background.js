@@ -87,10 +87,9 @@ browser.runtime.onMessage.addListener((data, sender) => {
 
 const DOWNLOAD_CACHE = {};
 async function TakeScreenshot(data, tab) {
-  formats = {png: "png", jpg: "jpeg", copy: "png"};
-
   const prefs = await Storage.get();
 
+  const formats = {png: "png", jpg: "jpeg", copy: "png"};
   const content = await browser.tabs.captureTab(tab.id, {
     format: formats[data.format],
     quality: prefs.jpegquality,
