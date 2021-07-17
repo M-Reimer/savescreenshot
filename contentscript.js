@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict';
+
 function Select() {
   const overlay = document.createElement('div');
   const selection = document.createElement('div');

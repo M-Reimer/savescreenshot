@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict';
+
 const IconUpdater = {
   // Fired whenever colors in browser change
   ThemeUpdated: function ThemeUpdated(updateInfo) {

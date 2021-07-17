@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict';
+
 async function CreateButtons() {
   const menus = await GetMenuList();
 

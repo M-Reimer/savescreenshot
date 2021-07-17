@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict';
+
 // Fired if one of our context menu entries is clicked.
 function ContextMenuClicked(aInfo) {
   SendMessage(aInfo.menuItemId);

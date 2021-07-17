@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict';
+
 // Function which handles sending the "take screenshot" message to the active
 // tab. Includes error handling with error notification.
 async function SendMessage(aJsonMessage) {
