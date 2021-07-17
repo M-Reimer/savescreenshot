@@ -104,7 +104,7 @@ async function TakeScreenshot(data, tab) {
 
   // Handle copy to clipboard
   if (data.format == "copy") {
-    const blob = DataURItoBlob(content);
+    const blob = await (await fetch(content)).blob()
     const reader = new FileReader();
     reader.onload = (e) => {
       browser.clipboard.setImageData(e.target.result, "png");
@@ -129,7 +129,7 @@ async function TakeScreenshot(data, tab) {
     }
     // All other download types are handled with the "browser.downloads" API
     else {
-      const blob = DataURItoBlob(content);
+      const blob = await (await fetch(content)).blob()
       const options = {
         filename: filename,
         url: URL.createObjectURL(blob),
@@ -169,31 +169,6 @@ browser.downloads.onChanged.addListener(async (delta) => {
   }
 });
 
-// This function converts a "data:" URI to a Blob object.
-// The Blob is used to get "blob:" URI as a workaround for Bug 1318564
-// https://bugzil.la/1318564 and to get an ArrayBuffer to copy to clipboard.
-// Note: It is not possible to use "toBlob()" in contentscript as
-//       we are not allowed to acces blob: URLs created in contentscript...
-function DataURItoBlob(aDataURI) {
-  // Split data URI into parts
-  const [scheme, mime, encoding, content] = aDataURI.split(/[:;,]/);
-
-  // Check preparsed values
-  if (scheme != "data" || mime == "" || encoding != "base64" || content == "") {
-    console.log("DataURItoBlobURI error: Invalid data URI: " + aDataURI);
-    return "";
-  }
-
-  // Convert base64-encoded string to byte array
-  let array = [];
-  const bytestring = atob(content);
-  for (let i = 0; i < bytestring.length; i++) {
-    array.push(bytestring.charCodeAt(i));
-  }
-
-  // Create Blob from byte array and return it
-  return new Blob([new Uint8Array(array)], {type: mime});
-}
 
 // Gets the default file name, used for saving the screenshot
 function GetDefaultFileName(aDefaultFileName, tab, aFilenameFormat) {
