@@ -92,7 +92,7 @@ async function TakeScreenshot(data, tab) {
   const prefs = await Storage.get();
 
   const formats = {png: "png", jpg: "jpeg", copy: "png"};
-  const content = await browser.tabs.captureTab(tab.id, {
+  let content = await browser.tabs.captureTab(tab.id, {
     format: formats[data.format],
     quality: prefs.jpegquality,
     rect: {
@@ -115,6 +115,9 @@ async function TakeScreenshot(data, tab) {
 
   // All other data formats have to be handled as downloads
   else {
+    const comment = "Generated with SaveScreenshot for Firefox\nTitle: " + tab.title + "\nURL: " + tab.url;
+    content = await ApplyImageComment(content, comment);
+
     const filename = GetDefaultFileName("saved_page", tab, prefs.filenameformat) + "." + data.format;
 
     // The method "open" requires a temporary <a> hyperlink whose creation and

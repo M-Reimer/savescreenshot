@@ -23,6 +23,8 @@
       "iconupdater.js",
       "storage.js",
       "_globals.js",
+      "lib/crc32.js",
+      "imagecomments.js",
       "background.js"
     ]
   },
