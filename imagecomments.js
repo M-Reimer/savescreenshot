@@ -18,9 +18,10 @@
 
 const PNG_SIGNATURE = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
 
-async function ApplyImageComment(content, comment) {
+async function ApplyImageComment(content, title, url) {
   const imgdata = new DataView(await (await fetch(content)).arrayBuffer());
 
+  const comment = FormatComment(title, url);
   const arr_comment = new TextEncoder("utf-8").encode(comment);
 
   let is_png = true;
@@ -50,6 +51,24 @@ async function ApplyImageComment(content, comment) {
   return dataurl;
 }
 
+function FormatComment(title, url) {
+  let comment = "Generated with SaveScreenshot for Firefox";
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth()+1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  comment += "\nDate: " + year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+
+  comment += "\nTitle: " + title;
+
+  comment += "\nURL: " + url;
+
+  return comment
+}
 
 //
 // PNG comment handling

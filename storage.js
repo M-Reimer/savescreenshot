@@ -27,7 +27,8 @@ const Storage = {
     "regions": ["full", "viewport", "selection"],
     "filenameformat": "",
     "jpegquality": 80,
-    "savenotification": true
+    "savenotification": true,
+    "image_comment": true
   },
 
   get: async function() {

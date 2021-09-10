@@ -115,8 +115,9 @@ async function TakeScreenshot(data, tab) {
 
   // All other data formats have to be handled as downloads
   else {
-    const comment = "Generated with SaveScreenshot for Firefox\nTitle: " + tab.title + "\nURL: " + tab.url;
-    content = await ApplyImageComment(content, comment);
+    // Add image comment if we are allowed to
+    if (prefs.image_comment)
+      content = await ApplyImageComment(content, tab.title, tab.url);
 
     const filename = GetDefaultFileName("saved_page", tab, prefs.filenameformat) + "." + data.format;
 

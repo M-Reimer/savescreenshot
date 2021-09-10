@@ -40,6 +40,10 @@
     "message": "Allgemeine Einstellungen",
     "description": "Headline for the general settings in option page"
   },
+  "image_comment_label": {
+    "message": "Metadaten als Kommentar in die Bilddatei speichern (Datum/Zeit, Titel und URL)",
+    "description": "Used in the options page for the image comments checkbox"
+  },
   "show_contextmenu_label": {
     "message": "Eintrag zum Seiten-Kontextmenü hinzufügen",
     "description": "Used in the options page for the context menu checkbox"

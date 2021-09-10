@@ -100,7 +100,8 @@ async function init() {
     "filenameformat_label",
     "filenameformat_description001","filenameformat_description002","filenameformat_description003",
     "jpegquality_label",
-    "savenotification_label"
+    "savenotification_label",
+    "image_comment_label"
   ].forEach((id) => {
     document.getElementById(id).textContent = browser.i18n.getMessage(id);
   });
@@ -125,6 +126,7 @@ async function init() {
 
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
   document.getElementById("savenotification_checkbox").addEventListener("change", CheckboxChanged);
+  document.getElementById("image_comment_checkbox").addEventListener("change", CheckboxChanged);
 }
 
 async function loadOptions() {
@@ -142,6 +144,7 @@ async function loadOptions() {
 
   document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
   document.getElementById("savenotification_checkbox").checked = prefs.savenotification;
+  document.getElementById("image_comment_checkbox").checked = prefs.image_comment;
 }
 
 // Register event listener to receive option update notifications
