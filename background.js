@@ -105,12 +105,13 @@ async function TakeScreenshot(data, tab) {
 
   // Handle copy to clipboard
   if (data.format == "copy") {
-    const blob = await (await fetch(content)).blob()
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      browser.clipboard.setImageData(e.target.result, "png");
-    }
-    reader.readAsArrayBuffer(blob);
+    const buffer = await (await fetch(content)).arrayBuffer()
+    await browser.clipboard.setImageData(buffer, "png");
+    browser.notifications.create("info-notification", {
+      "type": "basic",
+      "title": browser.i18n.getMessage("extensionName"),
+      "message": browser.i18n.getMessage("info_screenshot_copied")
+    });
   }
 
   // All other data formats have to be handled as downloads

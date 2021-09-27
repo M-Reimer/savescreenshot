@@ -82,6 +82,10 @@
     "message": "Copy",
     "description": "Used in options page and menus for copying to clipboard"
   },
+  "copynotification_label": {
+    "message": "Show notification after copying",
+    "description": "Label for the checkbox for toggling the copy notification"
+  },
 
   "savemethod_headline": {
     "message": "Save method",
@@ -107,5 +111,9 @@
   "info_screenshot_saved": {
     "message": "Screenshot saved:",
     "description": "Text in notification, displayed when saving without prompt"
+  },
+  "info_screenshot_copied": {
+    "message": "Screenshot was copied to clipboard",
+    "description": "Text in notification, displayed when finished copying to clipboard"
   }
 }

@@ -6,7 +6,8 @@
       input:disabled+label {
         color: GrayText;
       }
-      #savenotification_checkbox {
+      #savenotification_checkbox,
+      #copynotification_checkbox {
         margin-left: 2em;
       }
     </style>
@@ -44,6 +45,9 @@
       <br/>
       <input type="checkbox" name="format_options" id="format_copy_option"/>
       <label for="format_copy_option" id="format_copy_label">Copy to clipboard</label>
+      <br/>
+      <input type="checkbox" id="copynotification_checkbox"/>
+      <label for="copynotification_checkbox" id="copynotification_label">Show notification after copying</label>
 
       <h1 id="region_headline">Screenshot region</h1>
       <input type="checkbox" name="region_options" id="region_full_option"/>

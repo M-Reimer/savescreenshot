@@ -33,6 +33,9 @@ async function MultiselectGroupChanged(e) {
     e.target.checked = true;
   }
 
+  // Update copy notification checkbox disabled status
+  document.getElementById("copynotification_checkbox").disabled = !document.getElementById("format_copy_option").checked;
+
   // Store selection
   const pref = e.target.name.split("_")[0] + "s";
   const settings = {};
@@ -88,6 +91,7 @@ async function init() {
   [
     "imageformat_headline",
     "format_copy_label",
+    "copynotification_label",
     "region_headline",
     "region_full_label",
     "region_viewport_label",
@@ -126,6 +130,7 @@ async function init() {
 
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);
   document.getElementById("savenotification_checkbox").addEventListener("change", CheckboxChanged);
+  document.getElementById("copynotification_checkbox").addEventListener("change", CheckboxChanged);
   document.getElementById("image_comment_checkbox").addEventListener("change", CheckboxChanged);
 }
 
@@ -144,6 +149,8 @@ async function loadOptions() {
 
   document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
   document.getElementById("savenotification_checkbox").checked = prefs.savenotification;
+  document.getElementById("copynotification_checkbox").disabled = !prefs.formats.includes("copy");
+  document.getElementById("copynotification_checkbox").checked = prefs.copynotification;
   document.getElementById("image_comment_checkbox").checked = prefs.image_comment;
 }
 

@@ -82,6 +82,10 @@
     "message": "Kopieren",
     "description": "Used in options page and menus for copying to clipboard"
   },
+  "copynotification_label": {
+    "message": "Benachrichtigung nach dem Kopieren anzeigen",
+    "description": "Label for the checkbox for toggling the copy notification"
+  },
 
   "savemethod_headline": {
     "message": "Speichermethode",
@@ -107,5 +111,9 @@
   "info_screenshot_saved": {
     "message": "Bildschirmfoto gespeichert:",
     "description": "Text in notification, displayed when saving without prompt"
+  },
+  "info_screenshot_copied": {
+    "message": "Bildschirmfoto wurde in Zwischenablage kopiert",
+    "description": "Text in notification, displayed when finished copying to clipboard"
   }
 }

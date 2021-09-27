@@ -28,7 +28,8 @@ const Storage = {
     "filenameformat": "",
     "jpegquality": 80,
     "savenotification": true,
-    "image_comment": true
+    "image_comment": true,
+    "copynotification": false
   },
 
   get: async function() {
