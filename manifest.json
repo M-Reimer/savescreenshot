@@ -20,8 +20,8 @@
 
   "background": {
     "scripts": [
-      "iconupdater.js",
-      "storage.js",
+      "utils/iconupdater.js",
+      "utils/storage.js",
       "_globals.js",
       "lib/crc32.js",
       "imagecomments.js",
