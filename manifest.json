@@ -43,7 +43,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["storage.js", "contentscript.js"]
+      "js": ["utils/storage.js", "contentscript.js"]
     }
   ],
 
