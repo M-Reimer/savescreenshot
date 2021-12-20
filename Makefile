@@ -6,14 +6,17 @@
 FILES = manifest.json \
         background.js \
         contentscript.js \
-        storage.js \
+        default-preferences.json \
         _globals.js \
-        iconupdater.js \
         options.html \
         options.js \
         imagecomments.js \
+        utils/iconupdater.js \
+        utils/storage.js \
+        utils/html-i18n.js \
         lib/crc32.js \
         icons/savescreenshot.svg \
+        icons/info.svg \
         $(wildcard popup/choose_format.*) \
         $(wildcard _locales/*/messages.json)
 
