@@ -14,66 +14,67 @@
   </head>
   <body>
     <form>
-      <h1 id="general_headline">General settings</h1>
+      <h1 data-i18n-id="general_headline">General settings</h1>
       <p>
         <input type="checkbox" id="image_comment_checkbox"/>
-        <label for="image_comment_checkbox" id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
+        <label for="image_comment_checkbox" data-i18n-id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
       </p>
       <p>
         <input type="checkbox" id="show_contextmenu_checkbox"/>
-        <label for="show_contextmenu_checkbox" id="show_contextmenu_label">Add entry to the page context menu</label>
+        <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
       </p>
       <p>
-        <label for="jpegquality" id="jpegquality_label">JPEG quality</label>
+        <label for="jpegquality" data-i18n-id="jpegquality_label">JPEG quality</label>
         <input id="jpegquality" type="number" min="0" max="100" style="width: 5em;"/>%
       </p>
       <p>
-        <label for="filenameformat" id="filenameformat_label">Filename Format: </label>
+        <label for="filenameformat" data-i18n-id="filenameformat_label">Filename Format: </label>
         <input id="filenameformat" type="text" value=""></input>
         <br/>
-        <div id="filenameformat_description001">%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </div>
-        <div id="filenameformat_description002">%h - host name | %u - URL | %t - page title </div>
-        <div id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</div>
+        <div data-i18n-id="filenameformat_description001">%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </div>
+        <div data-i18n-id="filenameformat_description002">%h - host name | %u - URL | %t - page title </div>
+        <div data-i18n-id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</div>
       </p>
 
-      <h1 id="imageformat_headline">Image format</h1>
+      <h1 data-i18n-id="imageformat_headline">Image format</h1>
       <input type="checkbox" name="format_options" id="format_png_option"/>
-      <label for="format_png_option" id="format_png_label">PNG</label>
+      <label for="format_png_option">PNG</label>
       <br/>
       <input type="checkbox" name="format_options" id="format_jpg_option"/>
-      <label for="format_jpg_option" id="format_jpg_label">JPEG</label>
+      <label for="format_jpg_option">JPEG</label>
       <br/>
       <input type="checkbox" name="format_options" id="format_copy_option"/>
-      <label for="format_copy_option" id="format_copy_label">Copy to clipboard</label>
+      <label for="format_copy_option" data-i18n-id="format_copy_label">Copy to clipboard</label>
       <br/>
       <input type="checkbox" id="copynotification_checkbox"/>
-      <label for="copynotification_checkbox" id="copynotification_label">Show notification after copying</label>
+      <label for="copynotification_checkbox" data-i18n-id="copynotification_label">Show notification after copying</label>
 
-      <h1 id="region_headline">Screenshot region</h1>
+      <h1 data-i18n-id="region_headline">Screenshot region</h1>
       <input type="checkbox" name="region_options" id="region_full_option"/>
-      <label for="region_full_option" id="region_full_label">Full page</label>
+      <label for="region_full_option" data-i18n-id="region_full_label">Full page</label>
       <br/>
       <input type="checkbox" name="region_options" id="region_viewport_option"/>
-      <label for="region_viewport_option" id="region_viewport_label">Viewport</label>
+      <label for="region_viewport_option" data-i18n-id="region_viewport_label">Viewport</label>
       <br/>
       <input type="checkbox" name="region_options" id="region_selection_option"/>
       <label for="region_selection_option" id="region_selection_label">Selection</label>
 
 
-      <h1 id="savemethod_headline">Save method</h1>
+      <h1 data-i18n-id="savemethod_headline">Save method</h1>
       <input type="radio" name="savemethod_options" id="savemethod_open_option"/>
-      <label for="savemethod_open_option" id="savemethod_open_label">Offer to open the image file directly</label>
+      <label for="savemethod_open_option" data-i18n-id="savemethod_open_label">Offer to open the image file directly</label>
       <br/>
       <input type="radio" name="savemethod_options" id="savemethod_saveas_option"/>
-      <label for="savemethod_saveas_option" id="savemethod_saveas_label">Display "Save As" dialog</label>
+      <label for="savemethod_saveas_option" data-i18n-id="savemethod_saveas_label">Display "Save As" dialog</label>
       <br/>
       <input type="radio" name="savemethod_options" id="savemethod_save_option"/>
-      <label for="savemethod_save_option" id="savemethod_save_label">Directly save to "Downloads" directory without prompting</label>
+      <label for="savemethod_save_option" data-i18n-id="savemethod_save_label">Directly save to "Downloads" directory without prompting</label>
       <br/>
       <input type="checkbox" id="savenotification_checkbox"/>
-      <label for="savenotification_checkbox" id="savenotification_label">Show notification after saving</label>
+      <label for="savenotification_checkbox" data-i18n-id="savenotification_label">Show notification after saving</label>
     </form>
 
+    <script src="utils/html-i18n.js"></script>
     <script src="utils/storage.js"></script>
     <script src="options.js"></script>
   </body>

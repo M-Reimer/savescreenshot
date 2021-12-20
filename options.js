@@ -87,29 +87,6 @@ async function NumberChanged(e) {
 }
 
 async function init() {
-  // i18n
-  [
-    "imageformat_headline",
-    "format_copy_label",
-    "copynotification_label",
-    "region_headline",
-    "region_full_label",
-    "region_viewport_label",
-    "savemethod_headline",
-    "savemethod_open_label",
-    "savemethod_saveas_label",
-    "savemethod_save_label",
-    "general_headline",
-    "show_contextmenu_label",
-    "filenameformat_label",
-    "filenameformat_description001","filenameformat_description002","filenameformat_description003",
-    "jpegquality_label",
-    "savenotification_label",
-    "image_comment_label"
-  ].forEach((id) => {
-    document.getElementById(id).textContent = browser.i18n.getMessage(id);
-  });
-
   await loadOptions();
 
   let formatoptions = document.getElementsByName("format_options");
