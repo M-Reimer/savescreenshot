@@ -10,31 +10,61 @@
       #copynotification_checkbox {
         margin-left: 2em;
       }
+
+      img.info_button {
+          height: 1.2em;
+          width: 1.2em;
+          vertical-align: text-bottom;
+      }
+      span.info_popup {
+        position: absolute;
+        border-radius: 0.5em;
+        border: 1px solid #000000;
+        background-color: #DDDDDD;
+        padding: 0.5em;
+        margin-top: 0.2em;
+        display: none;
+      }
+      img.info_button:hover+span.info_popup {
+        display: block;
+      }
+
+      input[type="text"], input[type="number"] {
+        margin: 0.2em;
+      }
+
+      input:invalid {
+        border-color: red;
+      }
     </style>
   </head>
   <body>
     <form>
       <h1 data-i18n-id="general_headline">General settings</h1>
-      <p>
-        <input type="checkbox" id="image_comment_checkbox"/>
-        <label for="image_comment_checkbox" data-i18n-id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
-      </p>
-      <p>
-        <input type="checkbox" id="show_contextmenu_checkbox"/>
-        <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
-      </p>
-      <p>
-        <label for="jpegquality" data-i18n-id="jpegquality_label">JPEG quality</label>
-        <input id="jpegquality" type="number" min="0" max="100" style="width: 5em;"/>%
-      </p>
-      <p>
-        <label for="filenameformat" data-i18n-id="filenameformat_label">Filename Format: </label>
-        <input id="filenameformat" type="text" value=""></input>
-        <br/>
-        <div data-i18n-id="filenameformat_description001">%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </div>
-        <div data-i18n-id="filenameformat_description002">%h - host name | %u - URL | %t - page title </div>
-        <div data-i18n-id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</div>
-      </p>
+      <input type="checkbox" id="image_comment_checkbox"/>
+      <label for="image_comment_checkbox" data-i18n-id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
+      <br/>
+      <input type="checkbox" id="show_contextmenu_checkbox"/>
+      <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
+      <br/>
+      <label for="jpegquality" data-i18n-id="jpegquality_label">JPEG quality</label>
+      <input id="jpegquality" type="number" min="0" max="100" style="width: 5em;"/>%
+      <br/>
+      <label for="filenameformat" data-i18n-id="filenameformat_label">Filename Format:</label>
+      <input id="filenameformat" type="text" value=""></input>
+      <img class="info_button" src="icons/info.svg"/>
+      <span class="info_popup">
+        <span data-i18n-id="filenameformat_description001">%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second </span><br/>
+        <span data-i18n-id="filenameformat_description002">%h - host name | %u - URL | %t - page title </span><br/>
+        <span data-i18n-id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</span>
+      </span>
+      <br/>
+      <label data-i18n-id="targetdir_label" for="targetdir">Target directory name:</label>
+      <input id="targetdir" type="text" pattern="^[a-zA-Z0-9_-]*$" value=""></input>
+      <img class="info_button" src="icons/info.svg"/>
+      <span class="info_popup">
+        <span data-i18n-id="targetdir_description">You can enter a directory name here, if you want your screenshots to be placed into a subdirectory of your configured downloads directory. Allowed characters are:</span> <span>A-Z,a-z,0-9,_,-</span>
+      </span>
 
       <h1 data-i18n-id="imageformat_headline">Image format</h1>
       <input type="checkbox" name="format_options" id="format_png_option"/>

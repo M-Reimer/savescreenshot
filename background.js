@@ -135,7 +135,7 @@ async function TakeScreenshot(data, tab) {
     else {
       const blob = await (await fetch(content)).blob()
       const options = {
-        filename: filename,
+        filename: prefs.targetdir ? prefs.targetdir + "/" + filename: filename,
         url: URL.createObjectURL(blob),
         saveAs: (prefs.savemethod == "saveas")
       };

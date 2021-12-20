@@ -68,6 +68,14 @@
     "message": "Beispiel: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de",
     "description": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de"
   },
+  "targetdir_label": {
+    "message": "Zielverzeichnisname:",
+    "description": "Target directory name"
+  },
+  "targetdir_description": {
+    "message": "Hier kann ein Name für ein Verzeichnis angegeben werden, in welches die Bildschirmfotos unterhalb des konfigurierten Downloads-Verzeichnisses abgelegt werden. Erlaubte Zeichen sind:",
+    "description": "Description for the target directory name option"
+  },
 
   "imageformat_headline": {
     "message": "Bildformat",

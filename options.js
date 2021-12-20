@@ -66,6 +66,13 @@ async function CheckboxChanged(e) {
 async function TextChanged(e) {
   let pref = e.target.id;
   let value = e.target.value;
+
+  if (e.target.hasAttribute("pattern"))
+    if (!value.match(e.target.getAttribute("pattern"))) {
+      console.log("invalid");
+      return;
+    }
+
   let params = {};
   params[pref] = value;
   await Storage.set(params);
@@ -103,6 +110,7 @@ async function init() {
   });
 
   document.getElementById("filenameformat").addEventListener("change", TextChanged);
+  document.getElementById("targetdir").addEventListener("change", TextChanged);
   document.getElementById("jpegquality").addEventListener("change", NumberChanged);
 
   document.getElementById("show_contextmenu_checkbox").addEventListener("change", CheckboxChanged);

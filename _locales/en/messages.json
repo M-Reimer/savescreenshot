@@ -68,6 +68,14 @@
     "message": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de",
     "description": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de"
   },
+  "targetdir_label": {
+    "message": "Target directory name:",
+    "description": "Target directory name"
+  },
+  "targetdir_description": {
+    "message": "You can enter a directory name here, if you want your screenshots to be placed into a subdirectory of your configured downloads directory. Allowed characters are:",
+    "description": "Description for the target directory name option"
+  },
 
   "imageformat_headline": {
     "message": "Image format",
