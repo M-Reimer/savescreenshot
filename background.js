@@ -107,11 +107,12 @@ async function TakeScreenshot(data, tab) {
   if (data.format == "copy") {
     const buffer = await (await fetch(content)).arrayBuffer()
     await browser.clipboard.setImageData(buffer, "png");
-    browser.notifications.create("info-notification", {
-      "type": "basic",
-      "title": browser.i18n.getMessage("extensionName"),
-      "message": browser.i18n.getMessage("info_screenshot_copied")
-    });
+    if (prefs.copynotification)
+      browser.notifications.create("info-notification", {
+        "type": "basic",
+        "title": browser.i18n.getMessage("extensionName"),
+        "message": browser.i18n.getMessage("info_screenshot_copied")
+      });
   }
 
   // All other data formats have to be handled as downloads
