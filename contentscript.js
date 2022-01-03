@@ -18,13 +18,12 @@
 
 'use strict';
 
+let left, top, width, height = 0;
 function Select() {
   const overlay = document.createElement('div');
-  overlay.setAttribute("tabindex", 0);
   const selection = document.createElement('div');
   overlay.appendChild(selection);
   document.body.appendChild(overlay);
-  overlay.focus();
 
   selection.style.cssText=`
         border: 1px dashed black;
@@ -42,7 +41,6 @@ function Select() {
       `;
 
   let x1, y1, x2, y2 = 0;
-  let left, top, width, height;
   overlay.addEventListener('mousedown', (e) => {
     // starting postions
     x1 = e.clientX;
@@ -65,18 +63,34 @@ function Select() {
   });
 
   return new Promise((resolve, reject) => {
-    overlay.addEventListener('mouseup', (e) => {
+    function _keyhandler(e) {
+      if (e.key === "Escape") {
+        _cleanup();
+        reject();
+      }
+      else if (e.key === "Enter") {
+        if (width > 0 && height > 0) {
+          _cleanup();
+          resolve({x: left + window.scrollX,
+                   y: top + window.scrollY,
+                   w: width,
+                   h: height});
+        }
+      }
+    }
+    document.addEventListener('keyup', _keyhandler);
+
+    function _cleanup() {
       overlay.remove();
+      document.removeEventListener('keyup', _keyhandler);
+    }
+
+    overlay.addEventListener('mouseup', (e) => {
+      _cleanup();
       resolve({x: left + window.scrollX,
                y: top + window.scrollY,
                w: width,
                h: height});
-    });
-    overlay.addEventListener('keyup', (e) => {
-      if (e.key === "Escape") {
-        overlay.remove();
-        reject();
-      }
     });
   });
 }
