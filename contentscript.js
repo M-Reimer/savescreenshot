@@ -20,9 +20,11 @@
 
 function Select() {
   const overlay = document.createElement('div');
+  overlay.setAttribute("tabindex", 0);
   const selection = document.createElement('div');
   overlay.appendChild(selection);
   document.body.appendChild(overlay);
+  overlay.focus();
 
   selection.style.cssText=`
         border: 1px dashed black;
@@ -69,6 +71,12 @@ function Select() {
                y: top + window.scrollY,
                w: width,
                h: height});
+    });
+    overlay.addEventListener('keyup', (e) => {
+      if (e.key === "Escape") {
+        overlay.remove();
+        reject();
+      }
     });
   });
 }
