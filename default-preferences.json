@@ -8,5 +8,6 @@
   "jpegquality": 80,
   "savenotification": true,
   "image_comment": true,
-  "copynotification": false
+  "copynotification": false,
+  "fullpage_scrollpos": false
 }

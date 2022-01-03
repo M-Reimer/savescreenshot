@@ -2,41 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <style>
-      input:disabled+label {
-        color: GrayText;
-      }
-      #savenotification_checkbox,
-      #copynotification_checkbox {
-        margin-left: 2em;
-      }
-
-      img.info_button {
-          height: 1.2em;
-          width: 1.2em;
-          vertical-align: text-bottom;
-      }
-      span.info_popup {
-        position: absolute;
-        border-radius: 0.5em;
-        border: 1px solid #000000;
-        background-color: #DDDDDD;
-        padding: 0.5em;
-        margin-top: 0.2em;
-        display: none;
-      }
-      img.info_button:hover+span.info_popup {
-        display: block;
-      }
-
-      input[type="text"], input[type="number"] {
-        margin: 0.2em;
-      }
-
-      input:invalid {
-        border-color: red;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="options.css"/>
   </head>
   <body>
     <form>
@@ -82,6 +48,9 @@
       <h1 data-i18n-id="region_headline">Screenshot region</h1>
       <input type="checkbox" name="region_options" id="region_full_option"/>
       <label for="region_full_option" data-i18n-id="region_full_label">Full page</label>
+      <br/>
+      <input type="checkbox" id="fullpage_scrollpos_checkbox"/>
+      <label for="fullpage_scrollpos_checkbox" data-i18n-id="fullpage_scrollpos_label">Start full page screenshots at the current scroll position</label>
       <br/>
       <input type="checkbox" name="region_options" id="region_viewport_option"/>
       <label for="region_viewport_option" data-i18n-id="region_viewport_label">Viewport</label>

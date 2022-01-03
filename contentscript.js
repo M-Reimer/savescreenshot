@@ -87,12 +87,20 @@ async function TakeScreenshot(request) {
   const format = request.format || prefs.formats[0];
   const region = request.region || prefs.regions[0];
 
-  if (region == "full")
+  if (region == "full" && !prefs.fullpage_scrollpos)
     SaveScreenshot(
       0,
       0,
       window.innerWidth + window.scrollMaxX,
       window.innerHeight + window.scrollMaxY,
+      format
+    );
+  else if (region == "full")
+    SaveScreenshot(
+      0,
+      document.documentElement.scrollTop,
+      window.innerWidth + window.scrollMaxX,
+      window.innerHeight + window.scrollMaxY - document.documentElement.scrollTop,
       format
     );
   else if (region == "selection") {

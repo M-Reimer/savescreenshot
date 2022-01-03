@@ -35,6 +35,7 @@ async function MultiselectGroupChanged(e) {
 
   // Update copy notification checkbox disabled status
   document.getElementById("copynotification_checkbox").disabled = !document.getElementById("format_copy_option").checked;
+  document.getElementById("fullpage_scrollpos_checkbox").disabled = !document.getElementById("region_full_option").checked;
 
   // Store selection
   const pref = e.target.name.split("_")[0] + "s";
@@ -117,6 +118,7 @@ async function init() {
   document.getElementById("savenotification_checkbox").addEventListener("change", CheckboxChanged);
   document.getElementById("copynotification_checkbox").addEventListener("change", CheckboxChanged);
   document.getElementById("image_comment_checkbox").addEventListener("change", CheckboxChanged);
+  document.getElementById("fullpage_scrollpos_checkbox").addEventListener("change", CheckboxChanged);
 }
 
 async function loadOptions() {
@@ -137,6 +139,8 @@ async function loadOptions() {
   document.getElementById("copynotification_checkbox").disabled = !prefs.formats.includes("copy");
   document.getElementById("copynotification_checkbox").checked = prefs.copynotification;
   document.getElementById("image_comment_checkbox").checked = prefs.image_comment;
+  document.getElementById("fullpage_scrollpos_checkbox").checked = prefs.fullpage_scrollpos;
+  document.getElementById("fullpage_scrollpos_checkbox").disabled = !prefs.regions.includes("full");
 }
 
 // Register event listener to receive option update notifications

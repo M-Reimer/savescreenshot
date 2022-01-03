@@ -27,6 +27,10 @@
     "message": "Ganze Seite",
     "description": "Used in the options page and for creating the menus"
   },
+  "fullpage_scrollpos_label": {
+    "message": "Ganzseitige Bildschirmfotos an aktueller Scrollposition beginnen",
+    "description": "Label for the checkbox which enables full page screenshots to start at the current scroll position set by the user"
+  },
   "region_viewport_label": {
     "message": "Anzeigebereich",
     "description": "Used in the options page and for creating the menus"

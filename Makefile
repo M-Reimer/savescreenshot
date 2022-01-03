@@ -10,6 +10,7 @@ FILES = manifest.json \
         _globals.js \
         options.html \
         options.js \
+        options.css \
         imagecomments.js \
         utils/iconupdater.js \
         utils/storage.js \

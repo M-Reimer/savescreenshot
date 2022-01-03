@@ -27,6 +27,10 @@
     "message": "Full page",
     "description": "Used in the options page and for creating the menus"
   },
+  "fullpage_scrollpos_label": {
+    "message": "Start full page screenshots at the current scroll position",
+    "description": "Label for the checkbox which enables full page screenshots to start at the current scroll position set by the user"
+  },
   "region_viewport_label": {
     "message": "Viewport",
     "description": "Used in the options page and for creating the menus"

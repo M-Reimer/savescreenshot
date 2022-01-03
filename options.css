@@ -1,0 +1,38 @@
+input:disabled+label {
+  color: GrayText;
+}
+#savenotification_checkbox,
+#copynotification_checkbox,
+#fullpage_scrollpos_checkbox {
+  margin-left: 2em;
+}
+
+input[type="text"], input[type="number"] {
+  margin: 0.2em;
+}
+
+input:invalid {
+  border-color: red;
+}
+
+
+/*
+ * Info button and message
+ */
+img.info_button {
+  height: 1.2em;
+  width: 1.2em;
+  vertical-align: text-bottom;
+}
+span.info_popup {
+  position: absolute;
+  border-radius: 0.5em;
+  border: 1px solid #000000;
+  background-color: #DDDDDD;
+  padding: 0.5em;
+  margin-top: 0.2em;
+  display: none;
+}
+img.info_button:hover+span.info_popup {
+  display: block;
+}
