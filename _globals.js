@@ -1,6 +1,7 @@
 /*
     Firefox addon "Save Screenshot"
     Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2022  Jak.W <https://github.com/jakwings/firefox-screenshot>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +19,40 @@
 
 'use strict';
 
+function abort(err) {
+  if (err instanceof Error) {
+    throw err;
+  } else if (err instanceof ErrorEvent) {
+    throw err.error || new Error(err.message);
+  } else {
+    throw new Error(err);
+  }
+}
+
+function notify (
+  message = '',
+  title = browser.i18n.getMessage('extensionName'),
+  id = ''
+) {
+  browser.notifications.create(id, {
+    type: 'basic',
+    title: title,
+    message: message,
+  });
+}
+
+function alert (
+  message = '',
+  title = browser.i18n.getMessage('extensionName'),
+  id = ''
+) {
+  browser.notifications.create(id, {
+    type: 'basic',
+    title: title,
+    message: message,
+  });
+}
+
 // Function which handles sending the "take screenshot" message to the active
 // tab. Includes error handling with error notification.
 async function SendMessage(aJsonMessage) {
@@ -27,13 +62,10 @@ async function SendMessage(aJsonMessage) {
   try {
     await browser.tabs.sendMessage(tabs[0].id, message);
   }
-  catch(e) {
-    console.log("SaveScreenshot message sending error: " + e);
-    browser.notifications.create("error-notification", {
-      "type": "basic",
-      "title": browser.i18n.getMessage("errorTitleFailedSending"),
-      "message": browser.i18n.getMessage("errorTextFailedSending")
-    });
+  catch(err) {
+    console.error("SaveScreenshot message sending error: " + err);
+    alert(browser.i18n.getMessage("errorTextFailedSending"),
+          browser.i18n.getMessage("errorTitleFailedSending"));
   }
 }
 

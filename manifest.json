@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "9.2.0",
+  "version": "0.0.0",
 
   "description": "__MSG_extensionDescription__",
 
   "applications": {
     "gecko": {
-      "id": "{49bd4b24-e5b9-4238-a241-3487486f9235}",
-      "strict_min_version": "82.0"
+      "id": "{49bd4b24-e5b9-4238-a241-3487486f9236}",
+      "strict_min_version": "57.0"
     }
   },
 
@@ -87,6 +87,7 @@
     "contextMenus",
     "notifications",
     "storage",
+    "tabs",
     "downloads",
     "clipboardWrite"
   ],

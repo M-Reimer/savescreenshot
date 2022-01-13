@@ -1,6 +1,7 @@
 /*
     Firefox Add-on "Save Screenshot"
     Copyright (C) 2021  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2022  Jak.W <https://github.com/jakwings/firefox-screenshot>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,21 +17,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-const PNG_SIGNATURE = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
+const PNG_SIGNATURE = new Uint8Array([
+  0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A
+]);
 
 async function ApplyImageComment(content, title, url) {
-  const imgdata = new DataView(await (await fetch(content)).arrayBuffer());
+  const imgdata = new DataView(content);
 
   const comment = FormatComment(title, url);
   const arr_comment = new TextEncoder("utf-8").encode(comment);
 
-  let is_png = true;
-  for (const[index, byte] of PNG_SIGNATURE.entries()) {
-    if (imgdata.getUint8(index) != byte) {
-      is_png = false;
-      break;
-    }
-  }
+  let is_png = imgdata.byteLength >= PNG_SIGNATURE.length &&
+    PNG_SIGNATURE.every((byte, i) => imgdata.getUint8(i) === byte);
 
   let arr_final;
   let mimetype;

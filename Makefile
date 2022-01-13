@@ -15,6 +15,11 @@ FILES = manifest.json \
         utils/storage.js \
         utils/html-i18n.js \
         lib/crc32.js \
+        lib/inkjet.js \
+        lib/pako.js \
+        lib/upng.js \
+        lib/worker-jpeg.js \
+        lib/worker-png.js \
         icons/savescreenshot.svg \
         icons/info.svg \
         $(wildcard popup/choose_format.*) \

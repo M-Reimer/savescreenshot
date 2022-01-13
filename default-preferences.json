@@ -3,10 +3,10 @@
   "savemethod": "open",
   "formats": ["png", "jpg", "copy"],
   "regions": ["full", "viewport", "selection"],
-  "filenameformat": "",
+  "filenameformat": "Screenshot-%Y%m%d-%H%M%S",
   "targetdir": "",
   "jpegquality": 80,
   "savenotification": true,
-  "image_comment": true,
-  "copynotification": false
+  "image_comment": false,
+  "copynotification": true
 }
