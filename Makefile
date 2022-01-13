@@ -6,13 +6,12 @@
 FILES = manifest.json \
         background.js \
         contentscript.js \
-        default-preferences.json \
         _globals.js \
         options.html \
         options.js \
+        storage.js \
         imagecomments.js \
         utils/iconupdater.js \
-        utils/storage.js \
         utils/html-i18n.js \
         lib/crc32.js \
         lib/inkjet.js \
