@@ -118,17 +118,15 @@ function Select() {
   };
   let onMouseMove = (event) => {
     nopop(event);
-    let spx = window.scrollX - Math.trunc(window.scrollX);
-    let spy = window.scrollY - Math.trunc(window.scrollY);
     // new positions
     [x2, y2] = clamp(event.clientX, event.clientY);
     scrollX = x1 < x2 ? scrollX : window.scrollX;
     scrollY = y1 < y2 ? scrollY : window.scrollY;
     // update relative positions
-    left = (x1 < x2 ? x1 : x2) + spx;
-    top = (y1 < y2 ? y1 : y2) + spy;
-    width = Math.abs(x1 - x2) + (x1 != x2 ? 1 : 0);
-    height = Math.abs(y1 - y2) + (y1 != y2 ? 1 : 0);
+    left = (x1 < x2 ? x1 : x2);
+    top = (y1 < y2 ? y1 : y2);
+    width = Math.abs(x1 - x2);
+    height = Math.abs(y1 - y2);
     // FIXME: circumvent "transform: translate(...) matrix(...)"
     selection.style.left = left + 'px';
     selection.style.top = top + 'px';
