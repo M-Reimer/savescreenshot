@@ -28,9 +28,10 @@ function GetPageInfo() {
 }
 
 function GetScrollDirections() {
+  // don't care if can't scroll page at all
   return {
-    x: window.scrollMaxX <= 0 && window.innerWidth < document.documentElement.scrollWidth ? -1 : 1,
-    y: window.scrollMaxY <= 0 && window.innerHeight < document.documentElement.scrollHeight ? -1 : 1,
+    x: window.scrollX < 0 || window.scrollMaxX <= 0 && document.documentElement.clientWidth < document.documentElement.scrollWidth ? -1 : 1,
+    y: window.scrollY < 0 || window.scrollMaxY <= 0 && document.documentElement.clientHeight < document.documentElement.scrollHeight ? -1 : 1,
   };
 }
 
