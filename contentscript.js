@@ -117,13 +117,15 @@ function Select() {
   };
   let onMouseMove = (event) => {
     nopop(event);
+    let spx = window.scrollX - Math.trunc(window.scrollX);
+    let spy = window.scrollY - Math.trunc(window.scrollY);
     // new positions
     [x2, y2] = clamp(event.clientX, event.clientY);
     scrollX = x1 < x2 ? scrollX : window.scrollX;
     scrollY = y1 < y2 ? scrollY : window.scrollY;
     // update relative positions
-    left = x1 < x2 ? x1 : x2;
-    top = y1 < y2 ? y1 : y2;
+    left = (x1 < x2 ? x1 : x2) + spx;
+    top = (y1 < y2 ? y1 : y2) + spy;
     width = Math.abs(x1 - x2) + (x1 != x2 ? 1 : 0);
     height = Math.abs(y1 - y2) + (y1 != y2 ? 1 : 0);
     // FIXME: circumvent "transform: translate(...) matrix(...)"
@@ -205,8 +207,8 @@ async function TakeScreenshot(request) {
     let dir = GetScrollDirections();
     SaveScreenshot({
       region: region,
-      left: Math.trunc(dir.x > 0 ? i.sx : i.sw + i.sx - i.cw),
-      top: Math.trunc(dir.y > 0 ? i.sy : i.sh + i.sy - i.ch),
+      left: dir.x > 0 ? i.sx : i.sw + i.sx - i.cw,
+      top: dir.y > 0 ? i.sy : i.sh + i.sy - i.ch,
       // excluding scrollbar width/height
       width: i.cw,
       height: i.ch,
@@ -226,8 +228,8 @@ function SaveScreenshot({region, left, top, width, height, format}) {
     format: format,
     region: region,
     // distance from top left corner (non-negative)
-    left: left,
-    top: top,
+    left: Math.trunc(left),
+    top: Math.trunc(top),
     // extent from top left to bottom right
     width: width,
     height: height,

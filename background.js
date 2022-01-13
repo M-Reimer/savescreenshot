@@ -98,7 +98,6 @@ async function TakeScreenshot(req, tab) {
   const {vw, vh, pw, ph, width: rw, height: rh, scale: scl} = req;
   const {scroll: {sx, sy, spx, spy}, direction: dir} = req;
   const limits = [32767, 472907776].map(x => Math.trunc(x / scl));
-  const [mw, mh] = [Math.min(vw, limits[0]), Math.min(vh, limits[0])];
   const one_canvas = Math.max(rw, rh) <= limits[0] && rw * rh <= limits[1];
 
   const format = {
@@ -333,6 +332,9 @@ async function TakeScreenshot(req, tab) {
     });
   }
 
+  const [mw, mh] =
+    use_native ? [rw, rh] : [Math.min(vw, limits[0]), Math.min(vh, limits[0])];
+
   try {
     for (let y = 0; y < rh; y += mh) {
       let h = (y + mh <= rh ? mh : rh - y);
@@ -484,7 +486,7 @@ function DebugDraw(ctx, i) {
   ctx.strokeStyle = '#000';
   ctx.setLineDash([5 * i.scl, 5 * i.scl]);
   ctx.lineWidth = 1 * i.scl;
-  //ctx.fillRect(i.x * i.scl, i.y * i.scl, i.w * i.scl, i.h * i.scl);
+  ctx.fillRect(i.x * i.scl, i.y * i.scl, i.w * i.scl, i.h * i.scl);
   ctx.strokeRect(i.x * i.scl, i.y * i.scl, i.w * i.scl, i.h * i.scl);
   ctx.setLineDash([]);
   ctx.lineWidth = 2 * i.scl;
