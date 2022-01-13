@@ -270,9 +270,9 @@ async function DrawWindow(req) {
   let ctx = canvas.getContext('2d', {alpha: false});
   let {format, quality, rect: {x, y, width, height}, scale} = req;
   quality = (format === 'image/jpeg' ? quality / 100 : 1);
+  ctx.scale(scale, scale);
   canvas.width = Math.trunc(width * scale);
   canvas.height = Math.trunc(height * scale);
-  ctx.scale(scale, scale);
   ctx.drawWindow(window, x, y, width * scale, height * scale, '#fff');
   return canvas.toDataURL(format, quality);
   //// Security Error: Content at moz-extension://<uuid>/background.html may not

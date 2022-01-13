@@ -332,8 +332,7 @@ async function TakeScreenshot(req, tab) {
     });
   }
 
-  const [mw, mh] =
-    use_native ? [rw, rh] : [Math.min(vw, limits[0]), Math.min(vh, limits[0])];
+  const [mw, mh] = (use_native ? [rw, rh] : [vw, vh]).map(x => Math.min(x, limits[0]));
 
   try {
     for (let y = 0; y < rh; y += mh) {
