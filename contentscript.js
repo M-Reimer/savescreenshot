@@ -113,16 +113,16 @@ async function TakeScreenshot(request) {
     SaveScreenshot(
       0,
       0,
-      window.innerWidth + window.scrollMaxX,
-      window.innerHeight + window.scrollMaxY,
+      document.documentElement.scrollWidth,
+      document.documentElement.scrollHeight,
       format
     );
   else if (region == "full")
     SaveScreenshot(
       0,
       document.documentElement.scrollTop,
-      window.innerWidth + window.scrollMaxX,
-      window.innerHeight + window.scrollMaxY - document.documentElement.scrollTop,
+      document.documentElement.scrollWidth,
+      document.documentElement.scrollHeight - document.documentElement.scrollTop,
       format
     );
   else if (region == "selection") {
