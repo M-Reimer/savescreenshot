@@ -1,13 +1,31 @@
+:root {
+  --page-bg-color: #ffffff;
+  --page-fg-color: #15141a;
+  --menu-hover-color: #d4d4d4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg-color: #42414d;
+    --page-fg-color: #fbfbfe;
+    --menu-hover-color: #53525d;
+  }
+}
+
+
 body {
+  background-color: var(--page-bg-color);
+  color: var(--page-fg-color);
   margin: 0px;
-  padding: 6px 0px;
+  padding: 6px 6px;
 }
 
 .button {
   margin: 0px;
-  padding: 4px 10px;
+  padding: 8px 10px;
+  border-radius: 4px;
 }
 
 .button:hover {
-  background-color: #f0f0f0;
+  background-color: var(--menu-hover-color);
 }

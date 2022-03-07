@@ -1,3 +1,25 @@
+:root {
+  --page-bg-color: #fff;
+  --page-fg-color: #15141a;
+  --info-border-color: #0a84ff;
+  --info-bg-color: #cee6ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg-color: #23222b;
+    --page-fg-color: #fbfbfe;
+    --info-border-color: #00ddff;
+    --info-bg-color: #16424e;
+  }
+}
+
+
+body {
+  background-color: var(--page-bg-color);
+  color: var(--page-fg-color);
+}
+
 input:disabled+label {
   color: GrayText;
 }
@@ -26,9 +48,9 @@ img.info_button {
 }
 span.info_popup {
   position: absolute;
-  border-radius: 0.5em;
-  border: 1px solid #000000;
-  background-color: #DDDDDD;
+  border-radius: 2px;
+  border: 1px solid var(--info-border-color);
+  background-color: var(--info-bg-color);
   padding: 0.5em;
   margin-top: 0.2em;
   display: none;
