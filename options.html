@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="options.css"/>
+    <meta name="viewport" content="width=device-width">
   </head>
   <body>
     <form>
@@ -10,9 +11,11 @@
       <input type="checkbox" id="image_comment_checkbox"/>
       <label for="image_comment_checkbox" data-i18n-id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
       <br/>
-      <input type="checkbox" id="show_contextmenu_checkbox"/>
-      <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
-      <br/>
+      <div data-hide-on-android>
+        <input type="checkbox" id="show_contextmenu_checkbox"/>
+        <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
+        <br/>
+      </div>
       <label for="jpegquality" data-i18n-id="jpegquality_label">JPEG quality</label>
       <input id="jpegquality" type="number" min="0" max="100" style="width: 5em;"/>%
       <br/>
@@ -25,12 +28,14 @@
         <span data-i18n-id="filenameformat_description003">Example: %Y%m%d_%H%M%S_%h -&gt; 20181224_123805_www.abc.de</span>
       </span>
       <br/>
-      <label data-i18n-id="targetdir_label" for="targetdir">Target directory name:</label>
-      <input id="targetdir" type="text" pattern="^[a-zA-Z0-9_-]*$" value=""></input>
-      <img class="info_button" src="icons/info.svg"/>
-      <span class="info_popup">
-        <span data-i18n-id="targetdir_description">You can enter a directory name here, if you want your screenshots to be placed into a subdirectory of your configured downloads directory. Allowed characters are:</span> <span>A-Z,a-z,0-9,_,-</span>
-      </span>
+      <div data-hide-on-android>
+        <label data-i18n-id="targetdir_label" for="targetdir">Target directory name:</label>
+        <input id="targetdir" type="text" pattern="^[a-zA-Z0-9_-]*$" value=""></input>
+        <img class="info_button" src="icons/info.svg"/>
+        <span class="info_popup">
+          <span data-i18n-id="targetdir_description">You can enter a directory name here, if you want your screenshots to be placed into a subdirectory of your configured downloads directory. Allowed characters are:</span> <span>A-Z,a-z,0-9,_,-</span>
+        </span>
+      </div>
 
       <h1 data-i18n-id="imageformat_headline">Image format</h1>
       <input type="checkbox" name="format_options" id="format_png_option"/>
@@ -39,11 +44,13 @@
       <input type="checkbox" name="format_options" id="format_jpg_option"/>
       <label for="format_jpg_option">JPEG</label>
       <br/>
-      <input type="checkbox" name="format_options" id="format_copy_option"/>
-      <label for="format_copy_option" data-i18n-id="format_copy_label">Copy to clipboard</label>
-      <br/>
-      <input type="checkbox" id="copynotification_checkbox"/>
-      <label for="copynotification_checkbox" data-i18n-id="copynotification_label">Show notification after copying</label>
+      <div data-hide-on-android>
+        <input type="checkbox" name="format_options" id="format_copy_option"/>
+        <label for="format_copy_option" data-i18n-id="format_copy_label">Copy to clipboard</label>
+        <br/>
+        <input type="checkbox" id="copynotification_checkbox"/>
+        <label for="copynotification_checkbox" data-i18n-id="copynotification_label">Show notification after copying</label>
+      </div>
 
       <h1 data-i18n-id="region_headline">Screenshot region</h1>
       <input type="checkbox" name="region_options" id="region_full_option"/>
@@ -56,21 +63,22 @@
       <label for="region_viewport_option" data-i18n-id="region_viewport_label">Viewport</label>
       <br/>
       <input type="checkbox" name="region_options" id="region_selection_option"/>
-      <label for="region_selection_option" id="region_selection_label">Selection</label>
+      <label for="region_selection_option" data-i18n-id="region_selection_label">Selection</label>
 
-
-      <h1 data-i18n-id="savemethod_headline">Save method</h1>
-      <input type="radio" name="savemethod_options" id="savemethod_open_option"/>
-      <label for="savemethod_open_option" data-i18n-id="savemethod_open_label">Offer to open the image file directly</label>
-      <br/>
-      <input type="radio" name="savemethod_options" id="savemethod_saveas_option"/>
-      <label for="savemethod_saveas_option" data-i18n-id="savemethod_saveas_label">Display "Save As" dialog</label>
-      <br/>
-      <input type="radio" name="savemethod_options" id="savemethod_save_option"/>
-      <label for="savemethod_save_option" data-i18n-id="savemethod_save_label">Directly save to "Downloads" directory without prompting</label>
-      <br/>
-      <input type="checkbox" id="savenotification_checkbox"/>
-      <label for="savenotification_checkbox" data-i18n-id="savenotification_label">Show notification after saving</label>
+      <div data-hide-on-android>
+        <h1 data-i18n-id="savemethod_headline">Save method</h1>
+        <input type="radio" name="savemethod_options" id="savemethod_open_option"/>
+        <label for="savemethod_open_option" data-i18n-id="savemethod_open_label">Offer to open the image file directly</label>
+        <br/>
+        <input type="radio" name="savemethod_options" id="savemethod_saveas_option"/>
+        <label for="savemethod_saveas_option" data-i18n-id="savemethod_saveas_label">Display "Save As" dialog</label>
+        <br/>
+        <input type="radio" name="savemethod_options" id="savemethod_save_option"/>
+        <label for="savemethod_save_option" data-i18n-id="savemethod_save_label">Directly save to "Downloads" directory without prompting</label>
+        <br/>
+        <input type="checkbox" id="savenotification_checkbox"/>
+        <label for="savenotification_checkbox" data-i18n-id="savenotification_label">Show notification after saving</label>
+      </div>
     </form>
 
     <script src="utils/html-i18n.js"></script>

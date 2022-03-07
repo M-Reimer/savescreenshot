@@ -95,6 +95,13 @@ async function NumberChanged(e) {
 }
 
 async function init() {
+  // Android
+  if ((await browser.runtime.getPlatformInfo()).os === "android") {
+    const items = document.querySelectorAll('*[data-hide-on-android]');
+    for (const item of items)
+      item.setAttribute("style", "display:none");
+  }
+
   await loadOptions();
 
   let formatoptions = document.getElementsByName("format_options");

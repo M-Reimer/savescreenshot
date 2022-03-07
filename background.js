@@ -52,25 +52,27 @@ async function UpdateUI() {
   // Update context menu
   //
 
-  await browser.contextMenus.removeAll();
+  if (browser.contextMenus !== undefined) { // If not on Android
+    await browser.contextMenus.removeAll();
 
-  const prefs = await Storage.get();
+    const prefs = await Storage.get();
 
-  if (prefs.show_contextmenu) {
-    const topmenu = browser.contextMenus.create({
-      id: "{}",
-      title: browser.i18n.getMessage("extensionName"),
-      contexts: ["page"]
-    });
-
-    menus.forEach((entry) => {
-      browser.contextMenus.create({
-        id: entry.data,
-        title: entry.label,
-        contexts: ["page"],
-        parentId: topmenu
+    if (prefs.show_contextmenu) {
+      const topmenu = browser.contextMenus.create({
+        id: "{}",
+        title: browser.i18n.getMessage("extensionName"),
+        contexts: ["page"]
       });
-    });
+
+      menus.forEach((entry) => {
+        browser.contextMenus.create({
+          id: entry.data,
+          title: entry.label,
+          contexts: ["page"],
+          parentId: topmenu
+        });
+      });
+    }
   }
 }
 
@@ -254,13 +256,34 @@ async function MigrateSettings() {
 
 async function Startup() {
   await MigrateSettings();
+
+  // Android: Change defaults to reflect supported options on Android
+  if ((await browser.runtime.getPlatformInfo()).os === "android") {
+    const prefs = await Storage.get();
+
+    // Only save method "open" supported (downloads API behaves ugly)
+    prefs["savemethod"] = "open";
+
+    // "browser.contextMenus" is undefined on Android
+    prefs["show_contextmenu"] = false;
+
+    // No image copy to clipboard supported
+    const copyindex = prefs["formats"].indexOf("copy");
+    if (copyindex !== -1)
+      prefs["formats"].splice(copyindex, 1);
+
+    await Storage.set(prefs);
+  }
+
   await UpdateUI();
 }
 
 // Register event listeners
-browser.contextMenus.onClicked.addListener(ContextMenuClicked);
+if (browser.contextMenus !== undefined) // If not on Android
+  browser.contextMenus.onClicked.addListener(ContextMenuClicked);
 browser.browserAction.onClicked.addListener(ToolbarButtonClicked);
-browser.commands.onCommand.addListener(CommandPressed);
+if (browser.commands !== undefined) // If not on Android
+  browser.commands.onCommand.addListener(CommandPressed);
 
 Startup();
 

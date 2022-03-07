@@ -38,14 +38,18 @@ function Select() {
         width: 100%;
         z-index: 999999;
         cursor: crosshair;
+        background-color: rgba(255, 255, 255, 0.5);
+        touch-action: none;
       `;
 
   let x1, y1, x2, y2 = 0;
-  overlay.addEventListener('mousedown', (e) => {
+  overlay.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
     // starting postions
     x1 = e.clientX;
     y1 = e.clientY;
-    overlay.addEventListener('mousemove', (e) => {
+    overlay.addEventListener('pointermove', (e) => {
+      e.preventDefault();
       // new positions
       x2 = e.clientX;
       y2 = e.clientY;
@@ -85,7 +89,8 @@ function Select() {
       document.removeEventListener('keyup', _keyhandler);
     }
 
-    overlay.addEventListener('mouseup', (e) => {
+    overlay.addEventListener('pointerup', (e) => {
+      e.preventDefault();
       _cleanup();
       resolve({x: left + window.scrollX,
                y: top + window.scrollY,

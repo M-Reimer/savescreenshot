@@ -25,6 +25,8 @@ ADDON = savescreenshot
 
 VERSION = $(shell sed -n  's/^  "version": "\([^"]\+\).*/\1/p' manifest.json)
 
+ANDROIDDEVICE = $(shell adb devices | cut -s -d$$'\t' -f1 | head -n1)
+
 WEBEXT_UTILS_REPO = git@github.com:M-Reimer/webext-utils.git
 
 trunk: $(ADDON)-trunk.xpi
@@ -44,6 +46,14 @@ clean:
 # Starts local debug session
 run: icons/$(ADDON)-light.svg
 	web-ext run --pref=devtools.browserconsole.contentMessages=true --bc
+
+# Starts debug session on connected Android device
+arun: icons/$(ADDON)-light.svg
+	@if [ -z "$(ANDROIDDEVICE)" ]; then \
+	  echo "No android devices found!"; \
+	else \
+	  web-ext run --target=firefox-android --firefox-apk=org.mozilla.fenix --android-device="$(ANDROIDDEVICE)"; \
+	fi
 
 # Subtree stuff for webext-utils
 # Note to myself. Initial setup of subtree:
