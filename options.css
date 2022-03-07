@@ -48,7 +48,7 @@ img.info_button {
 }
 span.info_popup {
   position: absolute;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 1px solid var(--info-border-color);
   background-color: var(--info-bg-color);
   padding: 0.5em;
