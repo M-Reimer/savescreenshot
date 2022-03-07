@@ -38,7 +38,6 @@ function Select() {
         width: 100%;
         z-index: 999999;
         cursor: crosshair;
-        background-color: rgba(255, 255, 255, 0.5);
         touch-action: none;
       `;
 
