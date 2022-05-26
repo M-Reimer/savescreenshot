@@ -139,6 +139,7 @@ async function loadOptions() {
   document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
   document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
   document.getElementById("filenameformat").value = prefs.filenameformat;
+  document.getElementById("targetdir").value = prefs.targetdir;
   document.getElementById("jpegquality").value = prefs.jpegquality;
 
   document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
