@@ -1,0 +1,154 @@
+{
+  "extensionName": {
+    "message": "Salvar Captura de Tela",
+    "description": "Name of the extension.",
+    "hash": "a16f91f8ee98d5c7e30b50df45ecbebb"
+  },
+  "extensionDescription": {
+    "message": "Salva a página atual como arquivo de imagem.",
+    "description": "Description of the extension.",
+    "hash": "be0218f1de6fe5e4e531fd514a28faa5"
+  },
+  "errorTitleFailedSending": {
+    "message": "Falhou em tirar a captura de tela!",
+    "description": "Title of error notification.",
+    "hash": "dfbf3a13c410a62ee9e3558c464b49c2"
+  },
+  "errorTextFailedSending": {
+    "message": "Não é possível criar uma captura de tela a partir desta página!",
+    "description": "Text of error notification.",
+    "hash": "9f18a75e11e9ce7de0e048b5eb205c2e"
+  },
+  "warningImageTooHigh": {
+    "message": "A captura de tela, que você está tentando criar, excederia o limite de altura interna do Firefox de 32767 pixels. Foi truncado com exatamente 32767 pixels de altura para fazer a captura de tela ter sucesso!",
+    "description": "Warning message which is shown if pages are too high",
+    "hash": "ef3135076ed66421f31355add57b69fb"
+  },
+  "region_full_label": {
+    "message": "Página inteira",
+    "description": "Used in the options page and for creating the menus",
+    "hash": "97f6e29c99035690ae4e034beee0668f"
+  },
+  "fullpage_scrollpos_label": {
+    "message": "Inicie as capturas de tela de página inteira na posição de rolagem atual",
+    "description": "Label for the checkbox which enables full page screenshots to start at the current scroll position set by the user",
+    "hash": "c5259af8c79dde6c7eda3cb0bce6a8bc"
+  },
+  "region_viewport_label": {
+    "message": "Janela de exibição",
+    "description": "Used in the options page and for creating the menus",
+    "hash": "bcb4f7e678e72f3c5ad7a700db2b2eb2"
+  },
+  "region_selection_label": {
+    "message": "Seleção",
+    "description": "Used in the options page and for creating the menus",
+    "hash": "dce625bd3164f1dc4a1839d419accb05"
+  },
+  "general_headline": {
+    "message": "Configurações gerais",
+    "description": "Headline for the general settings in option page",
+    "hash": "46884bdc586d3c3de1b288f4c90148cc"
+  },
+  "image_comment_label": {
+    "message": "Salvar metadados como comentários no arquivo de imagem (data/hora, título e URL)",
+    "description": "Used in the options page for the image comments checkbox",
+    "hash": "d1854d76ad8b301079841c78d1bf3c1b"
+  },
+  "show_contextmenu_label": {
+    "message": "Adicione entrada ao menu de contexto da página",
+    "description": "Used in the options page for the context menu checkbox",
+    "hash": "0169fdd27a538a6e4066c93101369dd1"
+  },
+  "jpegquality_label": {
+    "message": "Qualidade do JPEG:",
+    "description": "Used in the options page for the jpeg quality textbox",
+    "hash": "c46ea420bc506b61b0283754c211af50"
+  },
+  "filenameformat_label": {
+    "message": "Formato de nome do arquivo:",
+    "description": "Filename format",
+    "hash": "735b2d801c8bf6e96e3958575d9cd555"
+  },
+  "filenameformat_description001": {
+    "message": "%Y - Ano | %m - mês | %d - dia | %H - hora | %M - minuto | %S - segundo",
+    "description": "%Y - year | %m - month | %d - day | %H - hour | %M - minute | %S - second",
+    "hash": "6645e757ccddd4b7b12d39a99c3658b8"
+  },
+  "filenameformat_description002": {
+    "message": "%H - Nome do host | %u - url | %t - título da página",
+    "description": "%h - host name | %u - URL | %t - page title",
+    "hash": "5db5ec4ce273d38fd582ee3dfe3b012a"
+  },
+  "filenameformat_description003": {
+    "message": "Exemplo: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de",
+    "description": "Example: %Y%m%d_%H%M%S_%h ⇨ 20181224_123805_www.abc.de",
+    "hash": "93c6a79a1ae87591cde5d0a34defa7c2"
+  },
+  "targetdir_label": {
+    "message": "Nome do diretório de destino:",
+    "description": "Target directory name",
+    "hash": "dea531d492fe4648cf0614123174d689"
+  },
+  "targetdir_description": {
+    "message": "Você pode inserir um nome de diretório aqui, se deseja que suas capturas de tela sejam colocadas em um subdiretório do seu diretório de downloads configurados. Os caracteres permitidos são:",
+    "description": "Description for the target directory name option",
+    "hash": "7b27bf4a2d4d473635d541d51cf75bf9"
+  },
+  "imageformat_headline": {
+    "message": "Formato de imagem",
+    "description": "Headline for image format options in option page",
+    "hash": "dc6da00ca899d3a7dda08da2b9a5bd69"
+  },
+  "region_headline": {
+    "message": "Região da Captura de Tela",
+    "description": "Headline for screenshot region options in option page",
+    "hash": "2fab869fb715ee70e2ac6f6d729bd302"
+  },
+  "format_copy_label": {
+    "message": "Copiar",
+    "description": "Used in options page and menus for copying to clipboard",
+    "hash": "4e2f826d2cfc84448fbb14ab3862a834"
+  },
+  "copynotification_label": {
+    "message": "Mostrar notificação após copiar",
+    "description": "Label for the checkbox for toggling the copy notification",
+    "hash": "305167359d357a0c7c4481266865f43e"
+  },
+  "savemethod_headline": {
+    "message": "Salvar metódo",
+    "description": "Headline for save method options in option page",
+    "hash": "7dc8745524624c168ad0a1939f04e7f0"
+  },
+  "savemethod_open_label": {
+    "message": "Ofereça para abrir o arquivo de imagem diretamente",
+    "description": "Used in option page for open dialog option",
+    "hash": "6111353d7806e44798c88eaabd0ffc76"
+  },
+  "savemethod_saveas_label": {
+    "message": "Exibe a caixa de diálogo \"Salvar como\"",
+    "description": "Used in option page for save as dialog option",
+    "hash": "bc5bb330425bbe2cd6ce37b0007ec9fe"
+  },
+  "savemethod_save_label": {
+    "message": "Salve diretamente no diretório \"Downloads\" sem avisar",
+    "description": "Used in option page for direct download option",
+    "hash": "b7f943ad9f03e1b19b6191bc01df4988"
+  },
+  "savenotification_label": {
+    "message": "Mostrar notificação após salvar",
+    "description": "Label for the checkbox for toggling the save notification",
+    "hash": "be065caf5c2a41cc10897dd50d981ffc"
+  },
+  "info_screenshot_saved": {
+    "message": "Captura de tela salva:",
+    "description": "Text in notification, displayed when saving without prompt",
+    "hash": "f7b379b1151d4f9f746e6bf6e408333b"
+  },
+  "info_screenshot_copied": {
+    "message": "A captura de tela foi copiada para a área de transferência",
+    "description": "Text in notification, displayed when finished copying to clipboard",
+    "hash": "74c829396286cce022c3791a276118a3"
+  },
+
+  "WET_LOCALE": { "message": "pt-br" }
+}
