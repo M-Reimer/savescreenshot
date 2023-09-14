@@ -206,6 +206,7 @@ function GetDefaultFileName(aDefaultFileName, tab, aFilenameFormat) {
 function ApplyFilenameFormat(aFormat, tab) {
   const now = new Date();
   aFormat = aFormat.replace(/%Y/,now.getFullYear());
+  aFormat = aFormat.replace(/%y/,now.getFullYear().toString().substring(2));
   aFormat = aFormat.replace(/%m/,(now.getMonth()+1).toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%d/,now.getDate().toString().padStart(2, '0'));
   aFormat = aFormat.replace(/%H/,now.getHours().toString().padStart(2, '0'));

@@ -61,8 +61,8 @@
     "description": "Filename format"
   },
   "filenameformat_description001": {
-    "message": "%Y - Jahr | %m  - Monat | %d - Tag | %H - Stunde | %M - Minute | %S - Sekunde",
-    "description": "%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
+    "message": "%Y,%y - Jahr | %m  - Monat | %d - Tag | %H - Stunde | %M - Minute | %S - Sekunde",
+    "description": "%Y,%y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
   },
   "filenameformat_description002": {
     "message": "%h - Hostname | %u - URL | %t - Seitentitel",

@@ -70,8 +70,8 @@
     "hash": "735b2d801c8bf6e96e3958575d9cd555"
   },
   "filenameformat_description001": {
-    "message": "%Y - år | %m  - måned | %d - dag | %H - time | %M - minutt | %S - sekund",
-    "description": "%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second",
+    "message": "%Y,%y - år | %m  - måned | %d - dag | %H - time | %M - minutt | %S - sekund",
+    "description": "%Y,%y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second",
     "hash": "6645e757ccddd4b7b12d39a99c3658b8"
   },
   "filenameformat_description002": {

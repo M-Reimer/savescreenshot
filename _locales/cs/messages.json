@@ -44,8 +44,8 @@
     "description": "Filename format"
   },
   "filenameformat_description001": {
-    "message": "%Y - rok | %m  - měsíc | %d - den | %H - hodina | %M - minuta | %S - vteřina",
-    "description": "%Y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
+    "message": "%Y,%y - rok | %m  - měsíc | %d - den | %H - hodina | %M - minuta | %S - vteřina",
+    "description": "%Y,%y - year | %m  - month | %d - day | %H - hour | %M - minute | %S - second"
   },
   "filenameformat_description002": {
     "message": "%h - název hostitele | %u - URL | %t - titulek stránky",
