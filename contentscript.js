@@ -25,11 +25,21 @@ function Select() {
   overlay.appendChild(selection);
   document.body.appendChild(overlay);
 
+  const global_css = `
+        margin: 0;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+        width: auto;
+    `;
+
   selection.style.cssText=`
+        ${global_css}
         border: 1px dashed black;
         position: absolute;
-     `;
+    `;
   overlay.style.cssText=`
+        ${global_css}
         position: fixed;
         left: 0;
         right: 0;
@@ -39,7 +49,7 @@ function Select() {
         z-index: 999999;
         cursor: crosshair;
         touch-action: none;
-      `;
+    `;
 
   let x1, y1, x2, y2 = 0;
   overlay.addEventListener('pointerdown', (e) => {
