@@ -35,7 +35,8 @@ function Select() {
 
   selection.style.cssText=`
         ${global_css}
-        border: 1px dashed black;
+        outline: 1px dashed black;
+        box-shadow: 0 0 0 1px white;
         position: absolute;
     `;
   overlay.style.cssText=`
