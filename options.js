@@ -34,6 +34,7 @@ async function MultiselectGroupChanged(e) {
   }
 
   // Update copy notification checkbox disabled status
+  document.getElementById("jpegquality").disabled = !document.getElementById("format_jpg_option").checked;
   document.getElementById("copynotification_checkbox").disabled = !document.getElementById("format_copy_option").checked;
   document.getElementById("fullpage_scrollpos_checkbox").disabled = !document.getElementById("region_full_option").checked;
 

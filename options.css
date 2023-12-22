@@ -20,10 +20,22 @@ body {
   color: var(--page-fg-color);
 }
 
-input:disabled+label {
+input:disabled+label,
+input:disabled+label+label {
   color: GrayText;
 }
+
+.input_flexbox {
+  display: flex;
+  flex-direction: row;
+}
+.input_flexbox > label {
+  display: flex;
+  align-items: center;
+}
+
 #savenotification_checkbox,
+label[data-i18n-id="jpegquality_label"],
 #copynotification_checkbox,
 #fullpage_scrollpos_checkbox {
   margin-left: 2em;

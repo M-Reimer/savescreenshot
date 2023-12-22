@@ -16,9 +16,6 @@
         <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
         <br/>
       </div>
-      <label for="jpegquality" data-i18n-id="jpegquality_label">JPEG quality</label>
-      <input id="jpegquality" type="number" min="0" max="100" style="width: 5em;"/>%
-      <br/>
       <label for="filenameformat" data-i18n-id="filenameformat_label">Filename Format:</label>
       <input id="filenameformat" type="text" value=""></input>
       <img class="info_button" src="icons/info.svg"/>
@@ -44,6 +41,11 @@
       <input type="checkbox" name="format_options" id="format_jpg_option"/>
       <label for="format_jpg_option">JPEG</label>
       <br/>
+      <div class="input_flexbox">
+        <input id="jpegquality" type="number" min="0" max="100" style="width: 5em; order: 2"/>
+        <label for="jpegquality" data-i18n-id="jpegquality_label" style="order: 1;">JPEG quality</label>
+        <label for="jpegquality" style="order: 3">%</label>
+      </div>
       <div data-hide-on-android>
         <input type="checkbox" name="format_options" id="format_copy_option"/>
         <label for="format_copy_option" data-i18n-id="format_copy_label">Copy to clipboard</label>
