@@ -52,3 +52,18 @@ div.checkbox input {
 div.checkbox label {
   margin: 1px 0px;
 }
+
+/* Style for a radio button with label, grouped by a <div> */
+
+div.radio {
+  display: flex;
+  margin: 2px 4px 2px 0px;
+}
+
+div.radio input {
+  margin: 2px 6px 2px 0px;
+}
+
+div.radio label {
+  margin: 0px 8px 0px 0px;
+}
