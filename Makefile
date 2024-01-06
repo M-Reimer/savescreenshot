@@ -15,6 +15,7 @@ FILES = manifest.json \
         utils/iconupdater.js \
         utils/storage.js \
         utils/html-i18n.js \
+        utils/options.css \
         lib/crc32.js \
         icons/savescreenshot.svg \
         icons/info.svg \

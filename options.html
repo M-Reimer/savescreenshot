@@ -2,19 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="utils/options.css"/>
     <link rel="stylesheet" type="text/css" href="options.css"/>
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
     <form>
       <h1 data-i18n-id="general_headline">General settings</h1>
-      <input type="checkbox" id="image_comment_checkbox"/>
-      <label for="image_comment_checkbox" data-i18n-id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
-      <br/>
-      <div data-hide-on-android>
+      <div class="checkbox">
+        <input type="checkbox" id="image_comment_checkbox"/>
+        <label for="image_comment_checkbox" data-i18n-id="image_comment_label">Save metadata as comment into the image file (date/time, title and URL)</label>
+      </div>
+      <div class="checkbox" data-hide-on-android>
         <input type="checkbox" id="show_contextmenu_checkbox"/>
         <label for="show_contextmenu_checkbox" data-i18n-id="show_contextmenu_label">Add entry to the page context menu</label>
-        <br/>
       </div>
       <label for="filenameformat" data-i18n-id="filenameformat_label">Filename Format:</label>
       <input id="filenameformat" type="text" value=""></input>
@@ -35,51 +36,64 @@
       </div>
 
       <h1 data-i18n-id="imageformat_headline">Image format</h1>
-      <input type="checkbox" name="format_options" id="format_png_option"/>
-      <label for="format_png_option">PNG</label>
-      <br/>
-      <input type="checkbox" name="format_options" id="format_jpg_option"/>
-      <label for="format_jpg_option">JPEG</label>
-      <br/>
-      <div class="input_flexbox">
+      <div class="checkbox">
+        <input type="checkbox" name="format_options" id="format_png_option"/>
+        <label for="format_png_option">PNG</label>
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" name="format_options" id="format_jpg_option"/>
+        <label for="format_jpg_option">JPEG</label>
+      </div>
+      <div class="input_flexbox indent">
         <input id="jpegquality" type="number" min="0" max="100" style="width: 5em; order: 2"/>
         <label for="jpegquality" data-i18n-id="jpegquality_label" style="order: 1;">JPEG quality</label>
         <label for="jpegquality" style="order: 3">%</label>
       </div>
-      <div data-hide-on-android>
+      <div class="checkbox" data-hide-on-android>
         <input type="checkbox" name="format_options" id="format_copy_option"/>
         <label for="format_copy_option" data-i18n-id="format_copy_label">Copy to clipboard</label>
-        <br/>
+      </div>
+      <div class="checkbox indent" data-hide-on-android>
         <input type="checkbox" id="copynotification_checkbox"/>
         <label for="copynotification_checkbox" data-i18n-id="copynotification_label">Show notification after copying</label>
       </div>
 
       <h1 data-i18n-id="region_headline">Screenshot region</h1>
-      <input type="checkbox" name="region_options" id="region_full_option"/>
-      <label for="region_full_option" data-i18n-id="region_full_label">Full page</label>
-      <br/>
-      <input type="checkbox" id="fullpage_scrollpos_checkbox"/>
-      <label for="fullpage_scrollpos_checkbox" data-i18n-id="fullpage_scrollpos_label">Start full page screenshots at the current scroll position</label>
-      <br/>
-      <input type="checkbox" name="region_options" id="region_viewport_option"/>
-      <label for="region_viewport_option" data-i18n-id="region_viewport_label">Viewport</label>
-      <br/>
-      <input type="checkbox" name="region_options" id="region_selection_option"/>
-      <label for="region_selection_option" data-i18n-id="region_selection_label">Selection</label>
+      <div class="checkbox">
+        <input type="checkbox" name="region_options" id="region_full_option"/>
+        <label for="region_full_option" data-i18n-id="region_full_label">Full page</label>
+      </div>
+      <div class="checkbox indent">
+        <input type="checkbox" id="fullpage_scrollpos_checkbox"/>
+        <label for="fullpage_scrollpos_checkbox" data-i18n-id="fullpage_scrollpos_label">Start full page screenshots at the current scroll position</label>
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" name="region_options" id="region_viewport_option"/>
+        <label for="region_viewport_option" data-i18n-id="region_viewport_label">Viewport</label>
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" name="region_options" id="region_selection_option"/>
+        <label for="region_selection_option" data-i18n-id="region_selection_label">Selection</label>
+      </div>
 
       <div data-hide-on-android>
         <h1 data-i18n-id="savemethod_headline">Save method</h1>
-        <input type="radio" name="savemethod_options" id="savemethod_open_option"/>
-        <label for="savemethod_open_option" data-i18n-id="savemethod_open_label">Offer to open the image file directly</label>
-        <br/>
-        <input type="radio" name="savemethod_options" id="savemethod_saveas_option"/>
-        <label for="savemethod_saveas_option" data-i18n-id="savemethod_saveas_label">Display "Save As" dialog</label>
-        <br/>
-        <input type="radio" name="savemethod_options" id="savemethod_save_option"/>
-        <label for="savemethod_save_option" data-i18n-id="savemethod_save_label">Directly save to "Downloads" directory without prompting</label>
-        <br/>
-        <input type="checkbox" id="savenotification_checkbox"/>
-        <label for="savenotification_checkbox" data-i18n-id="savenotification_label">Show notification after saving</label>
+        <div class="radio">
+          <input type="radio" name="savemethod_options" id="savemethod_open_option"/>
+          <label for="savemethod_open_option" data-i18n-id="savemethod_open_label">Offer to open the image file directly</label>
+        </div>
+        <div class="radio">
+          <input type="radio" name="savemethod_options" id="savemethod_saveas_option"/>
+          <label for="savemethod_saveas_option" data-i18n-id="savemethod_saveas_label">Display "Save As" dialog</label>
+        </div>
+        <div class="radio">
+          <input type="radio" name="savemethod_options" id="savemethod_save_option"/>
+          <label for="savemethod_save_option" data-i18n-id="savemethod_save_label">Directly save to "Downloads" directory without prompting</label>
+        </div>
+        <div class="checkbox indent">
+          <input type="checkbox" id="savenotification_checkbox"/>
+          <label for="savenotification_checkbox" data-i18n-id="savenotification_label">Show notification after saving</label>
+        </div>
       </div>
     </form>
 

@@ -1,23 +1,13 @@
 :root {
-  --page-bg-color: #fff;
-  --page-fg-color: #15141a;
   --info-border-color: #0a84ff;
   --info-bg-color: #cee6ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --page-bg-color: #23222b;
-    --page-fg-color: #fbfbfe;
     --info-border-color: #00ddff;
     --info-bg-color: #16424e;
   }
-}
-
-
-body {
-  background-color: var(--page-bg-color);
-  color: var(--page-fg-color);
 }
 
 input:disabled+label,
@@ -34,12 +24,6 @@ input:disabled+label+label {
   align-items: center;
 }
 
-#savenotification_checkbox,
-label[data-i18n-id="jpegquality_label"],
-#copynotification_checkbox,
-#fullpage_scrollpos_checkbox {
-  margin-left: 2em;
-}
 
 input[type="text"], input[type="number"] {
   margin: 0.2em;
