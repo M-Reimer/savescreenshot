@@ -185,9 +185,11 @@ function GetDefaultFileName(aDefaultFileName, tab, aFilenameFormat) {
     return formatted;
 
   // If possible, base the file name on document title
-  const title = SanitizeFileName(tab.title);
-  if (title)
-    return title;
+  if (tab.title) {
+    const title = SanitizeFileName(tab.title);
+    if (title)
+      return title;
+  }
 
   // Otherwise try to use the actual HTML filename
   const url = new URL(tab.url)
