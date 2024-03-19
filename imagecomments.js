@@ -19,7 +19,7 @@
 const PNG_SIGNATURE = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
 
 async function ApplyImageComment(content, title, url) {
-  const imgdata = new DataView(await (await fetch(content)).arrayBuffer());
+  const imgdata = new DataView(new DataURLParser(content).arrayBuffer());
 
   const comment = FormatComment(title, url);
   const arr_comment = new TextEncoder("utf-8").encode(comment);

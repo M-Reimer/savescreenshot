@@ -24,6 +24,7 @@
       "utils/storage.js",
       "_globals.js",
       "lib/crc32.js",
+      "dataurlparser.js",
       "imagecomments.js",
       "background.js"
     ]
@@ -43,7 +44,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["utils/storage.js", "contentscript.js"]
+      "js": ["utils/storage.js", "dataurlparser.js", "contentscript.js"]
     }
   ],
 

@@ -11,6 +11,7 @@ FILES = manifest.json \
         options.html \
         options.js \
         options.css \
+        dataurlparser.js \
         imagecomments.js \
         utils/iconupdater.js \
         utils/storage.js \

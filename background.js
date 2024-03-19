@@ -107,7 +107,7 @@ async function TakeScreenshot(data, tab) {
 
   // Handle copy to clipboard
   if (data.format == "copy") {
-    const buffer = await (await fetch(content)).arrayBuffer()
+    const buffer = new DataURLParser(content).arrayBuffer();
     await browser.clipboard.setImageData(buffer, "png");
     if (prefs.copynotification)
       browser.notifications.create("info-notification", {
@@ -136,7 +136,7 @@ async function TakeScreenshot(data, tab) {
     }
     // All other download types are handled with the "browser.downloads" API
     else {
-      const blob = await (await fetch(content)).blob()
+      const blob = new DataURLParser(content).blob();
       const options = {
         filename: prefs.targetdir ? prefs.targetdir + "/" + filename: filename,
         url: URL.createObjectURL(blob),
