@@ -164,11 +164,12 @@ function SaveScreenshot(aLeft, aTop, aWidth, aHeight, aFormat) {
   // Maximum size is limited!
   // https://hg.mozilla.org/mozilla-central/file/93c7ed3f5606865707e5ebee8709b13ce0c2e220/dom/canvas/CanvasRenderingContext2D.cpp#l4814
   // https://hg.mozilla.org/mozilla-central/file/93c7ed3f5606865707e5ebee8709b13ce0c2e220/gfx/2d/Factory.cpp#l326
-  if (aHeight > 32767) {
-    aHeight = 32767;
+  const max_len = parseInt(32767 / window.devicePixelRatio);
+  if (aHeight > max_len) {
+    aHeight = max_len;
     alert(browser.i18n.getMessage("warningImageTooHigh"));
   }
-  if (aWidth > 32767) aWidth = 32767;
+  if (aWidth > max_len) aWidth = max_len;
 
   browser.runtime.sendMessage({
     type: "TakeScreenshot",
