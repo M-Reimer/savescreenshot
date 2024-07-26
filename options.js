@@ -131,25 +131,33 @@ async function init() {
 
 async function loadOptions() {
   const prefs = await Storage.get();
-  document.getElementsByName("format_options").forEach((option) => {
-    option.checked = prefs.formats.includes(option.id.split("_")[1]);
-  });
-  document.getElementsByName("region_options").forEach((option) => {
-    option.checked = prefs.regions.includes(option.id.split("_")[1]);
-  });
-  document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
+
+  // General settings
+  document.getElementById("image_comment_checkbox").checked = prefs.image_comment;
   document.getElementById("show_contextmenu_checkbox").checked = prefs.show_contextmenu;
   document.getElementById("filenameformat").value = prefs.filenameformat;
   document.getElementById("targetdir").value = prefs.targetdir;
-  document.getElementById("jpegquality").value = prefs.jpegquality;
 
-  document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
-  document.getElementById("savenotification_checkbox").checked = prefs.savenotification;
+  // Image format
+  document.getElementsByName("format_options").forEach((option) => {
+    option.checked = prefs.formats.includes(option.id.split("_")[1]);
+  });
+  document.getElementById("jpegquality").disabled = !prefs.formats.includes("jpg");
+  document.getElementById("jpegquality").value = prefs.jpegquality;
   document.getElementById("copynotification_checkbox").disabled = !prefs.formats.includes("copy");
   document.getElementById("copynotification_checkbox").checked = prefs.copynotification;
-  document.getElementById("image_comment_checkbox").checked = prefs.image_comment;
-  document.getElementById("fullpage_scrollpos_checkbox").checked = prefs.fullpage_scrollpos;
+
+  // Screenshot region
+  document.getElementsByName("region_options").forEach((option) => {
+    option.checked = prefs.regions.includes(option.id.split("_")[1]);
+  });
   document.getElementById("fullpage_scrollpos_checkbox").disabled = !prefs.regions.includes("full");
+  document.getElementById("fullpage_scrollpos_checkbox").checked = prefs.fullpage_scrollpos;
+
+  // Save method
+  document.getElementById("savemethod_" + prefs.savemethod + "_option").checked = true;
+  document.getElementById("savenotification_checkbox").disabled = (prefs.savemethod != "save");
+  document.getElementById("savenotification_checkbox").checked = prefs.savenotification;
 }
 
 // Register event listener to receive option update notifications
