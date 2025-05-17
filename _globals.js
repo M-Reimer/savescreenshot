@@ -26,9 +26,11 @@ async function SendMessage(aJsonMessage) {
   message.type = "TakeScreenshot";
 
   // If available, apply custom style for taking screenshot
-  const style = GetCustomStyle(tabs[0].url);
-  if (style)
-    await browser.tabs.insertCSS(tabs[0].id, {file: style});
+  if (message.region == "full") {
+    const style = GetCustomStyle(tabs[0].url);
+    if (style)
+      await browser.tabs.insertCSS(tabs[0].id, {file: style});
+  }
 
   // Send trigger message to content script to begin the screenshot process
   try {
