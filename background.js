@@ -24,8 +24,9 @@ function ContextMenuClicked(aInfo) {
 }
 
 // Fired if toolbar button is clicked
-function ToolbarButtonClicked() {
-  SendMessage("{}");
+async function ToolbarButtonClicked() {
+  const prefs = await Storage.get();
+  SendMessage('{"format": "' + prefs.formats[0] + '", "region": "' + prefs.regions[0] + '"}')
 }
 
 // Fired if shortcut is pressed
@@ -59,7 +60,7 @@ async function UpdateUI() {
 
     if (prefs.show_contextmenu) {
       const topmenu = browser.contextMenus.create({
-        id: "{}",
+        id: '{"format": "' + prefs.formats[0] + '", "region": "' + prefs.regions[0] + '"}',
         title: browser.i18n.getMessage("extensionName"),
         contexts: ["page"]
       });

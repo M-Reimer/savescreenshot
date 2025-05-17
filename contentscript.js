@@ -121,33 +121,31 @@ async function OnMessage(request, sender, sendResponse) {
 
 async function TakeScreenshot(request) {
   const prefs = await Storage.get();
-  const format = request.format || prefs.formats[0];
-  const region = request.region || prefs.regions[0];
 
-  if (region == "full" && !prefs.fullpage_scrollpos)
+  if (request.region == "full" && !prefs.fullpage_scrollpos)
     SaveScreenshot(
       0,
       0,
       document.documentElement.scrollWidth,
       document.documentElement.scrollHeight,
-      format
+      request.format
     );
-  else if (region == "full")
+  else if (request.region == "full")
     SaveScreenshot(
       0,
       document.documentElement.scrollTop,
       document.documentElement.scrollWidth,
       document.documentElement.scrollHeight - document.documentElement.scrollTop,
-      format
+      request.format
     );
-  else if (region == "selection") {
+  else if (request.region == "selection") {
     Select().then((posn) => {
       SaveScreenshot(
         posn.x,
         posn.y,
         posn.w,
         posn.h,
-        format
+        request.format
       );
     });
   } else
@@ -156,7 +154,7 @@ async function TakeScreenshot(request) {
       document.documentElement.scrollTop,
       window.innerWidth,
       window.innerHeight,
-      format
+      request.format
     );
 }
 
