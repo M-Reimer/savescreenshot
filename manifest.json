@@ -26,6 +26,7 @@
       "lib/crc32.js",
       "dataurlparser.js",
       "imagecomments.js",
+      "customstyles/rules.js",
       "background.js"
     ]
   },

@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2022  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2025  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -93,6 +93,7 @@ const DOWNLOAD_CACHE = {};
 async function TakeScreenshot(data, tab) {
   const prefs = await Storage.get();
 
+  // Create screenshot
   const formats = {png: "png", jpg: "jpeg", copy: "png"};
   let content = await browser.tabs.captureTab(tab.id, {
     format: formats[data.format],
@@ -104,6 +105,11 @@ async function TakeScreenshot(data, tab) {
       height: data.height
     }
   });
+
+  // Remove custom style if one previously was applied
+  const style = GetCustomStyle(tab.url);
+  if (style)
+    await browser.tabs.removeCSS(tab.id, {file: style});
 
   // Handle copy to clipboard
   if (data.format == "copy") {
