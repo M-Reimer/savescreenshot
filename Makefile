@@ -20,6 +20,8 @@ FILES = manifest.json \
         lib/crc32.js \
         icons/savescreenshot.svg \
         icons/info.svg \
+        customstyles/rules.js \
+        $(wildcard customstyles/*.css) \
         $(wildcard popup/choose_format.*) \
         $(wildcard _locales/*/messages.json)
 
