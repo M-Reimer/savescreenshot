@@ -22,5 +22,9 @@ function GetCustomStyle(aURL) {
   if (url.host == "chatgpt.com")
     return "/customstyles/chatgpt.css";
 
+  if (url.host == "www.kleinanzeigen.de"
+      && url.pathname == "/m-nachrichten.html")
+    return "/customstyles/kleinanzeigen_nachrichten.css";
+
   return false;
 }
