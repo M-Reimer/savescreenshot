@@ -24,7 +24,7 @@ async function CreateButtons() {
   menus.forEach((entry) => {
     const div = document.createElement("div");
     div.setAttribute("class", "button");
-    div.setAttribute("data-settings", JSON.stringify(entry.data));
+    div._entry_data = entry.data;
     div.textContent = entry.label;
     document.body.appendChild(div);
   });
@@ -32,9 +32,8 @@ async function CreateButtons() {
 
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("button")) {
-    const data = JSON.parse(e.target.getAttribute("data-settings"));
     const tabs = await browser.tabs.query({active: true, currentWindow: true});
-    await SendMessage(data, tabs[0]);
+    await SendMessage(e.target._entry_data, tabs[0]);
     window.close();
   }
 });
