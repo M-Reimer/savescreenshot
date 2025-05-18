@@ -61,8 +61,11 @@ async function UpdateUI() {
 
     if (prefs.show_contextmenu) {
       const topmenu = browser.contextMenus.create({
-        id: JSON.stringify({format: prefs.formats[0],
-                            region: prefs.regions[0]}),
+        id: JSON.stringify({
+          format: prefs.formats[0],
+          region: prefs.regions[0],
+          topmenu: true // Added to give top menu a unique ID
+        }),
         title: browser.i18n.getMessage("extensionName"),
         contexts: ["page"]
       });
