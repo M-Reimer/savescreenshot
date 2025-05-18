@@ -75,7 +75,8 @@ async function GetMenuList() {
       if (!prefs.formats.includes(format.id))
         continue;
       list.push({
-        label: template.replace("$REGION", region.label).replace("$FORMAT", format.label),
+        label: template.replace("$REGION", region.label)
+                       .replace("$FORMAT", format.label),
         data: {format: format.id, region: region.id}
       });
     }
