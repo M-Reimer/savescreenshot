@@ -19,20 +19,21 @@
 'use strict';
 
 // Fired if one of our context menu entries is clicked.
-function ContextMenuClicked(aInfo) {
-  SendMessage(aInfo.menuItemId);
+function ContextMenuClicked(aInfo, tab) {
+  SendMessage(JSON.parse(aInfo.menuItemId), tab);
 }
 
 // Fired if toolbar button is clicked
-async function ToolbarButtonClicked() {
+async function ToolbarButtonClicked(tab) {
   const prefs = await Storage.get();
-  SendMessage('{"format": "' + prefs.formats[0] + '", "region": "' + prefs.regions[0] + '"}')
+  SendMessage({format: prefs.formats[0],
+               region: prefs.regions[0]}, tab)
 }
 
 // Fired if shortcut is pressed
-function CommandPressed(aName) {
+function CommandPressed(aName, tab) {
   const info = aName.split("-");
-  SendMessage('{"format": "' + info[1] + '", "region": "' + info[0] + '"}');
+  SendMessage({format: info[1], region: info[0]}, tab);
 }
 
 // Triggers UI update (toolbar button popup and context menu)
@@ -60,14 +61,15 @@ async function UpdateUI() {
 
     if (prefs.show_contextmenu) {
       const topmenu = browser.contextMenus.create({
-        id: '{"format": "' + prefs.formats[0] + '", "region": "' + prefs.regions[0] + '"}',
+        id: JSON.stringify({format: prefs.formats[0],
+                            region: prefs.regions[0]}),
         title: browser.i18n.getMessage("extensionName"),
         contexts: ["page"]
       });
 
       menus.forEach((entry) => {
         browser.contextMenus.create({
-          id: entry.data,
+          id: JSON.stringify(entry.data),
           title: entry.label,
           contexts: ["page"],
           parentId: topmenu

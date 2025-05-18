@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2020  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2025  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,21 +20,19 @@
 
 // Function which handles sending the "take screenshot" message to the active
 // tab. Includes error handling with error notification.
-async function SendMessage(aJsonMessage) {
-  const tabs = await browser.tabs.query({active: true, currentWindow: true});
-  const message = JSON.parse(aJsonMessage);
+async function SendMessage(message, tab) {
   message.type = "TakeScreenshot";
 
   // If available, apply custom style for taking screenshot
   if (message.region == "full") {
-    const style = GetCustomStyle(tabs[0].url);
+    const style = GetCustomStyle(tab.url);
     if (style)
-      await browser.tabs.insertCSS(tabs[0].id, {file: style});
+      await browser.tabs.insertCSS(tab.id, {file: style});
   }
 
   // Send trigger message to content script to begin the screenshot process
   try {
-    await browser.tabs.sendMessage(tabs[0].id, message);
+    await browser.tabs.sendMessage(tab.id, message);
   }
   catch(e) {
     console.log("SaveScreenshot message sending error: " + e);
@@ -78,7 +76,7 @@ async function GetMenuList() {
         continue;
       list.push({
         label: template.replace("$REGION", region.label).replace("$FORMAT", format.label),
-        data: '{"format": "' + format.id + '", "region": "' + region.id + '"}'
+        data: {format: format.id, region: region.id}
       });
     }
   }

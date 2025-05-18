@@ -1,6 +1,6 @@
 /*
     Firefox addon "Save Screenshot"
-    Copyright (C) 2017  Manuel Reimer <manuel.reimer@gmx.de>
+    Copyright (C) 2025  Manuel Reimer <manuel.reimer@gmx.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ async function CreateButtons() {
   menus.forEach((entry) => {
     const div = document.createElement("div");
     div.setAttribute("class", "button");
-    div.setAttribute("data-settings", entry.data);
+    div.setAttribute("data-settings", JSON.stringify(entry.data));
     div.textContent = entry.label;
     document.body.appendChild(div);
   });
@@ -32,8 +32,9 @@ async function CreateButtons() {
 
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("button")) {
-    var data = e.target.getAttribute("data-settings");
-    await SendMessage(data);
+    const data = JSON.parse(e.target.getAttribute("data-settings"));
+    const tabs = await browser.tabs.query({active: true, currentWindow: true});
+    await SendMessage(data, tabs[0]);
     window.close();
   }
 });
