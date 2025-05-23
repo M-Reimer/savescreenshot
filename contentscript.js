@@ -111,12 +111,22 @@ function Select() {
 }
 
 
-async function OnMessage(request, sender, sendResponse) {
+function OnMessage(request, sender, sendResponse) {
   if (request.type == "TakeScreenshot")
     TakeScreenshot(request);
 
   if (request.type == "TriggerOpen")
     TriggerOpen(request.content, request.filename);
+
+  if (request.type == "GetScrollTop") {
+    const viewport = document.querySelector(request.selector);
+    if (viewport && viewport.scrollTop > 10) {
+      const rect = viewport.getBoundingClientRect();
+      sendResponse(viewport.scrollTop + rect.top + document.documentElement.scrollTop);
+    }
+    else
+      sendResponse(0);
+  }
 }
 
 async function TakeScreenshot(request) {
@@ -130,14 +140,16 @@ async function TakeScreenshot(request) {
       document.documentElement.scrollHeight,
       request.format
     );
-  else if (request.region == "full")
+  else if (request.region == "full") {
+    const scrolltop = request.scrolltop || document.documentElement.scrollTop;
     SaveScreenshot(
       0,
-      document.documentElement.scrollTop,
+      scrolltop,
       document.documentElement.scrollWidth,
-      document.documentElement.scrollHeight - document.documentElement.scrollTop,
+      document.documentElement.scrollHeight - scrolltop,
       request.format
     );
+  }
   else if (request.region == "selection") {
     Select().then((posn) => {
       SaveScreenshot(
@@ -148,7 +160,8 @@ async function TakeScreenshot(request) {
         request.format
       );
     });
-  } else
+  }
+  else
     SaveScreenshot(
       document.documentElement.scrollLeft,
       document.documentElement.scrollTop,

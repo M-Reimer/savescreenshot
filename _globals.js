@@ -26,8 +26,16 @@ async function SendMessage(message, tab) {
   // If available, apply custom style for taking screenshot
   if (message.region == "full") {
     const style = GetCustomStyle(tab.url);
-    if (style)
+    if (style) {
+      const txt = await (await fetch(style)).text();
+      if (txt.match(/\/\* VIEWPORT \*\/\s*([^{]+)/))
+        message.scrolltop = await browser.tabs.sendMessage(tab.id, {
+          type: "GetScrollTop",
+          selector: RegExp.$1
+        });
+
       await browser.tabs.insertCSS(tab.id, {file: style});
+    }
   }
 
   // Send trigger message to content script to begin the screenshot process
