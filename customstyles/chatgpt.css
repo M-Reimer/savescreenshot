@@ -6,3 +6,7 @@ html {
 .overflow-y-auto {
   overflow-y: visible !important;
 }
+
+button.cursor-pointer {
+  display: none;
+}
