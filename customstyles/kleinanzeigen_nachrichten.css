@@ -1,3 +1,8 @@
 div.Messagebox--Grid--Row2 {
   height: auto !important;
 }
+
+/* VIEWPORT */
+div.Conversation--Grid--Row3 {
+  overflow-y: visible !important;
+}
